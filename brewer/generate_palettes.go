@@ -1,11 +1,11 @@
 // +build ignore
 
-// This program generates a Brewer Pallete Go source file from
+// This program generates a Brewer Palette Go source file from
 // a csv/tsv file exported from the xls file available from
 // http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html
 //
 // Run the program:
-// go run generate_palletes < infile.tsv
+// go run generate_palettes < infile.tsv
 package main
 
 import (
@@ -59,7 +59,7 @@ func main() {
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Pallete Copyright ©2002 Cynthia Brewer, Mark Harrower, and The Pennsylvania State University.
+// Palette Copyright ©2002 Cynthia Brewer, Mark Harrower, and The Pennsylvania State University.
 package brewer
 
 import (
