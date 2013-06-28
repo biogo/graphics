@@ -30,7 +30,7 @@ type DivergingPalette []color.Color
 // CriticalValue returns the indexish of the lightest (median) color in the DivergingPallete.
 func (d DivergingPalette) CriticalValue() float64 { return float64(len(d)+1)/2 - 1 }
 
-// DivergingPalette represents sequential or qualitative color schemes.
+// Palette represents sequential or qualitative color schemes.
 type Palette []color.Color
 
 // Diverging schemes put equal emphasis on mid-range critical values and extremes
