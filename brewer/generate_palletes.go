@@ -116,9 +116,9 @@ import (
 			mustAtoi(fields[label["B"]]),
 		}
 		if hex {
-			fmt.Fprintf(buf[lastType], "\t\t\t{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
+			fmt.Fprintf(buf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
 		} else {
-			fmt.Fprintf(buf[lastType], "\t\t\t{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
+			fmt.Fprintf(buf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
 		}
 	}
 	if err := scanner.Err(); err != nil {

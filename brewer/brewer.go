@@ -25,13 +25,13 @@ type Color struct {
 }
 
 // DivergingPallete represents a diverging color scheme.
-type DivergingPallete []Color
+type DivergingPallete []color.Color
 
 // CriticalValue returns the indexish of the lightest (median) color in the DivergingPallete.
 func (d DivergingPallete) CriticalValue() float64 { return float64(len(d)+1)/2 - 1 }
 
-// DivergingPallete represents a sequential or qualitative color schemes.
-type Pallete []Color
+// DivergingPallete represents sequential or qualitative color schemes.
+type Pallete []color.Color
 
 // Diverging schemes put equal emphasis on mid-range critical values and extremes
 // at both ends of the data range. The critical class or break in the middle of the
