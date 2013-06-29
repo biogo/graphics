@@ -16,6 +16,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Go port Copyright ©2013 The bíogo Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // Palette Copyright ©2002 Cynthia Brewer, Mark Harrower, and The Pennsylvania State University.
 package brewer
 

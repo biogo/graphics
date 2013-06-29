@@ -1,3 +1,7 @@
+// Copyright ©2013 The bíogo Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // +build ignore
 
 // This program generates a Brewer Palette Go source file from
@@ -56,6 +60,10 @@ func main() {
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // Go implementation Copyright ©2013 The bíogo Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Go port Copyright ©2013 The bíogo Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -126,6 +134,7 @@ import (
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
+		os.Exit(1)
 	}
 	for _, typ := range []string{"Diverging", "Qualitative", "Sequential"} {
 		fmt.Printf("var (\n%s\t\t},\n\t}\n)\n", defBuf[typ].Bytes())
