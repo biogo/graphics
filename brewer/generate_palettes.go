@@ -73,11 +73,13 @@ import (
 
 		last = make(map[string]string)
 
-		buf = map[string]*bytes.Buffer{
+		defBuf = map[string]*bytes.Buffer{
 			"Qualitative": &bytes.Buffer{},
 			"Sequential":  &bytes.Buffer{},
 			"Diverging":   &bytes.Buffer{},
 		}
+
+		lookBuf = make(map[string][]string)
 	)
 
 	for scanner.Scan() {
@@ -99,15 +101,16 @@ import (
 				}
 			}
 			if name != last[lastType] {
+				lookBuf[lastType] = append(lookBuf[lastType], fmt.Sprintf("%q: %s", name, name))
 				if last[lastType] != "" {
-					fmt.Fprintf(buf[lastType], "\t\t},\n\t}\n")
+					fmt.Fprintf(defBuf[lastType], "\t\t},\n\t}\n")
 				}
-				fmt.Fprintf(buf[lastType], "\t%s %s = %s{\n", fields[label["ColorName"]], lastType, lastType)
+				fmt.Fprintf(defBuf[lastType], "\t%s %s = %s{\n", fields[label["ColorName"]], lastType, lastType)
 				last[lastType] = name
 			} else {
-				fmt.Fprintf(buf[lastType], "\t\t},\n")
+				fmt.Fprintf(defBuf[lastType], "\t\t},\n")
 			}
-			fmt.Fprintf(buf[lastType], "\t\t%d: {\n", mustAtoi(fields[label["NumOfColors"]]))
+			fmt.Fprintf(defBuf[lastType], "\t\t%d: {\n", mustAtoi(fields[label["NumOfColors"]]))
 		}
 		values := []interface{}{
 			fields[label["ColorLetter"]],
@@ -116,15 +119,24 @@ import (
 			mustAtoi(fields[label["B"]]),
 		}
 		if hex {
-			fmt.Fprintf(buf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
+			fmt.Fprintf(defBuf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
 		} else {
-			fmt.Fprintf(buf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
+			fmt.Fprintf(defBuf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
 		}
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "reading standard input:", err)
 	}
 	for _, typ := range []string{"Diverging", "Qualitative", "Sequential"} {
-		fmt.Printf("var (\n%s\t\t},\n\t}\n)\n", buf[typ].Bytes())
+		fmt.Printf("var (\n%s\t\t},\n\t}\n)\n", defBuf[typ].Bytes())
 	}
+	fmt.Println("\nvar (")
+	for _, typ := range []string{"Diverging", "Qualitative", "Sequential"} {
+		fmt.Printf("\t%s = map[string]%s{\n\t\t%v,\n\t}\n", strings.ToLower(typ), typ, strings.Join(lookBuf[typ], ",\n\t\t"))
+	}
+	fmt.Println("\tall = map[string]interface{}{")
+	for _, typ := range []string{"Diverging", "Qualitative", "Sequential"} {
+		fmt.Printf("\t\t%v,\n", strings.Join(lookBuf[typ], ",\n\t\t"))
+	}
+	fmt.Println("\t}\n)")
 }
