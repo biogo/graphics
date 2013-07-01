@@ -2,15 +2,18 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Hue Saturation Value Alpha color package
-package color
+package palette
 
 import (
 	"image/color"
 	"math"
 )
 
-const maxChannelValue = float64(0xFFFF)
+// HSVA represents a Hue/Saturation/Value/Alpha color.
+// H. S, V and A are valid within [0, 1].
+type HSVA struct {
+	H, S, V, A float64
+}
 
 // HSVAModel converts any color.Color to an HSVA color.
 var HSVAModel color.Model = color.ModelFunc(hsvaModel)
@@ -19,17 +22,11 @@ func hsvaModel(c color.Color) color.Color {
 	if _, ok := c.(HSVA); ok {
 		return c
 	}
-	return RGBAtoHSVA(c.RGBA())
-}
-
-// HSVAColor represents a Hue/Saturation/Value/Alpha color.
-// H is valid within [0°, 360°]. S, V and A are valid within [0, 1].
-type HSVA struct {
-	H, S, V, A float64
+	return rgbaToHsva(c.RGBA())
 }
 
 // Convert r, g, b, a to HSVA
-func RGBAtoHSVA(r, g, b, a uint32) HSVA {
+func rgbaToHsva(r, g, b, a uint32) HSVA {
 	red := float64(r)
 	blue := float64(b)
 	green := float64(g)
@@ -43,7 +40,10 @@ func RGBAtoHSVA(r, g, b, a uint32) HSVA {
 	var hue float64
 	switch {
 	case chroma == 0:
-		hue = 0 // should really be math.NaN() since we have a 0 length vector, but 0 seems to be the convention and it may simplify imports in dependent packages
+		// This should really be math.NaN() since we have a 0 length vector,
+		// but 0 seems to be the convention and it may simplify imports in
+		// dependent packages.
+		hue = 0
 	case max == red:
 		hue = math.Mod((green-blue)/chroma, 6)
 	case max == green:
@@ -52,7 +52,7 @@ func RGBAtoHSVA(r, g, b, a uint32) HSVA {
 		hue = (red-green)/chroma + 4
 	}
 
-	hue *= 60
+	hue /= 6
 
 	var s float64
 	if chroma != 0 {
@@ -60,10 +60,10 @@ func RGBAtoHSVA(r, g, b, a uint32) HSVA {
 	}
 
 	return HSVA{
-		H: math.Mod(math.Mod(hue, 360)+360, 360),
+		H: math.Mod(math.Mod(hue, 1)+1, 1),
 		S: s,
-		V: max / maxChannelValue,
-		A: float64(a) / maxChannelValue,
+		V: max / math.MaxUint16,
+		A: float64(a) / math.MaxUint16,
 	}
 }
 
@@ -71,14 +71,14 @@ func RGBAtoHSVA(r, g, b, a uint32) HSVA {
 func (c HSVA) RGBA() (r, g, b, a uint32) {
 	var red, green, blue float64
 
-	a = uint32(maxChannelValue * c.A)
+	a = uint32(math.MaxUint16 * c.A)
 
 	if c.V == 0 {
 		return
 	}
 
 	if c.S == 0 {
-		r, g, b = uint32(maxChannelValue*c.V), uint32(maxChannelValue*c.V), uint32(maxChannelValue*c.V)
+		r, g, b = uint32(math.MaxUint16*c.V), uint32(math.MaxUint16*c.V), uint32(math.MaxUint16*c.V)
 		return
 	}
 
@@ -86,7 +86,7 @@ func (c HSVA) RGBA() (r, g, b, a uint32) {
 	m := c.V - chroma
 
 	if !math.IsNaN(c.H) {
-		hue := math.Mod(c.H, 360) / 60
+		hue := math.Mod(c.H, 1) * 6
 		x := chroma * (1 - math.Abs(math.Mod(hue, 2)-1))
 		switch math.Floor(hue) {
 		case 0:
@@ -106,7 +106,7 @@ func (c HSVA) RGBA() (r, g, b, a uint32) {
 		red, green, blue = 0, 0, 0
 	}
 
-	r, g, b = uint32(maxChannelValue*(red+m)), uint32(maxChannelValue*(green+m)), uint32(maxChannelValue*(blue+m))
+	r, g, b = uint32(math.MaxUint16*(red+m)), uint32(math.MaxUint16*(green+m)), uint32(math.MaxUint16*(blue+m))
 
 	return
 }

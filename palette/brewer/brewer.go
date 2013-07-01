@@ -15,6 +15,7 @@
 package brewer
 
 import (
+	"code.google.com/p/biogo.graphics/palette"
 	"errors"
 	"fmt"
 	"image/color"
@@ -24,11 +25,6 @@ import (
 type Color struct {
 	Letter byte
 	color.Color
-}
-
-// Palette is a collection of colors ordered into a palette.
-type Palette interface {
-	Colors() []color.Color
 }
 
 // DivergingPalette represents a diverging color scheme.
@@ -86,12 +82,12 @@ const (
 // GetPalette returns a Palette based on palette type and name, and the number of colors
 // required. An error is returned if the palette name or type is not known or the requested
 // palette does not support the required number of colors.
-func GetPalette(typ PaletteType, name string, colors int) (Palette, error) {
+func GetPalette(typ PaletteType, name string, colors int) (palette.Palette, error) {
 	if colors < 3 {
 		return nil, errors.New("brewer: number of colors must be 3 or greater")
 	}
 	var (
-		p Palette
+		p palette.Palette
 
 		nameOk, colorsOk bool
 	)

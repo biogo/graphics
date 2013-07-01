@@ -2,12 +2,11 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package color
+package palette
 
 import (
 	"image/color"
 	check "launchpad.net/gocheck"
-	"testing"
 )
 
 var e uint32 = 1
@@ -57,11 +56,6 @@ func (checker *uint32EpsilonChecker) Check(params []interface{}, names []string)
 }
 
 // Tests
-func Test(t *testing.T) { check.TestingT(t) }
-
-type S struct{}
-
-var _ = check.Suite(&S{})
 
 func (s *S) TestColor(c *check.C) {
 	for r := 0; r < 256; r += 5 {
@@ -69,15 +63,15 @@ func (s *S) TestColor(c *check.C) {
 			for b := 0; b < 256; b += 5 {
 				col := color.RGBA{uint8(r), uint8(g), uint8(b), 0}
 				cDirectR, cDirectG, cDirectB, cDirectA := col.RGBA()
-				hsva := RGBAtoHSVA(col.RGBA())
-				c.Check(hsva.H, floatWithinRange, float64(0), float64(360))
+				hsva := rgbaToHsva(col.RGBA())
+				c.Check(hsva.H, floatWithinRange, float64(0), float64(1))
 				c.Check(hsva.S, floatWithinRange, float64(0), float64(1))
 				c.Check(hsva.V, floatWithinRange, float64(0), float64(1))
 				cFromHSVR, cFromHSVG, cFromHSVB, cFromHSVA := hsva.RGBA()
 				c.Check(cFromHSVR, uintWithinRange, uint32(0), uint32(0xFFFF))
 				c.Check(cFromHSVG, uintWithinRange, uint32(0), uint32(0xFFFF))
 				c.Check(cFromHSVB, uintWithinRange, uint32(0), uint32(0xFFFF))
-				back := RGBAtoHSVA(color.RGBA{uint8(cFromHSVR >> 8), uint8(cFromHSVG >> 8), uint8(cFromHSVB >> 8), uint8(cFromHSVA)}.RGBA())
+				back := rgbaToHsva(color.RGBA{uint8(cFromHSVR >> 8), uint8(cFromHSVG >> 8), uint8(cFromHSVB >> 8), uint8(cFromHSVA)}.RGBA())
 				c.Check(hsva, check.Equals, back)
 				c.Check(cFromHSVR, withinEpsilon, cDirectR, e)
 				c.Check(cFromHSVG, withinEpsilon, cDirectG, e)
