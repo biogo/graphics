@@ -19,7 +19,7 @@ type Palette interface {
 type Hue float64
 
 const (
-	Red = Hue(iota) / 6
+	Red Hue = Hue(iota) / 6
 	Yellow
 	Green
 	Cyan
