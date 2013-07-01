@@ -91,7 +91,7 @@ func Radial(colors int, start, end Hue, alpha float64) Palette {
 		c.S -= ds
 	}
 	if colors%2 != 0 {
-		p[colors/2] = color.NRGBA{0xff, 0xff, 0xff, 0xff}
+		p[colors/2] = color.NRGBA{0xff, 0xff, 0xff, byte(math.MaxUint8 * alpha)}
 	}
 
 	return p

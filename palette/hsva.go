@@ -10,7 +10,7 @@ import (
 )
 
 // HSVA represents a Hue/Saturation/Value/Alpha color.
-// H. S, V and A are valid within [0, 1].
+// H, S, V and A are valid within [0, 1].
 type HSVA struct {
 	H, S, V, A float64
 }
