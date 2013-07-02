@@ -57,8 +57,12 @@ type DivergingPalette Palette
 // Colors returns the palette's color collection.
 func (d DivergingPalette) Colors() []color.Color { return d.Color }
 
-// CriticalValue returns the indexish of the lightest (median) color in the DivergingPalette.
-func (d DivergingPalette) CriticalValue() float64 { return float64(len(d.Color)+1)/2 - 1 }
+// CriticalIndex returns the indices of the lightest (median) color or colors in the DivergingPalette.
+// The low and high index values will be equal when there is a single median color.
+func (d DivergingPalette) CriticalIndex() (low, high int) {
+	l := len(d.Color)
+	return (l - 1) / 2, l / 2
+}
 
 // NonDivergingPalette represents sequential or qualitative color schemes.
 type NonDivergingPalette Palette
