@@ -87,12 +87,14 @@ import (
 			"Diverging":   &bytes.Buffer{},
 		}
 
+		cls = map[string]string{"Diverging": "Diverging", "Qualitative": "NonDiverging", "Sequential": "NonDiverging"}
+
 		lookBuf = make(map[string][]string)
 	)
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if len(line) == 0 {
+		if len(strings.TrimSpace(line)) == 0 {
 			break
 		}
 		fields := strings.Split(line, delim)
@@ -111,14 +113,15 @@ import (
 			if name != last[lastType] {
 				lookBuf[lastType] = append(lookBuf[lastType], fmt.Sprintf("%q: %s", name, name))
 				if last[lastType] != "" {
-					fmt.Fprintf(defBuf[lastType], "\t\t},\n\t}\n")
+					fmt.Fprintf(defBuf[lastType], "\t\t\t},\n\t\t},\n\t}\n")
 				}
 				fmt.Fprintf(defBuf[lastType], "\t%s %s = %s{\n", fields[label["ColorName"]], lastType, lastType)
 				last[lastType] = name
 			} else {
-				fmt.Fprintf(defBuf[lastType], "\t\t},\n")
+				fmt.Fprintf(defBuf[lastType], "\t\t\t},\n\t\t},\n")
 			}
-			fmt.Fprintf(defBuf[lastType], "\t\t%d: {\n", mustAtoi(fields[label["NumOfColors"]]))
+			fmt.Fprintf(defBuf[lastType], "\t\t%d: %sPalette{\n\t\t\tID: %q,\n\t\t\tColor: []color.Color{\n",
+				mustAtoi(fields[label["NumOfColors"]]), cls[lastType], last[lastType])
 		}
 		values := []interface{}{
 			fields[label["ColorLetter"]],
@@ -127,9 +130,9 @@ import (
 			mustAtoi(fields[label["B"]]),
 		}
 		if hex {
-			fmt.Fprintf(defBuf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
+			fmt.Fprintf(defBuf[lastType], "\t\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
 		} else {
-			fmt.Fprintf(defBuf[lastType], "\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
+			fmt.Fprintf(defBuf[lastType], "\t\t\t\tColor{'%s', color.RGBA{0x%02x, 0x%02x, 0x%02x, 0xff}},\n", values...)
 		}
 	}
 	if err := scanner.Err(); err != nil {
@@ -137,7 +140,7 @@ import (
 		os.Exit(1)
 	}
 	for _, typ := range []string{"Diverging", "Qualitative", "Sequential"} {
-		fmt.Printf("var (\n%s\t\t},\n\t}\n)\n", defBuf[typ].Bytes())
+		fmt.Printf("var (\n%s\t\t\t},\n\t\t},\n\t}\n)\n", defBuf[typ].Bytes())
 	}
 	fmt.Println("\nvar (")
 	for _, typ := range []string{"Diverging", "Qualitative", "Sequential"} {

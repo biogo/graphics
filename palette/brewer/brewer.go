@@ -27,20 +27,44 @@ type Color struct {
 	color.Color
 }
 
+// Usability describes the usability of a palette for particular use cases.
+type Usability byte
+
+const (
+	NotAvalailable Usability = iota
+	Bad
+	Unsure
+	Good
+)
+
+// Palette represents a color scheme.
+type Palette struct {
+	ID   string
+	Name string
+
+	Laptop     Usability
+	CRT        Usability
+	ColorBlind Usability
+	Copy       Usability
+	Projector  Usability
+
+	Color []color.Color
+}
+
 // DivergingPalette represents a diverging color scheme.
-type DivergingPalette []color.Color
+type DivergingPalette Palette
 
 // Colors returns the palette's color collection.
-func (d DivergingPalette) Colors() []color.Color { return d }
+func (d DivergingPalette) Colors() []color.Color { return d.Color }
 
 // CriticalValue returns the indexish of the lightest (median) color in the DivergingPalette.
-func (d DivergingPalette) CriticalValue() float64 { return float64(len(d)+1)/2 - 1 }
+func (d DivergingPalette) CriticalValue() float64 { return float64(len(d.Color)+1)/2 - 1 }
 
 // NonDivergingPalette represents sequential or qualitative color schemes.
-type NonDivergingPalette []color.Color
+type NonDivergingPalette Palette
 
 // Colors returns the palette's color collection.
-func (d NonDivergingPalette) Colors() []color.Color { return d }
+func (d NonDivergingPalette) Colors() []color.Color { return d.Color }
 
 // Diverging schemes put equal emphasis on mid-range critical values and extremes
 // at both ends of the data range. The critical class or break in the middle of the
