@@ -30,7 +30,13 @@ import (
 var (
 	BrBG Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xd8, 0xb3, 0x65, 0xff}},
 				Color{'H', color.RGBA{0xf5, 0xf5, 0xf5, 0xff}},
@@ -38,7 +44,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xa6, 0x61, 0x1a, 0xff}},
 				Color{'F', color.RGBA{0xdf, 0xc2, 0x7d, 0xff}},
@@ -47,7 +59,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xa6, 0x61, 0x1a, 0xff}},
 				Color{'F', color.RGBA{0xdf, 0xc2, 0x7d, 0xff}},
@@ -57,7 +75,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x8c, 0x51, 0x0a, 0xff}},
 				Color{'E', color.RGBA{0xd8, 0xb3, 0x65, 0xff}},
@@ -68,7 +92,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x8c, 0x51, 0x0a, 0xff}},
 				Color{'E', color.RGBA{0xd8, 0xb3, 0x65, 0xff}},
@@ -80,7 +110,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x8c, 0x51, 0x0a, 0xff}},
 				Color{'D', color.RGBA{0xbf, 0x81, 0x2d, 0xff}},
@@ -93,7 +129,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x8c, 0x51, 0x0a, 0xff}},
 				Color{'D', color.RGBA{0xbf, 0x81, 0x2d, 0xff}},
@@ -107,7 +149,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x54, 0x30, 0x05, 0xff}},
 				Color{'B', color.RGBA{0x8c, 0x51, 0x0a, 0xff}},
@@ -122,7 +170,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "BrBG",
+			ID:         "BrBG",
+			Name:       "Brown-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x54, 0x30, 0x05, 0xff}},
 				Color{'B', color.RGBA{0x8c, 0x51, 0x0a, 0xff}},
@@ -140,7 +194,13 @@ var (
 	}
 	PiYG Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xe9, 0xa3, 0xc9, 0xff}},
 				Color{'H', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
@@ -148,7 +208,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd0, 0x1c, 0x8b, 0xff}},
 				Color{'F', color.RGBA{0xf1, 0xb6, 0xda, 0xff}},
@@ -157,7 +223,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd0, 0x1c, 0x8b, 0xff}},
 				Color{'F', color.RGBA{0xf1, 0xb6, 0xda, 0xff}},
@@ -167,7 +239,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xc5, 0x1b, 0x7d, 0xff}},
 				Color{'E', color.RGBA{0xe9, 0xa3, 0xc9, 0xff}},
@@ -178,7 +256,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xc5, 0x1b, 0x7d, 0xff}},
 				Color{'E', color.RGBA{0xe9, 0xa3, 0xc9, 0xff}},
@@ -190,7 +274,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xc5, 0x1b, 0x7d, 0xff}},
 				Color{'D', color.RGBA{0xde, 0x77, 0xae, 0xff}},
@@ -203,7 +293,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xc5, 0x1b, 0x7d, 0xff}},
 				Color{'D', color.RGBA{0xde, 0x77, 0xae, 0xff}},
@@ -217,7 +313,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8e, 0x01, 0x52, 0xff}},
 				Color{'B', color.RGBA{0xc5, 0x1b, 0x7d, 0xff}},
@@ -232,7 +334,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "PiYG",
+			ID:         "PiYG",
+			Name:       "Pink-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8e, 0x01, 0x52, 0xff}},
 				Color{'B', color.RGBA{0xc5, 0x1b, 0x7d, 0xff}},
@@ -250,7 +358,13 @@ var (
 	}
 	PRGn Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xaf, 0x8d, 0xc3, 0xff}},
 				Color{'H', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
@@ -258,7 +372,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0x7b, 0x32, 0x94, 0xff}},
 				Color{'F', color.RGBA{0xc2, 0xa5, 0xcf, 0xff}},
@@ -267,7 +387,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0x7b, 0x32, 0x94, 0xff}},
 				Color{'F', color.RGBA{0xc2, 0xa5, 0xcf, 0xff}},
@@ -277,7 +403,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x76, 0x2a, 0x83, 0xff}},
 				Color{'E', color.RGBA{0xaf, 0x8d, 0xc3, 0xff}},
@@ -288,7 +420,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x76, 0x2a, 0x83, 0xff}},
 				Color{'E', color.RGBA{0xaf, 0x8d, 0xc3, 0xff}},
@@ -300,7 +438,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x76, 0x2a, 0x83, 0xff}},
 				Color{'D', color.RGBA{0x99, 0x70, 0xab, 0xff}},
@@ -313,7 +457,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0x76, 0x2a, 0x83, 0xff}},
 				Color{'D', color.RGBA{0x99, 0x70, 0xab, 0xff}},
@@ -327,7 +477,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x40, 0x00, 0x4b, 0xff}},
 				Color{'B', color.RGBA{0x76, 0x2a, 0x83, 0xff}},
@@ -342,7 +498,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "PRGn",
+			ID:         "PRGn",
+			Name:       "Purple-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x40, 0x00, 0x4b, 0xff}},
 				Color{'B', color.RGBA{0x76, 0x2a, 0x83, 0xff}},
@@ -360,7 +522,13 @@ var (
 	}
 	PuOr Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xf1, 0xa3, 0x40, 0xff}},
 				Color{'H', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
@@ -368,7 +536,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe6, 0x61, 0x01, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xb8, 0x63, 0xff}},
@@ -377,7 +551,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe6, 0x61, 0x01, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xb8, 0x63, 0xff}},
@@ -387,7 +567,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb3, 0x58, 0x06, 0xff}},
 				Color{'E', color.RGBA{0xf1, 0xa3, 0x40, 0xff}},
@@ -398,7 +584,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb3, 0x58, 0x06, 0xff}},
 				Color{'E', color.RGBA{0xf1, 0xa3, 0x40, 0xff}},
@@ -410,7 +602,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb3, 0x58, 0x06, 0xff}},
 				Color{'D', color.RGBA{0xe0, 0x82, 0x14, 0xff}},
@@ -423,7 +621,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb3, 0x58, 0x06, 0xff}},
 				Color{'D', color.RGBA{0xe0, 0x82, 0x14, 0xff}},
@@ -437,7 +641,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0x3b, 0x08, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0x58, 0x06, 0xff}},
@@ -452,7 +662,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "PuOr",
+			ID:         "PuOr",
+			Name:       "Purple-Orange",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0x3b, 0x08, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0x58, 0x06, 0xff}},
@@ -470,7 +686,13 @@ var (
 	}
 	RdBu Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xef, 0x8a, 0x62, 0xff}},
 				Color{'H', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
@@ -478,7 +700,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xca, 0x00, 0x20, 0xff}},
 				Color{'F', color.RGBA{0xf4, 0xa5, 0x82, 0xff}},
@@ -487,7 +715,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xca, 0x00, 0x20, 0xff}},
 				Color{'F', color.RGBA{0xf4, 0xa5, 0x82, 0xff}},
@@ -497,7 +731,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'E', color.RGBA{0xef, 0x8a, 0x62, 0xff}},
@@ -508,7 +748,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'E', color.RGBA{0xef, 0x8a, 0x62, 0xff}},
@@ -520,7 +766,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'D', color.RGBA{0xd6, 0x60, 0x4d, 0xff}},
@@ -533,7 +785,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'D', color.RGBA{0xd6, 0x60, 0x4d, 0xff}},
@@ -547,7 +805,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x67, 0x00, 0x1f, 0xff}},
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
@@ -562,7 +826,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "RdBu",
+			ID:         "RdBu",
+			Name:       "Red-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x67, 0x00, 0x1f, 0xff}},
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
@@ -580,7 +850,13 @@ var (
 	}
 	RdGy Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xef, 0x8a, 0x62, 0xff}},
 				Color{'H', color.RGBA{0xff, 0xff, 0xff, 0xff}},
@@ -588,7 +864,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xca, 0x00, 0x20, 0xff}},
 				Color{'F', color.RGBA{0xf4, 0xa5, 0x82, 0xff}},
@@ -597,7 +879,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xca, 0x00, 0x20, 0xff}},
 				Color{'F', color.RGBA{0xf4, 0xa5, 0x82, 0xff}},
@@ -607,7 +895,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Bad,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'E', color.RGBA{0xef, 0x8a, 0x62, 0xff}},
@@ -618,7 +912,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'E', color.RGBA{0xef, 0x8a, 0x62, 0xff}},
@@ -630,7 +930,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'D', color.RGBA{0xd6, 0x60, 0x4d, 0xff}},
@@ -643,7 +949,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
 				Color{'D', color.RGBA{0xd6, 0x60, 0x4d, 0xff}},
@@ -657,7 +969,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x67, 0x00, 0x1f, 0xff}},
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
@@ -672,7 +990,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "RdGy",
+			ID:         "RdGy",
+			Name:       "Red-Grey",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x67, 0x00, 0x1f, 0xff}},
 				Color{'B', color.RGBA{0xb2, 0x18, 0x2b, 0xff}},
@@ -690,7 +1014,13 @@ var (
 	}
 	RdYlBu Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
 				Color{'H', color.RGBA{0xff, 0xff, 0xbf, 0xff}},
@@ -698,7 +1028,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd7, 0x19, 0x1c, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x61, 0xff}},
@@ -707,7 +1043,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd7, 0x19, 0x1c, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x61, 0xff}},
@@ -717,7 +1059,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
@@ -728,7 +1076,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
@@ -740,7 +1094,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'D', color.RGBA{0xf4, 0x6d, 0x43, 0xff}},
@@ -753,7 +1113,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'D', color.RGBA{0xf4, 0x6d, 0x43, 0xff}},
@@ -767,7 +1133,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa5, 0x00, 0x26, 0xff}},
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
@@ -782,7 +1154,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "RdYlBu",
+			ID:         "RdYlBu",
+			Name:       "Red-Yellow-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa5, 0x00, 0x26, 0xff}},
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
@@ -800,7 +1178,13 @@ var (
 	}
 	RdYlGn Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
 				Color{'H', color.RGBA{0xff, 0xff, 0xbf, 0xff}},
@@ -808,7 +1192,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd7, 0x19, 0x1c, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x61, 0xff}},
@@ -817,7 +1207,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd7, 0x19, 0x1c, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x61, 0xff}},
@@ -827,7 +1223,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
@@ -838,7 +1240,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
@@ -850,7 +1258,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'D', color.RGBA{0xf4, 0x6d, 0x43, 0xff}},
@@ -863,7 +1277,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
 				Color{'D', color.RGBA{0xf4, 0x6d, 0x43, 0xff}},
@@ -877,7 +1297,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa5, 0x00, 0x26, 0xff}},
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
@@ -892,7 +1318,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "RdYlGn",
+			ID:         "RdYlGn",
+			Name:       "Red-Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa5, 0x00, 0x26, 0xff}},
 				Color{'B', color.RGBA{0xd7, 0x30, 0x27, 0xff}},
@@ -910,7 +1342,13 @@ var (
 	}
 	Spectral Diverging = Diverging{
 		3: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
 				Color{'H', color.RGBA{0xff, 0xff, 0xbf, 0xff}},
@@ -918,7 +1356,13 @@ var (
 			},
 		},
 		4: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd7, 0x19, 0x1c, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x61, 0xff}},
@@ -927,7 +1371,13 @@ var (
 			},
 		},
 		5: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xd7, 0x19, 0x1c, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x61, 0xff}},
@@ -937,7 +1387,13 @@ var (
 			},
 		},
 		6: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd5, 0x3e, 0x4f, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
@@ -948,7 +1404,13 @@ var (
 			},
 		},
 		7: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd5, 0x3e, 0x4f, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0x8d, 0x59, 0xff}},
@@ -960,7 +1422,13 @@ var (
 			},
 		},
 		8: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd5, 0x3e, 0x4f, 0xff}},
 				Color{'D', color.RGBA{0xf4, 0x6d, 0x43, 0xff}},
@@ -973,7 +1441,13 @@ var (
 			},
 		},
 		9: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xd5, 0x3e, 0x4f, 0xff}},
 				Color{'D', color.RGBA{0xf4, 0x6d, 0x43, 0xff}},
@@ -987,7 +1461,13 @@ var (
 			},
 		},
 		10: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x9e, 0x01, 0x42, 0xff}},
 				Color{'B', color.RGBA{0xd5, 0x3e, 0x4f, 0xff}},
@@ -1002,7 +1482,13 @@ var (
 			},
 		},
 		11: DivergingPalette{
-			ID: "Spectral",
+			ID:         "Spectral",
+			Name:       "Spectral",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x9e, 0x01, 0x42, 0xff}},
 				Color{'B', color.RGBA{0xd5, 0x3e, 0x4f, 0xff}},
@@ -1022,7 +1508,13 @@ var (
 var (
 	Accent Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Accent",
+			ID:         "Accent",
+			Name:       "Accent",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0xc9, 0x7f, 0xff}},
 				Color{'B', color.RGBA{0xbe, 0xae, 0xd4, 0xff}},
@@ -1030,7 +1522,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Accent",
+			ID:         "Accent",
+			Name:       "Accent",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0xc9, 0x7f, 0xff}},
 				Color{'B', color.RGBA{0xbe, 0xae, 0xd4, 0xff}},
@@ -1039,7 +1537,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Accent",
+			ID:         "Accent",
+			Name:       "Accent",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0xc9, 0x7f, 0xff}},
 				Color{'B', color.RGBA{0xbe, 0xae, 0xd4, 0xff}},
@@ -1049,7 +1553,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Accent",
+			ID:         "Accent",
+			Name:       "Accent",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0xc9, 0x7f, 0xff}},
 				Color{'B', color.RGBA{0xbe, 0xae, 0xd4, 0xff}},
@@ -1060,7 +1570,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Accent",
+			ID:         "Accent",
+			Name:       "Accent",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0xc9, 0x7f, 0xff}},
 				Color{'B', color.RGBA{0xbe, 0xae, 0xd4, 0xff}},
@@ -1072,7 +1588,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Accent",
+			ID:         "Accent",
+			Name:       "Accent",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x7f, 0xc9, 0x7f, 0xff}},
 				Color{'B', color.RGBA{0xbe, 0xae, 0xd4, 0xff}},
@@ -1087,7 +1609,13 @@ var (
 	}
 	Dark2 Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Dark2",
+			ID:         "Dark2",
+			Name:       "Dark 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x1b, 0x9e, 0x77, 0xff}},
 				Color{'B', color.RGBA{0xd9, 0x5f, 0x02, 0xff}},
@@ -1095,7 +1623,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Dark2",
+			ID:         "Dark2",
+			Name:       "Dark 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x1b, 0x9e, 0x77, 0xff}},
 				Color{'B', color.RGBA{0xd9, 0x5f, 0x02, 0xff}},
@@ -1104,7 +1638,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Dark2",
+			ID:         "Dark2",
+			Name:       "Dark 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x1b, 0x9e, 0x77, 0xff}},
 				Color{'B', color.RGBA{0xd9, 0x5f, 0x02, 0xff}},
@@ -1114,7 +1654,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Dark2",
+			ID:         "Dark2",
+			Name:       "Dark 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x1b, 0x9e, 0x77, 0xff}},
 				Color{'B', color.RGBA{0xd9, 0x5f, 0x02, 0xff}},
@@ -1125,7 +1671,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Dark2",
+			ID:         "Dark2",
+			Name:       "Dark 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x1b, 0x9e, 0x77, 0xff}},
 				Color{'B', color.RGBA{0xd9, 0x5f, 0x02, 0xff}},
@@ -1137,7 +1689,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Dark2",
+			ID:         "Dark2",
+			Name:       "Dark 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x1b, 0x9e, 0x77, 0xff}},
 				Color{'B', color.RGBA{0xd9, 0x5f, 0x02, 0xff}},
@@ -1152,7 +1710,13 @@ var (
 	}
 	Paired Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1160,7 +1724,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1169,7 +1739,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1179,7 +1755,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1190,7 +1772,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1202,7 +1790,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Unsure,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1215,7 +1809,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1229,7 +1829,13 @@ var (
 			},
 		},
 		10: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Good,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1244,7 +1850,13 @@ var (
 			},
 		},
 		11: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1260,7 +1872,13 @@ var (
 			},
 		},
 		12: NonDivergingPalette{
-			ID: "Paired",
+			ID:         "Paired",
+			Name:       "Paired",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xa6, 0xce, 0xe3, 0xff}},
 				Color{'B', color.RGBA{0x1f, 0x78, 0xb4, 0xff}},
@@ -1279,7 +1897,13 @@ var (
 	}
 	Pastel1 Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1287,7 +1911,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1296,7 +1926,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1306,7 +1942,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1317,7 +1959,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1329,7 +1977,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1342,7 +1996,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Pastel1",
+			ID:         "Pastel1",
+			Name:       "Pastel 1",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfb, 0xb4, 0xae, 0xff}},
 				Color{'B', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1358,7 +2018,13 @@ var (
 	}
 	Pastel2 Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Pastel2",
+			ID:         "Pastel2",
+			Name:       "Pastel 2",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xb3, 0xe2, 0xcd, 0xff}},
 				Color{'B', color.RGBA{0xfd, 0xcd, 0xac, 0xff}},
@@ -1366,7 +2032,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Pastel2",
+			ID:         "Pastel2",
+			Name:       "Pastel 2",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xb3, 0xe2, 0xcd, 0xff}},
 				Color{'B', color.RGBA{0xfd, 0xcd, 0xac, 0xff}},
@@ -1375,7 +2047,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Pastel2",
+			ID:         "Pastel2",
+			Name:       "Pastel 2",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xb3, 0xe2, 0xcd, 0xff}},
 				Color{'B', color.RGBA{0xfd, 0xcd, 0xac, 0xff}},
@@ -1385,7 +2063,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Pastel2",
+			ID:         "Pastel2",
+			Name:       "Pastel 2",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xb3, 0xe2, 0xcd, 0xff}},
 				Color{'B', color.RGBA{0xfd, 0xcd, 0xac, 0xff}},
@@ -1396,7 +2080,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Pastel2",
+			ID:         "Pastel2",
+			Name:       "Pastel 2",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xb3, 0xe2, 0xcd, 0xff}},
 				Color{'B', color.RGBA{0xfd, 0xcd, 0xac, 0xff}},
@@ -1408,7 +2098,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Pastel2",
+			ID:         "Pastel2",
+			Name:       "Pastel 2",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xb3, 0xe2, 0xcd, 0xff}},
 				Color{'B', color.RGBA{0xfd, 0xcd, 0xac, 0xff}},
@@ -1423,7 +2119,13 @@ var (
 	}
 	Set1 Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1431,7 +2133,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1440,7 +2148,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1450,7 +2164,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1461,7 +2181,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1473,7 +2199,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1486,7 +2218,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Set1",
+			ID:         "Set1",
+			Name:       "Set 1",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xe4, 0x1a, 0x1c, 0xff}},
 				Color{'B', color.RGBA{0x37, 0x7e, 0xb8, 0xff}},
@@ -1502,7 +2240,13 @@ var (
 	}
 	Set2 Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Set2",
+			ID:         "Set2",
+			Name:       "Set 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x66, 0xc2, 0xa5, 0xff}},
 				Color{'B', color.RGBA{0xfc, 0x8d, 0x62, 0xff}},
@@ -1510,7 +2254,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Set2",
+			ID:         "Set2",
+			Name:       "Set 2",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x66, 0xc2, 0xa5, 0xff}},
 				Color{'B', color.RGBA{0xfc, 0x8d, 0x62, 0xff}},
@@ -1519,7 +2269,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Set2",
+			ID:         "Set2",
+			Name:       "Set 2",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x66, 0xc2, 0xa5, 0xff}},
 				Color{'B', color.RGBA{0xfc, 0x8d, 0x62, 0xff}},
@@ -1529,7 +2285,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Set2",
+			ID:         "Set2",
+			Name:       "Set 2",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Unsure,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x66, 0xc2, 0xa5, 0xff}},
 				Color{'B', color.RGBA{0xfc, 0x8d, 0x62, 0xff}},
@@ -1540,7 +2302,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Set2",
+			ID:         "Set2",
+			Name:       "Set 2",
+			Laptop:     Unsure,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x66, 0xc2, 0xa5, 0xff}},
 				Color{'B', color.RGBA{0xfc, 0x8d, 0x62, 0xff}},
@@ -1552,7 +2320,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Set2",
+			ID:         "Set2",
+			Name:       "Set 2",
+			Laptop:     Unsure,
+			CRT:        Bad,
+			ColorBlind: Bad,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x66, 0xc2, 0xa5, 0xff}},
 				Color{'B', color.RGBA{0xfc, 0x8d, 0x62, 0xff}},
@@ -1567,7 +2341,13 @@ var (
 	}
 	Set3 Qualitative = Qualitative{
 		3: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1575,7 +2355,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Unsure,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1584,7 +2370,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1594,7 +2386,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1605,7 +2403,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1617,7 +2421,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Bad,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1630,7 +2440,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1644,7 +2460,13 @@ var (
 			},
 		},
 		10: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1659,7 +2481,13 @@ var (
 			},
 		},
 		11: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1675,7 +2503,13 @@ var (
 			},
 		},
 		12: NonDivergingPalette{
-			ID: "Set3",
+			ID:         "Set3",
+			Name:       "Set 3",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Bad,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0x8d, 0xd3, 0xc7, 0xff}},
 				Color{'B', color.RGBA{0xff, 0xff, 0xb3, 0xff}},
@@ -1696,7 +2530,13 @@ var (
 var (
 	Blues Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xde, 0xeb, 0xf7, 0xff}},
 				Color{'F', color.RGBA{0x9e, 0xca, 0xe1, 0xff}},
@@ -1704,7 +2544,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xef, 0xf3, 0xff, 0xff}},
 				Color{'E', color.RGBA{0xbd, 0xd7, 0xe7, 0xff}},
@@ -1713,7 +2559,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xef, 0xf3, 0xff, 0xff}},
 				Color{'E', color.RGBA{0xbd, 0xd7, 0xe7, 0xff}},
@@ -1723,7 +2575,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xef, 0xf3, 0xff, 0xff}},
 				Color{'D', color.RGBA{0xc6, 0xdb, 0xef, 0xff}},
@@ -1734,7 +2592,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xef, 0xf3, 0xff, 0xff}},
 				Color{'D', color.RGBA{0xc6, 0xdb, 0xef, 0xff}},
@@ -1746,7 +2610,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfb, 0xff, 0xff}},
 				Color{'C', color.RGBA{0xde, 0xeb, 0xf7, 0xff}},
@@ -1759,7 +2629,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Blues",
+			ID:         "Blues",
+			Name:       "Blues",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfb, 0xff, 0xff}},
 				Color{'C', color.RGBA{0xde, 0xeb, 0xf7, 0xff}},
@@ -1775,7 +2651,13 @@ var (
 	}
 	BuGn Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe5, 0xf5, 0xf9, 0xff}},
 				Color{'F', color.RGBA{0x99, 0xd8, 0xc9, 0xff}},
@@ -1783,7 +2665,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'E', color.RGBA{0xb2, 0xe2, 0xe2, 0xff}},
@@ -1792,7 +2680,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'E', color.RGBA{0xb2, 0xe2, 0xe2, 0xff}},
@@ -1802,7 +2696,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'D', color.RGBA{0xcc, 0xec, 0xe6, 0xff}},
@@ -1813,7 +2713,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'D', color.RGBA{0xcc, 0xec, 0xe6, 0xff}},
@@ -1825,7 +2731,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xfd, 0xff}},
 				Color{'C', color.RGBA{0xe5, 0xf5, 0xf9, 0xff}},
@@ -1838,7 +2750,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "BuGn",
+			ID:         "BuGn",
+			Name:       "Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xfd, 0xff}},
 				Color{'C', color.RGBA{0xe5, 0xf5, 0xf9, 0xff}},
@@ -1854,7 +2772,13 @@ var (
 	}
 	BuPu Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe0, 0xec, 0xf4, 0xff}},
 				Color{'F', color.RGBA{0x9e, 0xbc, 0xda, 0xff}},
@@ -1862,7 +2786,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'E', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1871,7 +2801,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Good,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'E', color.RGBA{0xb3, 0xcd, 0xe3, 0xff}},
@@ -1881,7 +2817,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'D', color.RGBA{0xbf, 0xd3, 0xe6, 0xff}},
@@ -1892,7 +2834,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xfb, 0xff}},
 				Color{'D', color.RGBA{0xbf, 0xd3, 0xe6, 0xff}},
@@ -1904,7 +2852,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xfd, 0xff}},
 				Color{'C', color.RGBA{0xe0, 0xec, 0xf4, 0xff}},
@@ -1917,7 +2871,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "BuPu",
+			ID:         "BuPu",
+			Name:       "Blue-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xfd, 0xff}},
 				Color{'C', color.RGBA{0xe0, 0xec, 0xf4, 0xff}},
@@ -1933,7 +2893,13 @@ var (
 	}
 	GnBu Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe0, 0xf3, 0xdb, 0xff}},
 				Color{'F', color.RGBA{0xa8, 0xdd, 0xb5, 0xff}},
@@ -1941,7 +2907,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf0, 0xf9, 0xe8, 0xff}},
 				Color{'E', color.RGBA{0xba, 0xe4, 0xbc, 0xff}},
@@ -1950,7 +2922,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf0, 0xf9, 0xe8, 0xff}},
 				Color{'E', color.RGBA{0xba, 0xe4, 0xbc, 0xff}},
@@ -1960,7 +2938,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf0, 0xf9, 0xe8, 0xff}},
 				Color{'D', color.RGBA{0xcc, 0xeb, 0xc5, 0xff}},
@@ -1971,7 +2955,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf0, 0xf9, 0xe8, 0xff}},
 				Color{'D', color.RGBA{0xcc, 0xeb, 0xc5, 0xff}},
@@ -1983,7 +2973,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xf0, 0xff}},
 				Color{'C', color.RGBA{0xe0, 0xf3, 0xdb, 0xff}},
@@ -1996,7 +2992,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "GnBu",
+			ID:         "GnBu",
+			Name:       "Green-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xf0, 0xff}},
 				Color{'C', color.RGBA{0xe0, 0xf3, 0xdb, 0xff}},
@@ -2012,7 +3014,13 @@ var (
 	}
 	Greens Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe5, 0xf5, 0xe0, 0xff}},
 				Color{'F', color.RGBA{0xa1, 0xd9, 0x9b, 0xff}},
@@ -2020,7 +3028,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xe9, 0xff}},
 				Color{'E', color.RGBA{0xba, 0xe4, 0xb3, 0xff}},
@@ -2029,7 +3043,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xe9, 0xff}},
 				Color{'E', color.RGBA{0xba, 0xe4, 0xb3, 0xff}},
@@ -2039,7 +3059,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xe9, 0xff}},
 				Color{'D', color.RGBA{0xc7, 0xe9, 0xc0, 0xff}},
@@ -2050,7 +3076,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xed, 0xf8, 0xe9, 0xff}},
 				Color{'D', color.RGBA{0xc7, 0xe9, 0xc0, 0xff}},
@@ -2062,7 +3094,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xf5, 0xff}},
 				Color{'C', color.RGBA{0xe5, 0xf5, 0xe0, 0xff}},
@@ -2075,7 +3113,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Greens",
+			ID:         "Greens",
+			Name:       "Greens",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xfc, 0xf5, 0xff}},
 				Color{'C', color.RGBA{0xe5, 0xf5, 0xe0, 0xff}},
@@ -2091,7 +3135,13 @@ var (
 	}
 	Greys Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xf0, 0xf0, 0xf0, 0xff}},
 				Color{'F', color.RGBA{0xbd, 0xbd, 0xbd, 0xff}},
@@ -2099,7 +3149,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
 				Color{'E', color.RGBA{0xcc, 0xcc, 0xcc, 0xff}},
@@ -2108,7 +3164,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
 				Color{'E', color.RGBA{0xcc, 0xcc, 0xcc, 0xff}},
@@ -2118,7 +3180,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
 				Color{'D', color.RGBA{0xd9, 0xd9, 0xd9, 0xff}},
@@ -2129,7 +3197,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf7, 0xf7, 0xf7, 0xff}},
 				Color{'D', color.RGBA{0xd9, 0xd9, 0xd9, 0xff}},
@@ -2141,7 +3215,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xff, 0xff}},
 				Color{'C', color.RGBA{0xf0, 0xf0, 0xf0, 0xff}},
@@ -2154,7 +3234,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Greys",
+			ID:         "Greys",
+			Name:       "Greys",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xff, 0xff}},
 				Color{'C', color.RGBA{0xf0, 0xf0, 0xf0, 0xff}},
@@ -2170,7 +3256,13 @@ var (
 	}
 	Oranges Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xfe, 0xe6, 0xce, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xae, 0x6b, 0xff}},
@@ -2178,7 +3270,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xed, 0xde, 0xff}},
 				Color{'E', color.RGBA{0xfd, 0xbe, 0x85, 0xff}},
@@ -2187,7 +3285,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xed, 0xde, 0xff}},
 				Color{'E', color.RGBA{0xfd, 0xbe, 0x85, 0xff}},
@@ -2197,7 +3301,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xed, 0xde, 0xff}},
 				Color{'D', color.RGBA{0xfd, 0xd0, 0xa2, 0xff}},
@@ -2208,7 +3318,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xed, 0xde, 0xff}},
 				Color{'D', color.RGBA{0xfd, 0xd0, 0xa2, 0xff}},
@@ -2220,7 +3336,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf5, 0xeb, 0xff}},
 				Color{'C', color.RGBA{0xfe, 0xe6, 0xce, 0xff}},
@@ -2233,7 +3355,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Oranges",
+			ID:         "Oranges",
+			Name:       "Oranges",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf5, 0xeb, 0xff}},
 				Color{'C', color.RGBA{0xfe, 0xe6, 0xce, 0xff}},
@@ -2249,7 +3377,13 @@ var (
 	}
 	OrRd Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xfe, 0xe8, 0xc8, 0xff}},
 				Color{'F', color.RGBA{0xfd, 0xbb, 0x84, 0xff}},
@@ -2257,7 +3391,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xf0, 0xd9, 0xff}},
 				Color{'E', color.RGBA{0xfd, 0xcc, 0x8a, 0xff}},
@@ -2266,7 +3406,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xf0, 0xd9, 0xff}},
 				Color{'E', color.RGBA{0xfd, 0xcc, 0x8a, 0xff}},
@@ -2276,7 +3422,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xf0, 0xd9, 0xff}},
 				Color{'D', color.RGBA{0xfd, 0xd4, 0x9e, 0xff}},
@@ -2287,7 +3439,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xf0, 0xd9, 0xff}},
 				Color{'D', color.RGBA{0xfd, 0xd4, 0x9e, 0xff}},
@@ -2299,7 +3457,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xec, 0xff}},
 				Color{'C', color.RGBA{0xfe, 0xe8, 0xc8, 0xff}},
@@ -2312,7 +3476,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "OrRd",
+			ID:         "OrRd",
+			Name:       "Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xec, 0xff}},
 				Color{'C', color.RGBA{0xfe, 0xe8, 0xc8, 0xff}},
@@ -2328,7 +3498,13 @@ var (
 	}
 	PuBu Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xec, 0xe7, 0xf2, 0xff}},
 				Color{'F', color.RGBA{0xa6, 0xbd, 0xdb, 0xff}},
@@ -2336,7 +3512,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'E', color.RGBA{0xbd, 0xc9, 0xe1, 0xff}},
@@ -2345,7 +3527,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'E', color.RGBA{0xbd, 0xc9, 0xe1, 0xff}},
@@ -2355,7 +3543,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'D', color.RGBA{0xd0, 0xd1, 0xe6, 0xff}},
@@ -2366,7 +3560,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'D', color.RGBA{0xd0, 0xd1, 0xe6, 0xff}},
@@ -2378,7 +3578,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xfb, 0xff}},
 				Color{'C', color.RGBA{0xec, 0xe7, 0xf2, 0xff}},
@@ -2391,7 +3597,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "PuBu",
+			ID:         "PuBu",
+			Name:       "Purple-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xfb, 0xff}},
 				Color{'C', color.RGBA{0xec, 0xe7, 0xf2, 0xff}},
@@ -2407,7 +3619,13 @@ var (
 	}
 	PuBuGn Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xec, 0xe2, 0xf0, 0xff}},
 				Color{'F', color.RGBA{0xa6, 0xbd, 0xdb, 0xff}},
@@ -2415,7 +3633,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf6, 0xef, 0xf7, 0xff}},
 				Color{'E', color.RGBA{0xbd, 0xc9, 0xe1, 0xff}},
@@ -2424,7 +3648,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf6, 0xef, 0xf7, 0xff}},
 				Color{'E', color.RGBA{0xbd, 0xc9, 0xe1, 0xff}},
@@ -2434,7 +3664,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf6, 0xef, 0xf7, 0xff}},
 				Color{'D', color.RGBA{0xd0, 0xd1, 0xe6, 0xff}},
@@ -2445,7 +3681,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf6, 0xef, 0xf7, 0xff}},
 				Color{'D', color.RGBA{0xd0, 0xd1, 0xe6, 0xff}},
@@ -2457,7 +3699,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xfb, 0xff}},
 				Color{'C', color.RGBA{0xec, 0xe2, 0xf0, 0xff}},
@@ -2470,7 +3718,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "PuBuGn",
+			ID:         "PuBuGn",
+			Name:       "Purple-Blue-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xfb, 0xff}},
 				Color{'C', color.RGBA{0xec, 0xe2, 0xf0, 0xff}},
@@ -2486,7 +3740,13 @@ var (
 	}
 	PuRd Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xe7, 0xe1, 0xef, 0xff}},
 				Color{'F', color.RGBA{0xc9, 0x94, 0xc7, 0xff}},
@@ -2494,7 +3754,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'E', color.RGBA{0xd7, 0xb5, 0xd8, 0xff}},
@@ -2503,7 +3769,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'E', color.RGBA{0xd7, 0xb5, 0xd8, 0xff}},
@@ -2513,7 +3785,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'D', color.RGBA{0xd4, 0xb9, 0xda, 0xff}},
@@ -2524,7 +3802,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf1, 0xee, 0xf6, 0xff}},
 				Color{'D', color.RGBA{0xd4, 0xb9, 0xda, 0xff}},
@@ -2536,7 +3820,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xf4, 0xf9, 0xff}},
 				Color{'C', color.RGBA{0xe7, 0xe1, 0xef, 0xff}},
@@ -2549,7 +3839,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "PuRd",
+			ID:         "PuRd",
+			Name:       "Purple-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xf7, 0xf4, 0xf9, 0xff}},
 				Color{'C', color.RGBA{0xe7, 0xe1, 0xef, 0xff}},
@@ -2565,7 +3861,13 @@ var (
 	}
 	Purples Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xef, 0xed, 0xf5, 0xff}},
 				Color{'F', color.RGBA{0xbc, 0xbd, 0xdc, 0xff}},
@@ -2573,7 +3875,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf2, 0xf0, 0xf7, 0xff}},
 				Color{'E', color.RGBA{0xcb, 0xc9, 0xe2, 0xff}},
@@ -2582,7 +3890,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf2, 0xf0, 0xf7, 0xff}},
 				Color{'E', color.RGBA{0xcb, 0xc9, 0xe2, 0xff}},
@@ -2592,7 +3906,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf2, 0xf0, 0xf7, 0xff}},
 				Color{'D', color.RGBA{0xda, 0xda, 0xeb, 0xff}},
@@ -2603,7 +3923,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xf2, 0xf0, 0xf7, 0xff}},
 				Color{'D', color.RGBA{0xda, 0xda, 0xeb, 0xff}},
@@ -2615,7 +3941,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfc, 0xfb, 0xfd, 0xff}},
 				Color{'C', color.RGBA{0xef, 0xed, 0xf5, 0xff}},
@@ -2628,7 +3960,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Purples",
+			ID:         "Purples",
+			Name:       "Purples",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xfc, 0xfb, 0xfd, 0xff}},
 				Color{'C', color.RGBA{0xef, 0xed, 0xf5, 0xff}},
@@ -2644,7 +3982,13 @@ var (
 	}
 	RdPu Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xfd, 0xe0, 0xdd, 0xff}},
 				Color{'F', color.RGBA{0xfa, 0x9f, 0xb5, 0xff}},
@@ -2652,7 +3996,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xeb, 0xe2, 0xff}},
 				Color{'E', color.RGBA{0xfb, 0xb4, 0xb9, 0xff}},
@@ -2661,7 +4011,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xeb, 0xe2, 0xff}},
 				Color{'E', color.RGBA{0xfb, 0xb4, 0xb9, 0xff}},
@@ -2671,7 +4027,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xeb, 0xe2, 0xff}},
 				Color{'D', color.RGBA{0xfc, 0xc5, 0xc0, 0xff}},
@@ -2682,7 +4044,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xeb, 0xe2, 0xff}},
 				Color{'D', color.RGBA{0xfc, 0xc5, 0xc0, 0xff}},
@@ -2694,7 +4062,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xf3, 0xff}},
 				Color{'C', color.RGBA{0xfd, 0xe0, 0xdd, 0xff}},
@@ -2707,7 +4081,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "RdPu",
+			ID:         "RdPu",
+			Name:       "Red-Purple",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf7, 0xf3, 0xff}},
 				Color{'C', color.RGBA{0xfd, 0xe0, 0xdd, 0xff}},
@@ -2723,7 +4103,13 @@ var (
 	}
 	Reds Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xfe, 0xe0, 0xd2, 0xff}},
 				Color{'F', color.RGBA{0xfc, 0x92, 0x72, 0xff}},
@@ -2731,7 +4117,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xe5, 0xd9, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0xae, 0x91, 0xff}},
@@ -2740,7 +4132,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xe5, 0xd9, 0xff}},
 				Color{'E', color.RGBA{0xfc, 0xae, 0x91, 0xff}},
@@ -2750,7 +4148,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xe5, 0xd9, 0xff}},
 				Color{'D', color.RGBA{0xfc, 0xbb, 0xa1, 0xff}},
@@ -2761,7 +4165,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xfe, 0xe5, 0xd9, 0xff}},
 				Color{'D', color.RGBA{0xfc, 0xbb, 0xa1, 0xff}},
@@ -2773,7 +4183,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf5, 0xf0, 0xff}},
 				Color{'C', color.RGBA{0xfe, 0xe0, 0xd2, 0xff}},
@@ -2786,7 +4202,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "Reds",
+			ID:         "Reds",
+			Name:       "Reds",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xf5, 0xf0, 0xff}},
 				Color{'C', color.RGBA{0xfe, 0xe0, 0xd2, 0xff}},
@@ -2802,7 +4224,13 @@ var (
 	}
 	YlGn Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xf7, 0xfc, 0xb9, 0xff}},
 				Color{'F', color.RGBA{0xad, 0xdd, 0x8e, 0xff}},
@@ -2810,7 +4238,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'E', color.RGBA{0xc2, 0xe6, 0x99, 0xff}},
@@ -2819,7 +4253,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'E', color.RGBA{0xc2, 0xe6, 0x99, 0xff}},
@@ -2829,7 +4269,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'D', color.RGBA{0xd9, 0xf0, 0xa3, 0xff}},
@@ -2840,7 +4286,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'D', color.RGBA{0xd9, 0xf0, 0xa3, 0xff}},
@@ -2852,7 +4304,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xe5, 0xff}},
 				Color{'C', color.RGBA{0xf7, 0xfc, 0xb9, 0xff}},
@@ -2865,7 +4323,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "YlGn",
+			ID:         "YlGn",
+			Name:       "Yellow-Green",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xe5, 0xff}},
 				Color{'C', color.RGBA{0xf7, 0xfc, 0xb9, 0xff}},
@@ -2881,7 +4345,13 @@ var (
 	}
 	YlGnBu Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xed, 0xf8, 0xb1, 0xff}},
 				Color{'F', color.RGBA{0x7f, 0xcd, 0xbb, 0xff}},
@@ -2889,7 +4359,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'E', color.RGBA{0xa1, 0xda, 0xb4, 0xff}},
@@ -2898,7 +4374,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Unsure,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'E', color.RGBA{0xa1, 0xda, 0xb4, 0xff}},
@@ -2908,7 +4390,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'D', color.RGBA{0xc7, 0xe9, 0xb4, 0xff}},
@@ -2919,7 +4407,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'D', color.RGBA{0xc7, 0xe9, 0xb4, 0xff}},
@@ -2931,7 +4425,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xd9, 0xff}},
 				Color{'C', color.RGBA{0xed, 0xf8, 0xb1, 0xff}},
@@ -2944,7 +4444,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "YlGnBu",
+			ID:         "YlGnBu",
+			Name:       "Yellow-Green-Blue",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xd9, 0xff}},
 				Color{'C', color.RGBA{0xed, 0xf8, 0xb1, 0xff}},
@@ -2960,7 +4466,13 @@ var (
 	}
 	YlOrBr Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xff, 0xf7, 0xbc, 0xff}},
 				Color{'F', color.RGBA{0xfe, 0xc4, 0x4f, 0xff}},
@@ -2968,7 +4480,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xd4, 0xff}},
 				Color{'E', color.RGBA{0xfe, 0xd9, 0x8e, 0xff}},
@@ -2977,7 +4495,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Bad,
+			CRT:        Unsure,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xd4, 0xff}},
 				Color{'E', color.RGBA{0xfe, 0xd9, 0x8e, 0xff}},
@@ -2987,7 +4511,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xd4, 0xff}},
 				Color{'D', color.RGBA{0xfe, 0xe3, 0x91, 0xff}},
@@ -2998,7 +4528,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xd4, 0xff}},
 				Color{'D', color.RGBA{0xfe, 0xe3, 0x91, 0xff}},
@@ -3010,7 +4546,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xe5, 0xff}},
 				Color{'C', color.RGBA{0xff, 0xf7, 0xbc, 0xff}},
@@ -3023,7 +4565,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "YlOrBr",
+			ID:         "YlOrBr",
+			Name:       "Yellow-Orange-Brown",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xe5, 0xff}},
 				Color{'C', color.RGBA{0xff, 0xf7, 0xbc, 0xff}},
@@ -3039,7 +4587,13 @@ var (
 	}
 	YlOrRd Sequential = Sequential{
 		3: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Good,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Good,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'C', color.RGBA{0xff, 0xed, 0xa0, 0xff}},
 				Color{'F', color.RGBA{0xfe, 0xb2, 0x4c, 0xff}},
@@ -3047,7 +4601,13 @@ var (
 			},
 		},
 		4: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xb2, 0xff}},
 				Color{'E', color.RGBA{0xfe, 0xcc, 0x5c, 0xff}},
@@ -3056,7 +4616,13 @@ var (
 			},
 		},
 		5: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Unsure,
+			CRT:        Good,
+			ColorBlind: Good,
+			Copy:       Unsure,
+			Projector:  Good,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xb2, 0xff}},
 				Color{'E', color.RGBA{0xfe, 0xcc, 0x5c, 0xff}},
@@ -3066,7 +4632,13 @@ var (
 			},
 		},
 		6: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Unsure,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xb2, 0xff}},
 				Color{'D', color.RGBA{0xfe, 0xd9, 0x76, 0xff}},
@@ -3077,7 +4649,13 @@ var (
 			},
 		},
 		7: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'B', color.RGBA{0xff, 0xff, 0xb2, 0xff}},
 				Color{'D', color.RGBA{0xfe, 0xd9, 0x76, 0xff}},
@@ -3089,7 +4667,13 @@ var (
 			},
 		},
 		8: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'C', color.RGBA{0xff, 0xed, 0xa0, 0xff}},
@@ -3102,7 +4686,13 @@ var (
 			},
 		},
 		9: NonDivergingPalette{
-			ID: "YlOrRd",
+			ID:         "YlOrRd",
+			Name:       "Yellow-Orange-Red",
+			Laptop:     Bad,
+			CRT:        Bad,
+			ColorBlind: Good,
+			Copy:       Bad,
+			Projector:  Bad,
 			Color: []color.Color{
 				Color{'A', color.RGBA{0xff, 0xff, 0xcc, 0xff}},
 				Color{'C', color.RGBA{0xff, 0xed, 0xa0, 0xff}},
