@@ -1,0 +1,191 @@
+// Copyright ©2013 The bíogo Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+package rings
+
+import (
+	"code.google.com/p/biogo.graphics/bezier"
+	"code.google.com/p/biogo/feat"
+
+	"code.google.com/p/plotinum/plot"
+	"code.google.com/p/plotinum/vg"
+
+	"errors"
+	"fmt"
+	"math"
+)
+
+// Links implements rendering of feat.Feature associations as Bézier curves.
+type Links struct {
+	// Set holds a collection of feature pairs to render.
+	Set []Pair
+
+	// Ends holds the elements that define the end targets of the rendered ribbons.
+	Ends [2]ArcOfer
+	// Radii indicates the distance of the ribbon end points from the center of the plot.
+	Radii [2]vg.Length
+
+	// Bezier describes the Bézier configuration for link rendering.
+	Bezier *Bezier
+
+	// LineStyle determines the line style of each link Bézier curve. LineStyle behaviour
+	// is over-ridden if the Pair describing features is a LineStyler.
+	LineStyle plot.LineStyle
+
+	// X and Y specify rendering location when Plot is called.
+	X, Y float64
+}
+
+// NewLinks returns a Links based on the parameters, first checking that the provided features
+// are able to be rendered. An error is returned if the features are not renderable. The ends of
+// a Links ring cannot be an Arc or a Highlight.
+func NewLinks(fp []Pair, ends [2]ArcOfer, r [2]vg.Length) (*Links, error) {
+	for _, p := range fp {
+		for i, f := range p.Features() {
+			if f.End() < f.Start() {
+				return nil, errors.New("rings: inverted feature")
+			}
+			if _, err := ends[i].ArcOf(nil, f); err != nil {
+				return nil, err
+			}
+		}
+	}
+	return &Links{
+		Set:   fp,
+		Ends:  ends,
+		Radii: r,
+	}, nil
+}
+
+// DrawAt renders the feature pairs of a Links at cen in the specified drawing area,
+// according to the Links configuration.
+func (r *Links) DrawAt(da plot.DrawArea, cen plot.Point) {
+	if len(r.Set) == 0 {
+		return
+	}
+
+	// Check if we have a Bézier and we want more than one segment in the curve.
+	bez := r.Bezier != nil && r.Bezier.Segments > 1
+
+	var pa vg.Path
+loop:
+	for _, fp := range r.Set {
+		p := fp.Features()
+		loc := [2]feat.Feature{p[0].Location(), p[1].Location()}
+		var min, max [2]int
+		for j, l := range loc {
+			min[j] = l.Start()
+			max[j] = l.End()
+		}
+
+		var angles [2]Angle
+		for j, f := range p {
+			if f.Start() < min[j] || f.Start() > max[j] {
+				continue loop
+			}
+
+			arc, err := r.Ends[j].ArcOf(f.Location(), f)
+			if err != nil {
+				panic(fmt.Sprint("rings: no arc for feature location:", err))
+			}
+			angles[j] = Normalize(arc.Theta)
+		}
+
+		pa = pa[:0]
+		e := Rectangular(angles[0], float64(r.Radii[0]))
+		pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+		// Bézier from angles[0]@radius[0] to angles[1]@radius[1] through
+		// r.Bezier if it is not nil and we wanted more than 1 segment;
+		// otherwise straight lines.
+		if bez {
+			b := bezier.New(
+				r.Bezier.ControlPoints(angles, r.Radii)...,
+			)
+			for i := 1; i <= r.Bezier.Segments; i++ {
+				pnt := b.Point(float64(i) / float64(r.Bezier.Segments))
+				pa.Line(cen.X+vg.Length(pnt.X), cen.Y+vg.Length(pnt.Y))
+			}
+		} else {
+			e = Rectangular(angles[1], float64(r.Radii[1]))
+			pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+		}
+
+		var sty plot.LineStyle
+		if ls, ok := fp.(LineStyler); ok {
+			sty = ls.LineStyle()
+		} else {
+			sty = r.LineStyle
+		}
+		if sty.Color != nil && sty.Width != 0 {
+			da.SetLineStyle(sty)
+			da.Stroke(pa)
+		}
+	}
+}
+
+// Plot calls DrawAt using the Links' X and Y values as the drawing coordinates.
+func (r *Links) Plot(da plot.DrawArea, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&da)
+	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+}
+
+// GlyphBoxes returns a liberal glyphbox for the links rendering.
+func (r *Links) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
+	if len(r.Set) == 0 {
+		return nil
+	}
+
+	rad := float64(r.Radii[0])
+	if float64(r.Radii[1]) > rad {
+		rad = float64(r.Radii[1])
+	}
+
+	// If draw a Bézier we need to see if the radius is increased,
+	// so we mock the drawing, just keeping a record of the furthest
+	// distance from the origin. This may change to be more conservative.
+	if r.Bezier != nil && r.Bezier.Segments > 1 {
+	loop:
+		for _, fp := range r.Set {
+			p := fp.Features()
+			loc := [2]feat.Feature{p[0].Location(), p[1].Location()}
+			var min, max [2]int
+			for j, l := range loc {
+				min[j] = l.Start()
+				max[j] = l.End()
+			}
+
+			var angles [2]Angle
+			for j, f := range p {
+				if f.Start() < min[j] || f.End() > max[j] {
+					continue loop
+				}
+
+				arc, err := r.Ends[j].ArcOf(f.Location(), f)
+				if err != nil {
+					panic(fmt.Sprint("rings: no arc for feature location:", err))
+				}
+				angles[j] = Normalize(arc.Theta)
+			}
+
+			b := bezier.New(
+				r.Bezier.ControlPoints(angles, r.Radii)...,
+			)
+			for k := 0; k <= r.Bezier.Segments; k++ {
+				e := b.Point(float64(k) / float64(r.Bezier.Segments))
+				if d := math.Hypot(e.X, e.Y); d > rad {
+					rad = d
+				}
+			}
+		}
+	}
+
+	return []plot.GlyphBox{{
+		X: plt.X.Norm(r.X),
+		Y: plt.Y.Norm(r.Y),
+		Rect: plot.Rect{
+			Min:  plot.Point{vg.Length(-rad), vg.Length(-rad)},
+			Size: plot.Point{2 * vg.Length(rad), 2 * vg.Length(rad)},
+		},
+	}}
+}
