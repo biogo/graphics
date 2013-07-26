@@ -187,8 +187,7 @@ func (h *Heat) Configure(da plot.DrawArea, cen plot.Point, _ ArcOfer, inner, out
 func (h *Heat) Render(arc Arc, scorer Scorer) {
 	scores := scorer.Scores()
 
-	// Define palette scale factor for an inclusive range.
-	ps := math.Nextafter(float64(len(h.Palette)-1)/(h.Max-h.Min), 0)
+	ps := float64(len(h.Palette)-1) / (h.Max - h.Min)
 
 	// Define block progression inner to outer.
 	d := (h.Outer - h.Inner) / vg.Length(len(scores))
@@ -213,7 +212,7 @@ func (h *Heat) Render(arc Arc, scorer Scorer) {
 		case v > h.Max:
 			c = h.Overflow
 		default:
-			c = h.Palette[int((v-h.Min)*ps)]
+			c = h.Palette[int((v-h.Min)*ps+0.5)]
 		}
 		if c != nil {
 			h.DrawArea.SetColor(c)
@@ -278,8 +277,7 @@ func (t *Trace) Close() {
 
 	sort.Sort(t.values)
 
-	// Define scale factor for an inclusive range.
-	rs := math.Nextafter(float64(t.Outer-t.Inner)/(t.Max-t.Min), 0)
+	rs := float64(t.Outer-t.Inner) / (t.Max - t.Min)
 
 	var pa vg.Path
 	for i, arc := range t.values {
