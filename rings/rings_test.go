@@ -8,6 +8,7 @@ import (
 	"code.google.com/p/biogo.graphics/palette"
 	"code.google.com/p/biogo.graphics/rings"
 	"code.google.com/p/biogo/feat"
+	"reflect"
 
 	"code.google.com/p/plotinum/plot"
 	"code.google.com/p/plotinum/plotter"
@@ -175,8 +176,8 @@ func (s *S) TestHighlight(c *check.C) {
 		}},
 	)
 	c.Check(tc.actions, check.DeepEquals, base.actions)
-	if c.Failed() && *pics || *allPics {
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("highlight-%s.svg", failure(c.Failed()))), check.Equals, nil)
+	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
+		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("highlight-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -250,8 +251,8 @@ func (s *S) TestBlocks(c *check.C) {
 		}},
 	)
 	c.Check(tc.actions, check.DeepEquals, base.actions)
-	if c.Failed() && *pics || *allPics {
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("blocks-%s.svg", failure(c.Failed()))), check.Equals, nil)
+	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
+		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("blocks-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -878,9 +879,9 @@ func (s *S) TestBlocksScale(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("scale-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("scale-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -1030,9 +1031,9 @@ func (s *S) TestLabelsBlocks(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labels-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labels-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -1137,9 +1138,9 @@ func (s *S) TestLabelsArcs(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(h)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labels-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labels-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -1200,9 +1201,9 @@ func (s *S) TestLabelSpokes(c *check.C) {
 		fillString{font: "Helvetica", size: 10, x: 63.680626544459074, y: 44.96565340167564, str: "feature9"},
 		pop{})
 	c.Check(tc.actions, check.DeepEquals, base.actions)
-	if c.Failed() && *pics || *allPics {
+	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 		p.Add(b, ms)
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labelspokes-%s.svg", failure(c.Failed()))), check.Equals, nil)
+		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labelspokes-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -1304,9 +1305,9 @@ func (s *S) TestSpokes(c *check.C) {
 		}},
 	)
 	c.Check(tc.actions, check.DeepEquals, base.actions)
-	if c.Failed() && *pics || *allPics {
+	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 		p.Add(b)
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("spokes-%s.svg", failure(c.Failed()))), check.Equals, nil)
+		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("spokes-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -1549,11 +1550,11 @@ func (s *S) TestLinks(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			s, err := rings.NewSpokes(append(m[0], m[1]...), b, 72, 78)
 			c.Assert(err, check.Equals, nil)
 			p.Add(b, s)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("links-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("links-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -2175,9 +2176,9 @@ func (s *S) TestRibbons(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("ribbons-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("ribbons-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -2642,9 +2643,9 @@ func (s *S) TestSail(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("sail-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("sail-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -4263,9 +4264,9 @@ func (s *S) TestScores(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("scores-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("scores-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -4529,9 +4530,9 @@ func (s *S) TestScoresAxis(c *check.C) {
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
-		if c.Failed() && *pics || *allPics {
+		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("axis-%d-%s.svg", i, failure(c.Failed()))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("axis-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
