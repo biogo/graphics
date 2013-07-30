@@ -286,22 +286,21 @@ func (t *Trace) Close() {
 
 			sty := t.LineStyle
 
+			if arc.Phi < 0 {
+				arc.Theta, arc.Phi = arc.Theta+arc.Phi, -arc.Phi
+			}
+
 			var joined bool
 			if t.Join && i != 0 && adjacent(t.values[i-1].Scorer, arc.Scorer) {
 				prev := t.values[i-1].Scores()[j]
 				if (t.Min <= as && as <= t.Max) || (t.Min <= prev && prev <= t.Max) {
+					joined = true
+
 					prev = math.Min(math.Max(prev, t.Min), t.Max)
 					as := math.Min(math.Max(as, t.Min), t.Max)
 
-					var angle Angle
-					if arc.Phi <= 0 {
-						angle = arc.Theta + arc.Phi
-					} else if arc := t.values[i-1]; arc.Phi >= 0 {
-						angle = arc.Theta + arc.Phi
-					}
-
-					s := Rectangular(angle, (prev-t.Min)*rs+float64(t.Inner))
-					e := Rectangular(angle, (as-t.Min)*rs+float64(t.Inner))
+					s := Rectangular(arc.Theta, (prev-t.Min)*rs+float64(t.Inner))
+					e := Rectangular(arc.Theta, (as-t.Min)*rs+float64(t.Inner))
 					pa.Move(t.Center.X+vg.Length(s.X), t.Center.Y+vg.Length(s.Y))
 					pa.Line(t.Center.X+vg.Length(e.X), t.Center.Y+vg.Length(e.Y))
 					sty.Color = t.Palette[j]
