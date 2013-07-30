@@ -226,16 +226,12 @@ func (h *Heat) Close() {}
 
 // Trace is a ScoreRenderer that represents feature scores as a trace line.
 type Trace struct {
-	Palette []color.Color
+	// LineStyles determines the lines style for each trace.
+	LineStyles []plot.LineStyle
 
 	// Join specifies whether adjacent features should be joined with radial lines.
 	// It is overridden by the returned value of JoinTrace if the Scorer is a TraceJoiner.
 	Join bool
-
-	// LineStyle determines the lines style for the trace. It is overridden by the returned
-	// value of TraceStyle is the Scorer is a TraceStyler. Trace color is alway determined
-	// from the Trace palette.
-	LineStyle plot.LineStyle
 
 	Base ArcOfer
 
@@ -272,12 +268,6 @@ func (t *Trace) Configure(da plot.DrawArea, cen plot.Point, base ArcOfer, inner,
 type TraceJoiner interface {
 	// JoinTrace returns whether the ith score value should be part of a joined trace.
 	JoinTrace(i int) bool
-}
-
-// TraceStyler is a type that can determine its trace line style (except color).
-type TraceStyler interface {
-	// TraceStyle returns the line style for the ith score value.
-	TraceStyle(i int) plot.LineStyle
 }
 
 // Render add the scores at the specified arc for lazy rendering.
@@ -338,13 +328,7 @@ func (t *Trace) Close() {
 				pa.Arc(t.Center.X, t.Center.Y, rad, float64(arc.Theta), float64(arc.Phi))
 			}
 
-			var sty plot.LineStyle
-			if ts, ok := arc.Scorer.(TraceStyler); ok {
-				sty = ts.TraceStyle(j)
-			} else {
-				sty = t.LineStyle
-			}
-			sty.Color = t.Palette[j]
+			sty := t.LineStyles[j]
 			if sty.Color != nil && sty.Width != 0 {
 				t.DrawArea.SetLineStyle(sty)
 				t.DrawArea.Stroke(pa)

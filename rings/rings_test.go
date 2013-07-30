@@ -3398,8 +3398,11 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 1, func(v, _ int) float64 { return float64(v) }),
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3476,9 +3479,12 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 1, func(v, _ int) float64 { return float64(v) }),
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3588,9 +3594,12 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3644,9 +3653,12 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3699,9 +3711,12 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3754,9 +3769,12 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3810,9 +3828,12 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3864,9 +3885,12 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.Gray{Y: 0x0}},
@@ -3896,8 +3920,12 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 2, func(_, _ int) float64 { return rand.NormFloat64() }),
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.NRGBA{R: 0xff, A: 0xff}, color.RGBA{G: 0xff, A: 0x80}},
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: func() []plot.LineStyle {
+					sty := []plot.LineStyle{plotter.DefaultLineStyle, plotter.DefaultLineStyle}
+					sty[0].Color = color.NRGBA{R: 0xff, A: 0xff}
+					sty[1].Color = color.RGBA{G: 0xff, A: 0x80}
+					return sty
+				}(),
 			},
 			actions: []interface{}{
 				setColor{col: color.NRGBA{R: 0xff, G: 0x0, B: 0x0, A: 0xff}},
@@ -4045,9 +4073,13 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 2, func(_, _ int) float64 { return rand.NormFloat64() }),
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.NRGBA{R: 0xff, A: 0xff}, color.RGBA{G: 0xff, A: 0x80}},
-				Join:      true,
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: func() []plot.LineStyle {
+					sty := []plot.LineStyle{plotter.DefaultLineStyle, plotter.DefaultLineStyle}
+					sty[0].Color = color.NRGBA{R: 0xff, A: 0xff}
+					sty[1].Color = color.RGBA{G: 0xff, A: 0x80}
+					return sty
+				}(),
+				Join: true,
 			},
 			actions: []interface{}{
 				setColor{col: color.NRGBA{R: 0xff, G: 0x0, B: 0x0, A: 0xff}},
@@ -4253,8 +4285,11 @@ func (s *S) TestScoresAxis(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 1, func(v, _ int) float64 { return float64(v) }),
 			renderer: &rings.Trace{
-				Palette:   []color.Color{color.Gray{0}},
-				LineStyle: plotter.DefaultLineStyle,
+				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+					sty := plotter.DefaultLineStyle
+					sty.Color = color.Gray{0}
+					return sty
+				}()},
 				Axis: func() *rings.Axis {
 					a, err := b.ArcOf(b.Set[1], nil)
 					c.Assert(err, check.Equals, nil)
