@@ -34,7 +34,7 @@ type ScoreRenderer interface {
 	// performed lazily.
 	Render(Arc, Scorer)
 
-	// Close finialises the rendering. For ScoreRenderers that do not
+	// Close finalises the rendering. For ScoreRenderers that do not
 	// render lazily, this is a no-op.
 	Close()
 }
