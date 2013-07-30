@@ -262,10 +262,11 @@ func (t *Trace) Configure(da plot.DrawArea, cen plot.Point, base ArcOfer, inner,
 	}
 }
 
-// TraceJoiner is a type that can specify whether the trace for its scores should
+// TraceJoiner is a type that can specify whether the traces for its scores should
 // be joined when adjacent.
 type TraceJoiner interface {
-	JoinTrace() bool
+	// JoinTrace returns whether the ith score value should be part of a joined trace.
+	JoinTrace(i int) bool
 }
 
 // Render add the scores at the specified arc for lazy rendering.
@@ -289,13 +290,6 @@ func (t *Trace) Close() {
 
 	var pa vg.Path
 	for i, arc := range t.values {
-		var join bool
-		if tj, ok := arc.Scorer.(TraceJoiner); ok {
-			join = tj.JoinTrace()
-		} else {
-			join = t.Join
-		}
-
 		for j, as := range arc.Scores() {
 			pa = pa[:0]
 
@@ -305,7 +299,12 @@ func (t *Trace) Close() {
 				arc.Theta, arc.Phi = arc.Theta+arc.Phi, -arc.Phi
 			}
 
-			var joined bool
+			var join, joined bool
+			if tj, ok := arc.Scorer.(TraceJoiner); ok {
+				join = tj.JoinTrace(j)
+			} else {
+				join = t.Join
+			}
 			if join && i != 0 && adjacent(t.values[i-1].Scorer, arc.Scorer) {
 				prev := t.values[i-1].Scores()[j]
 				if (t.Min <= as && as <= t.Max) || (t.Min <= prev && prev <= t.Max) {
