@@ -227,14 +227,19 @@ func (h *Heat) Close() {}
 // Trace is a ScoreRenderer that represents feature scores as a trace line.
 type Trace struct {
 	Palette []color.Color
+
 	// Join specifies whether adjacent features should be joined with radial lines.
 	// It is overridden by the returned value of JoinTrace if the Scorer is a TraceJoiner.
 	Join bool
 
-	DrawArea  plot.DrawArea
+	// LineStyle determines the lines style for the trace. It is overridden by the returned
+	// value of TraceStyle is the Scorer is a TraceStyler. Trace color is alway determined
+	// from the Trace palette.
 	LineStyle plot.LineStyle
 
 	Base ArcOfer
+
+	DrawArea plot.DrawArea
 
 	Center       plot.Point
 	Inner, Outer vg.Length
@@ -269,6 +274,12 @@ type TraceJoiner interface {
 	JoinTrace(i int) bool
 }
 
+// TraceStyler is a type that can determine its trace line style (except color).
+type TraceStyler interface {
+	// TraceStyle returns the line style for the ith score value.
+	TraceStyle(i int) plot.LineStyle
+}
+
 // Render add the scores at the specified arc for lazy rendering.
 func (t *Trace) Render(arc Arc, scorer Scorer) {
 	t.values = append(t.values, arcScore{arc, scorer})
@@ -293,8 +304,6 @@ func (t *Trace) Close() {
 		for j, as := range arc.Scores() {
 			pa = pa[:0]
 
-			sty := t.LineStyle
-
 			if arc.Phi < 0 {
 				arc.Theta, arc.Phi = arc.Theta+arc.Phi, -arc.Phi
 			}
@@ -317,7 +326,6 @@ func (t *Trace) Close() {
 					e := Rectangular(arc.Theta, (as-t.Min)*rs+float64(t.Inner))
 					pa.Move(t.Center.X+vg.Length(s.X), t.Center.Y+vg.Length(s.Y))
 					pa.Line(t.Center.X+vg.Length(e.X), t.Center.Y+vg.Length(e.Y))
-					sty.Color = t.Palette[j]
 				}
 			}
 
@@ -328,9 +336,15 @@ func (t *Trace) Close() {
 					pa.Move(t.Center.X+vg.Length(s.X), t.Center.Y+vg.Length(s.Y))
 				}
 				pa.Arc(t.Center.X, t.Center.Y, rad, float64(arc.Theta), float64(arc.Phi))
-				sty.Color = t.Palette[j]
 			}
 
+			var sty plot.LineStyle
+			if ts, ok := arc.Scorer.(TraceStyler); ok {
+				sty = ts.TraceStyle(j)
+			} else {
+				sty = t.LineStyle
+			}
+			sty.Color = t.Palette[j]
 			if sty.Color != nil && sty.Width != 0 {
 				t.DrawArea.SetLineStyle(sty)
 				t.DrawArea.Stroke(pa)
