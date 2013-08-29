@@ -82,6 +82,9 @@ func NewScores(fs []Scorer, base ArcOfer, inner, outer vg.Length, renderer Score
 			return nil, err
 		}
 		for _, v := range f.Scores() {
+			if math.IsNaN(v) {
+				continue
+			}
 			min = math.Min(min, v)
 			max = math.Max(max, v)
 		}
@@ -292,6 +295,9 @@ func (t *Trace) Close() {
 	var pa vg.Path
 	for i, arc := range t.values {
 		for j, as := range arc.Scores() {
+			if math.IsNaN(as) {
+				continue
+			}
 			pa = pa[:0]
 
 			if arc.Phi < 0 {
@@ -306,7 +312,7 @@ func (t *Trace) Close() {
 			}
 			if join && i != 0 && adjacent(t.values[i-1].Scorer, arc.Scorer) {
 				prev := t.values[i-1].Scores()[j]
-				if (t.Min <= as && as <= t.Max) || (t.Min <= prev && prev <= t.Max) {
+				if !math.IsNaN(prev) && ((t.Min <= as && as <= t.Max) || (t.Min <= prev && prev <= t.Max)) {
 					joined = true
 
 					prev = math.Min(math.Max(prev, t.Min), t.Max)
