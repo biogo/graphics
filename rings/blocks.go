@@ -108,6 +108,12 @@ func (r *Blocks) DrawAt(da plot.DrawArea, cen plot.Point) {
 		s := Rectangular(arc.Theta, float64(r.Inner))
 		pa.Move(cen.X+vg.Length(s.X), cen.Y+vg.Length(s.Y))
 		pa.Arc(cen.X, cen.Y, r.Inner, float64(arc.Theta), float64(arc.Phi))
+		if arc.Phi == Clockwise*Complete || arc.Phi == CounterClockwise*Complete {
+			if c, ok := f.(feat.Conformationer); ok && c.Conformation() == feat.Circular {
+				s = Rectangular(arc.Theta+arc.Phi, float64(r.Outer))
+				pa.Move(cen.X+vg.Length(s.X), cen.Y+vg.Length(s.Y))
+			}
+		}
 		pa.Arc(cen.X, cen.Y, r.Outer, float64(arc.Theta+arc.Phi), float64(-arc.Phi))
 		pa.Close()
 
