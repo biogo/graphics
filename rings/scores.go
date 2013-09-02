@@ -89,6 +89,9 @@ func NewScores(fs []Scorer, base ArcOfer, inner, outer vg.Length, renderer Score
 			max = math.Max(max, v)
 		}
 	}
+	if math.IsInf(max-min, 0) {
+		return nil, errors.New("rings: score range is infinite")
+	}
 	return &Scores{
 		Set:      fs,
 		Base:     base,
