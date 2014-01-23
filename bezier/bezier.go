@@ -68,9 +68,9 @@ func (c Curve) Point(t float64) Point {
 	return p
 }
 
-// Curve returns a slice of Point, p, filled with equally spaced points along the Bézier curve
-// described by c. If the length of p is less than 2, the curve points are undefined. The length of
-// p is not altered by the call.
+// Curve returns a slice of Point, p, filled with points along the Bézier curve described by c.
+// If the length of p is less than 2, the curve points are undefined. The length of p is not
+// altered by the call.
 func (c Curve) Curve(p []Point) []Point {
 	for i, nf := 0, float64(len(p)-1); i < len(p); i++ {
 		p[i] = c.Point(float64(i) / nf)
