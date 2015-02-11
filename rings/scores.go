@@ -212,7 +212,7 @@ func (h *Heat) Render(arc Arc, scorer Scorer) {
 
 		var c color.Color
 		switch {
-		case math.IsNaN(v):
+		case math.IsNaN(v), math.IsInf(v, 0):
 		case v < h.Min:
 			c = h.Underflow
 		case v > h.Max:
