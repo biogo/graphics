@@ -5,11 +5,12 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
+	"fmt"
+
+	"github.com/biogo/biogo/feat"
+
 	"code.google.com/p/plotinum/plot"
 	"code.google.com/p/plotinum/vg"
-
-	"fmt"
 )
 
 // Axis represents the radial axis of ring, usually a Scores.

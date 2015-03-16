@@ -5,13 +5,13 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
+	"fmt"
+	"math"
+
+	"github.com/biogo/biogo/feat"
 
 	"code.google.com/p/plotinum/plot"
 	"code.google.com/p/plotinum/vg"
-
-	"fmt"
-	"math"
 )
 
 // Labeler is a type that can be used to label a block in a ring.

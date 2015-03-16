@@ -6,9 +6,10 @@ package bezier
 
 import (
 	"fmt"
-	check "launchpad.net/gocheck"
 	"math"
 	"testing"
+
+	"gopkg.in/check.v1"
 )
 
 const epsilon = 1e-12

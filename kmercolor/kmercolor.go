@@ -6,12 +6,12 @@
 package kmercolor
 
 import (
-	"code.google.com/p/biogo.graphics/palette"
-	"code.google.com/p/biogo/index/kmerindex"
-	"code.google.com/p/biogo/util"
-
 	"image"
 	"image/color"
+
+	"github.com/biogo/biogo/index/kmerindex"
+	"github.com/biogo/biogo/util"
+	"github.com/biogo/graphics/palette"
 )
 
 const (

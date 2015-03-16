@@ -6,7 +6,8 @@ package palette
 
 import (
 	"image/color"
-	check "launchpad.net/gocheck"
+
+	"gopkg.in/check.v1"
 )
 
 var e uint32 = 1

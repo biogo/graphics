@@ -5,10 +5,10 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
-
 	"errors"
 	"math"
+
+	"github.com/biogo/biogo/feat"
 )
 
 // Arcer is a type that describes an arc of circle.

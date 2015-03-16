@@ -5,13 +5,13 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
+	"errors"
+	"fmt"
+
+	"github.com/biogo/biogo/feat"
 
 	"code.google.com/p/plotinum/plot"
 	"code.google.com/p/plotinum/vg"
-
-	"errors"
-	"fmt"
 )
 
 // Blocks implements rendering of feat.Features representing 0 or 1 length features as radial lines.

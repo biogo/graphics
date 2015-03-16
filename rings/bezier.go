@@ -5,12 +5,12 @@
 package rings
 
 import (
-	"code.google.com/p/biogo.graphics/bezier"
-
-	"code.google.com/p/plotinum/vg"
-
 	"math"
 	"math/rand"
+
+	"github.com/biogo/graphics/bezier"
+
+	"code.google.com/p/plotinum/vg"
 )
 
 // LengthDist generates a random value in the range [Length*Min, Length*Max), depending on a

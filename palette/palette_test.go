@@ -6,8 +6,9 @@ package palette
 
 import (
 	"image/color"
-	check "launchpad.net/gocheck"
 	"testing"
+
+	"gopkg.in/check.v1"
 )
 
 // Tests

@@ -7,18 +7,18 @@
 package main
 
 import (
-	"code.google.com/p/biogo.graphics/rings"
-	"code.google.com/p/biogo/feat"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/plotter"
-	"code.google.com/p/plotinum/vg"
-
 	"flag"
 	"fmt"
 	"image/color"
 	"math/rand"
 	"os"
+
+	"github.com/biogo/biogo/feat"
+	"github.com/biogo/graphics/rings"
+
+	"code.google.com/p/plotinum/plot"
+	"code.google.com/p/plotinum/plotter"
+	"code.google.com/p/plotinum/vg"
 )
 
 const name = "example_rings"

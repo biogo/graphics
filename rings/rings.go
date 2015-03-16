@@ -10,11 +10,11 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
+	"image/color"
+
+	"github.com/biogo/biogo/feat"
 
 	"code.google.com/p/plotinum/plot"
-
-	"image/color"
 )
 
 // Twist is a flag type used to specify Ribbon and Sail twist behaviour. Specific interpretation

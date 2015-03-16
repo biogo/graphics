@@ -5,15 +5,15 @@
 package rings
 
 import (
-	"code.google.com/p/biogo.graphics/bezier"
-	"code.google.com/p/biogo/feat"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
-
 	"errors"
 	"fmt"
 	"math"
+
+	"github.com/biogo/biogo/feat"
+	"github.com/biogo/graphics/bezier"
+
+	"code.google.com/p/plotinum/plot"
+	"code.google.com/p/plotinum/vg"
 )
 
 // Links implements rendering of feat.Feature associations as Bézier curves.

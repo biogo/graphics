@@ -5,10 +5,10 @@
 package rings
 
 import (
+	"image/color"
+
 	"code.google.com/p/plotinum/plot"
 	"code.google.com/p/plotinum/vg"
-
-	"image/color"
 )
 
 // Highlight implements rendering a colored arc.

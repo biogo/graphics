@@ -5,14 +5,14 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
-
 	"errors"
 	"fmt"
 	"image/color"
+
+	"github.com/biogo/biogo/feat"
+
+	"code.google.com/p/plotinum/plot"
+	"code.google.com/p/plotinum/vg"
 )
 
 // Blocks implements rendering of feat.Features as radial blocks.

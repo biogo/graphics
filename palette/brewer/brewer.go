@@ -15,10 +15,11 @@
 package brewer
 
 import (
-	"code.google.com/p/biogo.graphics/palette"
 	"errors"
 	"fmt"
 	"image/color"
+
+	"github.com/biogo/graphics/palette"
 )
 
 // Color represents a Brewer Palette color.

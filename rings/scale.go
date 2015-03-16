@@ -5,13 +5,14 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
-
 	"errors"
 	"fmt"
 	"math"
+
+	"github.com/biogo/biogo/feat"
+
+	"code.google.com/p/plotinum/plot"
+	"code.google.com/p/plotinum/vg"
 )
 
 // Scale represents the circular axis of ring.

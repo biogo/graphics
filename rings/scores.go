@@ -5,16 +5,16 @@
 package rings
 
 import (
-	"code.google.com/p/biogo/feat"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
-
 	"errors"
 	"fmt"
 	"image/color"
 	"math"
 	"sort"
+
+	"github.com/biogo/biogo/feat"
+
+	"code.google.com/p/plotinum/plot"
+	"code.google.com/p/plotinum/vg"
 )
 
 // Scorer describes features that can provided scored values.

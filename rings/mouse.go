@@ -7,17 +7,17 @@
 package main
 
 import (
-	"code.google.com/p/biogo.graphics/rings"
-	"code.google.com/p/biogo/feat"
-	"code.google.com/p/biogo/feat/genome"
-	mouse "code.google.com/p/biogo/feat/genome/mouse/mm10"
+	"image/color"
+	"math"
+
+	"github.com/biogo/biogo/feat"
+	"github.com/biogo/feat/genome"
+	mouse "github.com/biogo/feat/genome/mouse/mm10"
+	"github.com/biogo/graphics/rings"
 
 	"code.google.com/p/plotinum/plot"
 	"code.google.com/p/plotinum/plotter"
 	"code.google.com/p/plotinum/vg"
-
-	"image/color"
-	"math"
 )
 
 func main() {
