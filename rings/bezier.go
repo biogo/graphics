@@ -85,7 +85,8 @@ func (b *Bezier) ControlPoints(a [2]Angle, rad [2]vg.Length) []bezier.Point {
 
 	var radius = b.Radius
 	if b.Purity != nil {
-		radius.Length += vg.Length(b.Purity.Perturb(rand.Float64())-1) * (radius.Length - vg.Length(math.Hypot((p[0].X+p[1].X)/2, (p[0].Y+p[1].Y)/2)))
+		bisectRadius := vg.Length(math.Hypot((p[0].X+p[1].X)/2, (p[0].Y+p[1].Y)/2))
+		radius.Length += vg.Length(b.Purity.Perturb(rand.Float64())-1) * (radius.Length - bisectRadius)
 	}
 
 	var bisect Angle
