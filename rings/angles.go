@@ -183,7 +183,7 @@ func contains(loc, f feat.Feature) bool {
 }
 
 func (a Arcs) containingArcOf(f feat.Feature) (Arc, bool) {
-	for q := f; q != nil; q = f.Location() {
+	for q := f; q != nil; q = q.Location() {
 		arc, ok := a.Arcs[q]
 		if ok {
 			return arc, ok
