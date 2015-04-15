@@ -65,9 +65,6 @@ type Scores struct {
 // NewScores returns a Scores based on the parameters, first checking that the provided features
 // are able to be rendered. An error is returned if the features are not renderable.
 func NewScores(fs []Scorer, base ArcOfer, inner, outer vg.Length, renderer ScoreRenderer) (*Scores, error) {
-	if inner > outer {
-		return nil, errors.New("rings: inner radius greater than outer radius")
-	}
 	min, max := math.Inf(1), math.Inf(-1)
 	for _, f := range fs {
 		if f.End() < f.Start() {
