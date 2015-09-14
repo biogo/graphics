@@ -7,8 +7,9 @@ package rings
 import (
 	"image/color"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 )
 
 // Highlight implements rendering a colored arc.
@@ -20,7 +21,7 @@ type Highlight struct {
 	Color color.Color
 
 	// LineStyle determines the line style of the highlight.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// Inner and Outer define the inner and outer radii of the blocks.
 	Inner, Outer vg.Length
@@ -42,7 +43,7 @@ func NewHighlight(col color.Color, base Arc, inner, outer vg.Length) *Highlight 
 
 // DrawAt renders the feature of a Highlight at cen in the specified drawing area,
 // according to the Highlight configuration.
-func (r *Highlight) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Highlight) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if r.Color == nil && (r.LineStyle.Color == nil || r.LineStyle.Width == 0) {
 		return
 	}
@@ -60,12 +61,12 @@ func (r *Highlight) DrawAt(da plot.DrawArea, cen plot.Point) {
 	pa.Close()
 
 	if r.Color != nil {
-		da.SetColor(r.Color)
-		da.Fill(pa)
+		ca.SetColor(r.Color)
+		ca.Fill(pa)
 	}
 	if r.LineStyle.Color != nil && r.LineStyle.Width != 0 {
-		da.SetLineStyle(r.LineStyle)
-		da.Stroke(pa)
+		ca.SetLineStyle(r.LineStyle)
+		ca.Stroke(pa)
 	}
 }
 
@@ -76,9 +77,9 @@ func (r *Highlight) XY() (x, y float64) { return r.X, r.Y }
 func (r *Highlight) Arc() Arc { return r.Base }
 
 // Plot calls DrawAt using the Highlight's X and Y values as the drawing coordinates.
-func (r *Highlight) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Highlight) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the highlight rendering.
@@ -86,9 +87,9 @@ func (r *Highlight) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{-r.Outer, -r.Outer},
-			Size: plot.Point{2 * r.Outer, 2 * r.Outer},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{-r.Outer, -r.Outer},
+			Max: draw.Point{r.Outer, r.Outer},
 		},
 	}}
 }

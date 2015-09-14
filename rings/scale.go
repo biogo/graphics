@@ -9,10 +9,11 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
 )
 
 // Scale represents the circular axis of ring.
@@ -27,7 +28,7 @@ type Scale struct {
 	Radius vg.Length
 
 	// LineStyle is the style of the axis line.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// Tick describes the scale's tick configuration.
 	Tick TickConfig
@@ -43,7 +44,7 @@ type ScaleGrid struct {
 	Inner, Outer vg.Length
 
 	// LineStyle is the style of the axis line.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 }
 
 // NewScale returns a Scale based on the parameters, first checking that the provided feature
@@ -67,14 +68,14 @@ func NewScale(fs []feat.Feature, base ArcOfer, r vg.Length) (*Scale, error) {
 		Base:   base,
 		Radius: r,
 	}
-	s.Tick.Marker = plot.DefaultTicks
+	s.Tick.Marker = plot.DefaultTicks{}
 
 	return s, nil
 }
 
 // DrawAt renders the scales at cen in the specified drawing area, according to the
 // Scale configuration.
-func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -98,11 +99,11 @@ func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
 		scale := arc.Phi / Angle(max-min)
 
 		// These loops are split to reduce the amount of style changing between elements.
-		marks := r.Tick.Marker(float64(f.Start()), float64(f.End()))
+		marks := r.Tick.Marker.Ticks(float64(f.Start()), float64(f.End()))
 		var e Point
 
 		if r.Grid.Inner != r.Grid.Outer && r.Grid.LineStyle.Color != nil && r.Grid.LineStyle.Width != 0 {
-			da.SetLineStyle(r.Grid.LineStyle)
+			ca.SetLineStyle(r.Grid.LineStyle)
 			for _, mark := range marks {
 				iv := int(mark.Value)
 				if iv < f.Start() || iv > f.End() {
@@ -117,7 +118,7 @@ func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
 				e = Rectangular(angle, float64(r.Grid.Outer))
 				pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 
-				da.Stroke(pa)
+				ca.Stroke(pa)
 			}
 		}
 
@@ -129,12 +130,12 @@ func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
 			pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 			pa.Arc(cen.X, cen.Y, r.Radius, float64(start), float64(end-start))
 
-			da.SetLineStyle(r.LineStyle)
-			da.Stroke(pa)
+			ca.SetLineStyle(r.LineStyle)
+			ca.Stroke(pa)
 		}
 
 		if r.Tick.LineStyle.Color != nil && r.Tick.LineStyle.Width != 0 && r.Tick.Length != 0 {
-			da.SetLineStyle(r.LineStyle)
+			ca.SetLineStyle(r.LineStyle)
 			for _, mark := range marks {
 				iv := int(mark.Value)
 				if iv < f.Start() || iv > f.End() {
@@ -155,7 +156,7 @@ func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
 				e = Rectangular(angle, float64(r.Radius+length))
 				pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 
-				da.Stroke(pa)
+				ca.Stroke(pa)
 			}
 		}
 
@@ -179,14 +180,14 @@ func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
 					rot, xalign, yalign = r.Tick.Placement(angle)
 				}
 				if rot != 0 {
-					da.Push()
-					da.Translate(x, y)
-					da.Rotate(float64(rot))
-					da.Translate(-x, -y)
-					da.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
-					da.Pop()
+					ca.Push()
+					ca.Translate(x, y)
+					ca.Rotate(float64(rot))
+					ca.Translate(-x, -y)
+					ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+					ca.Pop()
 				} else {
-					da.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+					ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
 				}
 			}
 		}
@@ -194,9 +195,9 @@ func (r *Scale) DrawAt(da plot.DrawArea, cen plot.Point) {
 }
 
 // Plot calls DrawAt using the Scale's X and Y values as the drawing coordinates.
-func (r *Scale) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Scale) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the label rendering.
@@ -207,9 +208,9 @@ func (r *Scale) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{-vg.Length(radius), -vg.Length(radius)},
-			Size: plot.Point{2 * vg.Length(radius), 2 * vg.Length(radius)},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{-vg.Length(radius), -vg.Length(radius)},
+			Max: draw.Point{vg.Length(radius), vg.Length(radius)},
 		},
 	}}
 }

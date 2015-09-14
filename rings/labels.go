@@ -8,10 +8,11 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
 )
 
 // Labeler is a type that can be used to label a block in a ring.
@@ -65,7 +66,7 @@ type Labels struct {
 
 	// TextStyle determines the text style of each label. TextStyle behaviour
 	// is over-ridden if the Label describing a block is a TextStyler.
-	TextStyle plot.TextStyle
+	TextStyle draw.TextStyle
 
 	// Radius define the inner radius of the labels.
 	Radius vg.Length
@@ -124,9 +125,9 @@ func NewLabels(base Arcer, r vg.Length, ls ...Labeler) (*Labels, error) {
 
 // DrawAt renders the text of a Labels at cen in the specified drawing area,
 // according to the Labels configuration.
-func (r *Labels) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Labels) DrawAt(ca draw.Canvas, cen draw.Point) {
 	for _, l := range r.Labels {
-		var sty plot.TextStyle
+		var sty draw.TextStyle
 		if ts, ok := l.(TextStyler); ok {
 			sty = ts.TextStyle()
 		} else {
@@ -165,22 +166,22 @@ func (r *Labels) DrawAt(da plot.DrawArea, cen plot.Point) {
 			rot, xalign, yalign = r.Placement(angle)
 		}
 		if rot != 0 {
-			da.Push()
-			da.Translate(x, y)
-			da.Rotate(float64(rot))
-			da.Translate(-x, -y)
-			da.FillText(sty, x, y, xalign, yalign, l.Label())
-			da.Pop()
+			ca.Push()
+			ca.Translate(x, y)
+			ca.Rotate(float64(rot))
+			ca.Translate(-x, -y)
+			ca.FillText(sty, x, y, xalign, yalign, l.Label())
+			ca.Pop()
 		} else {
-			da.FillText(sty, x, y, xalign, yalign, l.Label())
+			ca.FillText(sty, x, y, xalign, yalign, l.Label())
 		}
 	}
 }
 
 // Plot calls DrawAt using the Labels' X and Y values as the drawing coordinates.
-func (r *Labels) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Labels) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the label rendering.
@@ -188,9 +189,9 @@ func (r *Labels) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{-r.Radius, -r.Radius},
-			Size: plot.Point{2 * r.Radius, 2 * r.Radius},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{-r.Radius, -r.Radius},
+			Max: draw.Point{r.Radius, r.Radius},
 		},
 	}}
 }

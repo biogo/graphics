@@ -11,14 +11,15 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/biogo/biogo/feat"
-	"github.com/biogo/feat/genome"
-	human "github.com/biogo/feat/genome/human/hg19"
-	"github.com/biogo/graphics/rings"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/plotter"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/plotter"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
+	"github.com/biogo/biogo/feat/genome"
+	human "github.com/biogo/biogo/feat/genome/human/hg19"
+	"github.com/biogo/graphics/rings"
 )
 
 func main() {
@@ -65,7 +66,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	lb.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+	lb.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 	p.Add(lb)
 
 	bfont, err := vg.MakeFont("Helvetica", 0.5)
@@ -79,12 +80,12 @@ func main() {
 	blb.Placement = func(a rings.Angle) (rot rings.Angle, xalign, yalign float64) {
 		return a, 0, 0.75
 	}
-	blb.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: bfont}
+	blb.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: bfont}
 	p.Add(blb)
 
 	p.HideAxes()
 
-	if err := p.Save(4, 4, "human.svg"); err != nil {
+	if err := p.Save(300, 300, "human.svg"); err != nil {
 		panic(err)
 	}
 }
@@ -120,14 +121,14 @@ func (b colorBand) FillColor() color.Color {
 	}
 }
 
-func (b colorBand) LineStyle() plot.LineStyle {
+func (b colorBand) LineStyle() draw.LineStyle {
 	switch b.Giemsa {
 	case "acen":
-		return plot.LineStyle{Color: color.RGBA{R: 0xff, A: 0xff}}
+		return draw.LineStyle{Color: color.RGBA{R: 0xff, A: 0xff}}
 	case "stalk":
-		return plot.LineStyle{Color: color.RGBA{R: 0xff, G: 0xff, B: 0xff, A: 0xff}, Width: 0.6}
+		return draw.LineStyle{Color: color.RGBA{R: 0xff, G: 0xff, B: 0xff, A: 0xff}, Width: 0.6}
 	case "gneg", "gvar", "gpos25", "gpos33", "gpos50", "gpos66", "gpos75", "gpos100":
-		return plot.LineStyle{}
+		return draw.LineStyle{}
 	default:
 		panic(fmt.Sprintf("unexpected giemsa value: %q", b.Giemsa))
 	}

@@ -7,10 +7,11 @@ package rings
 import (
 	"fmt"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
 )
 
 // Axis represents the radial axis of ring, usually a Scores.
@@ -22,13 +23,13 @@ type Axis struct {
 	Label AxisLabel
 
 	// LineStyle is the style of the axis line.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// Tick describes the scale's tick configuration.
 	Tick TickConfig
 
 	// Grid is the style of the grid lines.
-	Grid plot.LineStyle
+	Grid draw.LineStyle
 }
 
 // AxisLabel describes an axis label format and text.
@@ -37,7 +38,7 @@ type AxisLabel struct {
 	Text string
 
 	// TextStyle is the style of the axis label text.
-	plot.TextStyle
+	draw.TextStyle
 
 	// Placement determines the text rotation and alignment.
 	// If Placement is nil, DefaultPlacement is used.
@@ -47,10 +48,10 @@ type AxisLabel struct {
 // TickConfig describes an axis tick configuration.
 type TickConfig struct {
 	// Label is the TextStyle on the tick labels.
-	Label plot.TextStyle
+	Label draw.TextStyle
 
 	// LineStyle is the LineStyle of the tick lines.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// Placement determines the text rotation and alignment.
 	// If Placement is nil, DefaultPlacement is used.
@@ -64,12 +65,12 @@ type TickConfig struct {
 	// Marker returns the tick marks. Any tick marks
 	// returned by the Marker function that are not in
 	// range of the axis are not drawn.
-	Marker func(min, max float64) []plot.Tick
+	Marker plot.Ticker
 }
 
 // drawAt renders the axis at cen in the specified drawing area, according to the
 // Axis configuration.
-func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfer, inner, outer vg.Length, min, max float64) {
+func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer, inner, outer vg.Length, min, max float64) {
 	locMap := make(map[feat.Feature]struct{})
 
 	var (
@@ -90,8 +91,8 @@ func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfe
 				panic(fmt.Sprint("rings: no arc for feature location:", err))
 			}
 
-			da.SetLineStyle(r.Grid)
-			marks = r.Tick.Marker(min, max)
+			ca.SetLineStyle(r.Grid)
+			marks = r.Tick.Marker.Ticks(min, max)
 			for _, mark := range marks {
 				if mark.Value < min || mark.Value > max {
 					continue
@@ -104,7 +105,7 @@ func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfe
 				pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 				pa.Arc(cen.X, cen.Y, radius, float64(arc.Theta), float64(arc.Phi))
 
-				da.Stroke(pa)
+				ca.Stroke(pa)
 			}
 		}
 	}
@@ -117,14 +118,14 @@ func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfe
 		e = Rectangular(r.Angle, float64(outer))
 		pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 
-		da.SetLineStyle(r.LineStyle)
-		da.Stroke(pa)
+		ca.SetLineStyle(r.LineStyle)
+		ca.Stroke(pa)
 	}
 
 	if r.Tick.LineStyle.Color != nil && r.Tick.LineStyle.Width != 0 && r.Tick.Length != 0 {
-		da.SetLineStyle(r.Tick.LineStyle)
+		ca.SetLineStyle(r.Tick.LineStyle)
 		if marks == nil {
-			marks = r.Tick.Marker(min, max)
+			marks = r.Tick.Marker.Ticks(min, max)
 		}
 		for _, mark := range marks {
 			if mark.Value < min || mark.Value > max {
@@ -145,7 +146,7 @@ func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfe
 			pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 			pa.Line(cen.X+vg.Length(e.X+off.X), cen.Y+vg.Length(e.Y+off.Y))
 
-			da.Stroke(pa)
+			ca.Stroke(pa)
 
 			if mark.IsMinor() || r.Tick.Label.Color == nil {
 				continue
@@ -164,14 +165,14 @@ func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfe
 				rot, xalign, yalign = r.Tick.Placement(r.Angle)
 			}
 			if rot != 0 {
-				da.Push()
-				da.Translate(x, y)
-				da.Rotate(float64(rot))
-				da.Translate(-x, -y)
-				da.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
-				da.Pop()
+				ca.Push()
+				ca.Translate(x, y)
+				ca.Rotate(float64(rot))
+				ca.Translate(-x, -y)
+				ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+				ca.Pop()
 			} else {
-				da.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+				ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
 			}
 		}
 	}
@@ -190,14 +191,14 @@ func (r *Axis) drawAt(da plot.DrawArea, cen plot.Point, fs []Scorer, base ArcOfe
 			rot, xalign, yalign = r.Label.Placement(r.Angle)
 		}
 		if rot != 0 {
-			da.Push()
-			da.Translate(x, y)
-			da.Rotate(float64(rot))
-			da.Translate(-x, -y)
-			da.FillText(r.Label.TextStyle, x, y, xalign, yalign, r.Label.Text)
-			da.Pop()
+			ca.Push()
+			ca.Translate(x, y)
+			ca.Rotate(float64(rot))
+			ca.Translate(-x, -y)
+			ca.FillText(r.Label.TextStyle, x, y, xalign, yalign, r.Label.Text)
+			ca.Pop()
 		} else {
-			da.FillText(r.Label.TextStyle, x, y, xalign, yalign, r.Label.Text)
+			ca.FillText(r.Label.TextStyle, x, y, xalign, yalign, r.Label.Text)
 		}
 	}
 }

@@ -11,11 +11,12 @@ import (
 	"math"
 	"sort"
 
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
+
 	"github.com/biogo/biogo/feat"
 	"github.com/biogo/graphics/bezier"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
 )
 
 // Sail implements rendering of feat.Feature associations as sails. A sail is conceptually
@@ -66,7 +67,7 @@ type Sail struct {
 
 	// LineStyle determines the line style of each sail. LineStyle behaviour is over-ridden
 	// for end point arcs if the feature describing an end point is a LineStyler.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// X and Y specify rendering location when Plot is called.
 	X, Y float64
@@ -167,7 +168,7 @@ func (r *Sail) twist(af []angleFeat) {
 // according to the Sail configuration.
 // DrawAt will panic if the feature pairs being linked both satisfy feat.Orienter and the
 // product of orientations is not in feat.{Forward,NotOriented,Reverse}.
-func (r *Sail) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -236,8 +237,8 @@ func (r *Sail) DrawAt(da plot.DrawArea, cen plot.Point) {
 	}
 
 	if r.Color != nil {
-		da.SetColor(r.Color)
-		da.Fill(pa)
+		ca.SetColor(r.Color)
+		ca.Fill(pa)
 	}
 
 	if r.LineStyle.Color != nil && r.LineStyle.Width != 0 {
@@ -256,8 +257,8 @@ func (r *Sail) DrawAt(da plot.DrawArea, cen plot.Point) {
 		}
 
 		if r.LineStyle.Color != nil && r.LineStyle.Width != 0 {
-			da.SetLineStyle(r.LineStyle)
-			da.Stroke(pa)
+			ca.SetLineStyle(r.LineStyle)
+			ca.Stroke(pa)
 		}
 	}
 
@@ -271,16 +272,16 @@ func (r *Sail) DrawAt(da plot.DrawArea, cen plot.Point) {
 			e = Rectangular(start, float64(r.Radius))
 			pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 			pa.Arc(cen.X, cen.Y, r.Radius, float64(start), float64(end-start))
-			da.SetLineStyle(ls.LineStyle())
-			da.Stroke(pa)
+			ca.SetLineStyle(ls.LineStyle())
+			ca.Stroke(pa)
 		}
 	}
 }
 
 // Plot calls DrawAt using the Sail's X and Y values as the drawing coordinates.
-func (r *Sail) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Sail) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the ribbons rendering.
@@ -344,9 +345,9 @@ func (r *Sail) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{vg.Length(-rad), vg.Length(-rad)},
-			Size: plot.Point{2 * vg.Length(rad), 2 * vg.Length(rad)},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{vg.Length(-rad), vg.Length(-rad)},
+			Max: draw.Point{vg.Length(rad), vg.Length(rad)},
 		},
 	}}
 }

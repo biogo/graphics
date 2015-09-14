@@ -11,10 +11,11 @@ import (
 	"math"
 	"sort"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
 )
 
 // Scorer describes features that can provided scored values.
@@ -28,7 +29,7 @@ type Scorer interface {
 type ScoreRenderer interface {
 	// Configure sets up the ScoreRenderer for set-wide values.
 	// The min and max parameters may be ignored by an implementation.
-	Configure(da plot.DrawArea, cen plot.Point, base ArcOfer, inner, outer vg.Length, min, max float64)
+	Configure(ca draw.Canvas, cen draw.Point, base ArcOfer, inner, outer vg.Length, min, max float64)
 
 	// Render renders scores across the specified arc. Rendering may be
 	// performed lazily.
@@ -102,12 +103,12 @@ func NewScores(fs []Scorer, base ArcOfer, inner, outer vg.Length, renderer Score
 
 // DrawAt renders the feature of a Scores at cen in the specified drawing area,
 // according to the Scores configuration.
-func (r *Scores) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Scores) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
 
-	r.Renderer.Configure(da, cen, r.Base, r.Inner, r.Outer, r.Min, r.Max)
+	r.Renderer.Configure(ca, cen, r.Base, r.Inner, r.Outer, r.Min, r.Max)
 	for _, f := range r.Set {
 		loc := f.Location()
 		min := loc.Start()
@@ -127,9 +128,9 @@ func (r *Scores) DrawAt(da plot.DrawArea, cen plot.Point) {
 }
 
 // Plot calls DrawAt using the Scores' X and Y values as the drawing coordinates.
-func (r *Scores) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Scores) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the score rendering.
@@ -137,9 +138,9 @@ func (r *Scores) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{-r.Outer, -r.Outer},
-			Size: plot.Point{2 * r.Outer, 2 * r.Outer},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{-r.Outer, -r.Outer},
+			Max: draw.Point{r.Outer, r.Outer},
 		},
 	}}
 }
@@ -164,9 +165,9 @@ type Heat struct {
 	Underflow color.Color
 	Overflow  color.Color
 
-	DrawArea plot.DrawArea
+	DrawArea draw.Canvas
 
-	Center       plot.Point
+	Center       draw.Point
 	Inner, Outer vg.Length
 
 	Min, Max float64
@@ -174,8 +175,8 @@ type Heat struct {
 
 // Configure is called by Scores' DrawAt method. The min and max parameters are ignored if
 // the Heat's Min and Max fields are both non-zero.
-func (h *Heat) Configure(da plot.DrawArea, cen plot.Point, _ ArcOfer, inner, outer vg.Length, min, max float64) {
-	h.DrawArea = da
+func (h *Heat) Configure(ca draw.Canvas, cen draw.Point, _ ArcOfer, inner, outer vg.Length, min, max float64) {
+	h.DrawArea = ca
 	h.Center = cen
 	h.Inner = inner
 	h.Outer = outer
@@ -230,7 +231,7 @@ func (h *Heat) Close() {}
 // Trace is a ScoreRenderer that represents feature scores as a trace line.
 type Trace struct {
 	// LineStyles determines the lines style for each trace.
-	LineStyles []plot.LineStyle
+	LineStyles []draw.LineStyle
 
 	// Join specifies whether adjacent features should be joined with radial lines.
 	// It is overridden by the returned value of JoinTrace if the Scorer is a TraceJoiner.
@@ -238,9 +239,9 @@ type Trace struct {
 
 	Base ArcOfer
 
-	DrawArea plot.DrawArea
+	DrawArea draw.Canvas
 
-	Center       plot.Point
+	Center       draw.Point
 	Inner, Outer vg.Length
 
 	Min, Max float64
@@ -253,9 +254,9 @@ type Trace struct {
 
 // Configure is called by Scores' DrawAt method. The min and max parameters are ignored if
 // the Trace's Min and Max fields are both non-zero.
-func (t *Trace) Configure(da plot.DrawArea, cen plot.Point, base ArcOfer, inner, outer vg.Length, min, max float64) {
+func (t *Trace) Configure(ca draw.Canvas, cen draw.Point, base ArcOfer, inner, outer vg.Length, min, max float64) {
 	t.values = t.values[:0]
-	t.DrawArea = da
+	t.DrawArea = ca
 	t.Center = cen
 	t.Base = base
 	t.Inner = inner

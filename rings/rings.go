@@ -12,9 +12,9 @@ package rings
 import (
 	"image/color"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
+	"github.com/biogo/biogo/feat"
 )
 
 // Twist is a flag type used to specify Ribbon and Sail twist behaviour. Specific interpretation
@@ -33,7 +33,7 @@ const (
 type ColorFunc func(interface{}) color.Color
 
 // LineStyleFunc allows dynamic assignment of line styles to objects based on passed parameters.
-type LineStyleFunc func(interface{}) plot.LineStyle
+type LineStyleFunc func(interface{}) draw.LineStyle
 
 // Pair represents a pair of associated features.
 type Pair interface {
@@ -43,13 +43,13 @@ type Pair interface {
 // TextStyler is a type that can define its text style. For the purposes of the rings package
 // the lines of a LineStyler that returns a nil Color or a TextStyle with Font.Size of 0 are not rendered.
 type TextStyler interface {
-	TextStyle() plot.TextStyle
+	TextStyle() draw.TextStyle
 }
 
 // LineStyler is a type that can define its drawing line style. For the purposes of the rings package
 // the lines of a LineStyler that returns a nil Color or a LineStyle with width 0 are not rendered.
 type LineStyler interface {
-	LineStyle() plot.LineStyle
+	LineStyle() draw.LineStyle
 }
 
 // FillColorer is a type that can define its fill color. For the purposes of the rings package

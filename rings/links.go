@@ -9,11 +9,12 @@ import (
 	"fmt"
 	"math"
 
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
+
 	"github.com/biogo/biogo/feat"
 	"github.com/biogo/graphics/bezier"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
 )
 
 // Links implements rendering of feat.Feature associations as Bézier curves.
@@ -31,7 +32,7 @@ type Links struct {
 
 	// LineStyle determines the line style of each link Bézier curve. LineStyle behaviour
 	// is over-ridden if the Pair describing features is a LineStyler.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// X and Y specify rendering location when Plot is called.
 	X, Y float64
@@ -60,7 +61,7 @@ func NewLinks(fp []Pair, ends [2]ArcOfer, r [2]vg.Length) (*Links, error) {
 
 // DrawAt renders the feature pairs of a Links at cen in the specified drawing area,
 // according to the Links configuration.
-func (r *Links) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Links) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -111,23 +112,23 @@ loop:
 			pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 		}
 
-		var sty plot.LineStyle
+		var sty draw.LineStyle
 		if ls, ok := fp.(LineStyler); ok {
 			sty = ls.LineStyle()
 		} else {
 			sty = r.LineStyle
 		}
 		if sty.Color != nil && sty.Width != 0 {
-			da.SetLineStyle(sty)
-			da.Stroke(pa)
+			ca.SetLineStyle(sty)
+			ca.Stroke(pa)
 		}
 	}
 }
 
 // Plot calls DrawAt using the Links' X and Y values as the drawing coordinates.
-func (r *Links) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Links) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the links rendering.
@@ -183,9 +184,9 @@ func (r *Links) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{vg.Length(-rad), vg.Length(-rad)},
-			Size: plot.Point{2 * vg.Length(rad), 2 * vg.Length(rad)},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{vg.Length(-rad), vg.Length(-rad)},
+			Max: draw.Point{vg.Length(rad), vg.Length(rad)},
 		},
 	}}
 }

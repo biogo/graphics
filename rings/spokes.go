@@ -8,10 +8,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
 )
 
 // Blocks implements rendering of feat.Features representing 0 or 1 length features as radial lines.
@@ -24,7 +25,7 @@ type Spokes struct {
 
 	// LineStyle determines the line style of each spoke. LineStyle is over-ridden
 	// for each spoke if the feature describing the spoke is a LineStyler.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// Inner and Outer define the inner and outer radii of the spokes.
 	Inner, Outer vg.Length
@@ -64,7 +65,7 @@ func NewSpokes(fs []feat.Feature, base ArcOfer, inner, outer vg.Length) (*Spokes
 
 // DrawAt renders the feature of a Spokes at cen in the specified drawing area,
 // according to the Spokes configuration.
-func (r *Spokes) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Spokes) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -92,15 +93,15 @@ func (r *Spokes) DrawAt(da plot.DrawArea, cen plot.Point) {
 		e = Rectangular(arc.Theta, float64(r.Outer))
 		pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 
-		var sty plot.LineStyle
+		var sty draw.LineStyle
 		if ls, ok := f.(LineStyler); ok {
 			sty = ls.LineStyle()
 		} else {
 			sty = r.LineStyle
 		}
 		if sty.Color != nil && sty.Width != 0 {
-			da.SetLineStyle(r.LineStyle)
-			da.Stroke(pa)
+			ca.SetLineStyle(r.LineStyle)
+			ca.Stroke(pa)
 		}
 	}
 }
@@ -116,9 +117,9 @@ func (r *Spokes) Arc() Arc { return r.Base.Arc() }
 func (r *Spokes) ArcOf(loc, f feat.Feature) (Arc, error) { return r.Base.ArcOf(loc, f) }
 
 // Plot calls DrawAt using the Spokes' X and Y values as the drawing coordinates.
-func (r *Spokes) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Spokes) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the blocks rendering.
@@ -126,9 +127,9 @@ func (r *Spokes) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{-r.Outer, -r.Outer},
-			Size: plot.Point{2 * r.Outer, 2 * r.Outer},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{-r.Outer, -r.Outer},
+			Max: draw.Point{r.Outer, r.Outer},
 		},
 	}}
 }

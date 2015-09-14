@@ -13,13 +13,14 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/plotter"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
+
 	"github.com/biogo/biogo/feat"
 	"github.com/biogo/graphics/palette"
 	"github.com/biogo/graphics/rings"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/plotter"
-	"code.google.com/p/plotinum/vg"
 
 	"gopkg.in/check.v1"
 )
@@ -42,7 +43,7 @@ type fs struct {
 	name       string
 	location   feat.Feature
 	orient     feat.Orientation
-	style      plot.LineStyle
+	style      draw.LineStyle
 	scores     []float64
 }
 
@@ -53,16 +54,16 @@ func (f *fs) Name() string                  { return f.name }
 func (f *fs) Description() string           { return "bogus" }
 func (f *fs) Location() feat.Feature        { return f.location }
 func (f *fs) Orientation() feat.Orientation { return f.orient }
-func (f *fs) LineStyle() plot.LineStyle     { return f.style }
+func (f *fs) LineStyle() draw.LineStyle     { return f.style }
 func (f *fs) Scores() []float64             { return f.scores }
 
 type fp struct {
 	feats [2]*fs
-	sty   plot.LineStyle
+	sty   draw.LineStyle
 }
 
 func (p fp) Features() [2]feat.Feature { return [2]feat.Feature{p.feats[0], p.feats[1]} }
-func (p fp) LineStyle() plot.LineStyle {
+func (p fp) LineStyle() draw.LineStyle {
 	var col color.RGBA
 	for _, f := range p.feats {
 		r, g, b, a := f.style.Color.RGBA()
@@ -75,7 +76,7 @@ func (p fp) LineStyle() plot.LineStyle {
 	return p.sty
 }
 
-func randomFeatures(n, min, max int, single bool, sty plot.LineStyle) []feat.Feature {
+func randomFeatures(n, min, max int, single bool, sty draw.LineStyle) []feat.Feature {
 	data := make([]feat.Feature, n)
 	for i := range data {
 		start := rand.Intn(max-min) + min
@@ -135,7 +136,7 @@ func (s *S) TestNew(c *check.C) {
 	p.HideAxes()
 
 	tc := &canvas{dpi: defaultDPI}
-	p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+	p.Draw(draw.NewCanvas(tc, 300, 300))
 
 	base.append()
 	c.Check(tc.actions, check.DeepEquals, base.actions)
@@ -156,7 +157,7 @@ func (s *S) TestHighlight(c *check.C) {
 	p.HideAxes()
 
 	tc := &canvas{dpi: defaultDPI}
-	p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+	p.Draw(draw.NewCanvas(tc, 300, 300))
 
 	base.append(
 		setColor{col: color.NRGBA{R: 0xf3, G: 0xf3, B: 0x15, A: 0xff}},
@@ -178,7 +179,7 @@ func (s *S) TestHighlight(c *check.C) {
 	)
 	c.Check(tc.actions, check.DeepEquals, base.actions)
 	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("highlight-%s.svg", failure(!ok))), check.Equals, nil)
+		c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("highlight-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -199,7 +200,7 @@ func (s *S) TestBlocks(c *check.C) {
 	p.HideAxes()
 
 	tc := &canvas{dpi: defaultDPI}
-	p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+	p.Draw(draw.NewCanvas(tc, 300, 300))
 
 	base.append(
 		setColor{col: color.RGBA{R: 0xc4, G: 0x18, B: 0x80, A: 0xff}},
@@ -253,7 +254,7 @@ func (s *S) TestBlocks(c *check.C) {
 	)
 	c.Check(tc.actions, check.DeepEquals, base.actions)
 	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("blocks-%s.svg", failure(!ok))), check.Equals, nil)
+		c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("blocks-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -269,7 +270,7 @@ func (s *S) TestBlocksScale(c *check.C) {
 
 	for i, t := range []struct {
 		feats   []feat.Feature
-		grid    plot.LineStyle
+		grid    draw.LineStyle
 		inner   vg.Length
 		outer   vg.Length
 		actions []interface{}
@@ -320,28 +321,28 @@ func (s *S) TestBlocksScale(c *check.C) {
 				rotate{angle: 4.656622921172369},
 				translate{x: -271.49972408618373, y: -145.85696662569424},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 263.15972408618376, y: 143.70946662569423, str: "800000"},
+				fillString{font: "Helvetica", size: 5, x: 264.47972408618375, y: 143.70946662569423, str: "8e+05"},
 				pop{},
 				push{},
 				translate{x: 253.2690487108116, y: 88.85518051782944},
 				rotate{angle: 4.149064136880077},
 				translate{x: -253.2690487108116, y: -88.85518051782944},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 244.9290487108116, y: 86.70768051782944, str: "840000"},
+				fillString{font: "Helvetica", size: 5, x: 244.1640487108116, y: 86.70768051782944, str: "8.4e+05"},
 				pop{},
 				push{},
 				translate{x: 209.63120138064443, y: 47.90033435137447},
 				rotate{angle: 3.641505352587785},
 				translate{x: -209.63120138064443, y: -47.90033435137447},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 201.29120138064442, y: 45.75283435137447, str: "880000"},
+				fillString{font: "Helvetica", size: 5, x: 200.52620138064444, y: 45.75283435137447, str: "8.8e+05"},
 				pop{},
 				push{},
 				translate{x: 151.58871020365763, y: 33.31848391672858},
 				rotate{angle: 3.1339465682954932},
 				translate{x: -151.58871020365763, y: -33.31848391672858},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 143.24871020365762, y: 31.17098391672858, str: "920000"},
+				fillString{font: "Helvetica", size: 5, x: 142.48371020365764, y: 31.17098391672858, str: "9.2e+05"},
 				pop{},
 				setColor{col: color.Gray16{Y: 0x0}},
 				setWidth{w: 1},
@@ -398,21 +399,21 @@ func (s *S) TestBlocksScale(c *check.C) {
 				rotate{angle: 2.6868546486056104},
 				translate{x: -100.15073491380008, y: -45.42704043534255},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 91.81073491380008, y: 43.27954043534255, str: "750000"},
+				fillString{font: "Helvetica", size: 5, x: 91.04573491380008, y: 43.27954043534255, str: "7.5e+05"},
 				pop{},
 				push{},
 				translate{x: 64.11601743090151, y: 72.54166178424356},
 				rotate{angle: 2.3061855603863917},
 				translate{x: -64.11601743090151, y: -72.54166178424356},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 55.776017430901504, y: 70.39416178424356, str: "780000"},
+				fillString{font: "Helvetica", size: 5, x: 55.011017430901504, y: 70.39416178424356, str: "7.8e+05"},
 				pop{},
 				push{},
 				translate{x: 40.735013912670425, y: 111.1037186464892},
 				rotate{angle: 1.9255164721671725},
 				translate{x: -40.735013912670425, y: -111.1037186464892},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 32.39501391267042, y: 108.9562186464892, str: "810000"},
+				fillString{font: "Helvetica", size: 5, x: 31.630013912670425, y: 108.9562186464892, str: "8.1e+05"},
 				pop{},
 				setColor{col: color.Gray16{Y: 0x0}},
 				setWidth{w: 1},
@@ -477,28 +478,28 @@ func (s *S) TestBlocksScale(c *check.C) {
 				rotate{angle: 0.7516384402795491},
 				translate{x: -71.11611111931958, y: -239.57311212801034},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 62.77611111931958, y: 237.42561212801033, str: "360000"},
+				fillString{font: "Helvetica", size: 5, x: 62.01111111931958, y: 237.42561212801033, str: "3.6e+05"},
 				pop{},
 				push{},
 				translate{x: 153.65604492617322, y: 271.6793932906552},
 				rotate{angle: -0.009699736158889083},
 				translate{x: -153.65604492617322, y: -271.6793932906552},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 145.31604492617322, y: 269.5318932906552, str: "420000"},
+				fillString{font: "Helvetica", size: 5, x: 144.55104492617323, y: 269.5318932906552, str: "4.2e+05"},
 				pop{},
 				push{},
 				translate{x: 235.55764185380664, y: 237.97802264140643},
 				rotate{angle: -0.7710379125973268},
 				translate{x: -235.55764185380664, y: -237.97802264140643},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 227.21764185380664, y: 235.83052264140642, str: "480000"},
+				fillString{font: "Helvetica", size: 5, x: 226.45264185380665, y: 235.83052264140642, str: "4.8e+05"},
 				pop{},
 				push{},
 				translate{x: 271.5970454566076, y: 157.07798957040575},
 				rotate{angle: -1.5323760890357647},
 				translate{x: -271.5970454566076, y: -157.07798957040575},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 263.2570454566076, y: 154.93048957040574, str: "540000"},
+				fillString{font: "Helvetica", size: 5, x: 262.49204545660757, y: 154.93048957040574, str: "5.4e+05"},
 				pop{},
 			},
 		},
@@ -582,28 +583,28 @@ func (s *S) TestBlocksScale(c *check.C) {
 				rotate{angle: 4.656622921172369},
 				translate{x: -271.49972408618373, y: -145.85696662569424},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 263.15972408618376, y: 143.70946662569423, str: "800000"},
+				fillString{font: "Helvetica", size: 5, x: 264.47972408618375, y: 143.70946662569423, str: "8e+05"},
 				pop{},
 				push{},
 				translate{x: 253.2690487108116, y: 88.85518051782944},
 				rotate{angle: 4.149064136880077},
 				translate{x: -253.2690487108116, y: -88.85518051782944},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 244.9290487108116, y: 86.70768051782944, str: "840000"},
+				fillString{font: "Helvetica", size: 5, x: 244.1640487108116, y: 86.70768051782944, str: "8.4e+05"},
 				pop{},
 				push{},
 				translate{x: 209.63120138064443, y: 47.90033435137447},
 				rotate{angle: 3.641505352587785},
 				translate{x: -209.63120138064443, y: -47.90033435137447},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 201.29120138064442, y: 45.75283435137447, str: "880000"},
+				fillString{font: "Helvetica", size: 5, x: 200.52620138064444, y: 45.75283435137447, str: "8.8e+05"},
 				pop{},
 				push{},
 				translate{x: 151.58871020365763, y: 33.31848391672858},
 				rotate{angle: 3.1339465682954932},
 				translate{x: -151.58871020365763, y: -33.31848391672858},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 143.24871020365762, y: 31.17098391672858, str: "920000"},
+				fillString{font: "Helvetica", size: 5, x: 142.48371020365764, y: 31.17098391672858, str: "9.2e+05"},
 				pop{},
 				setColor{col: color.Gray{Y: 0x80}},
 				setWidth{w: 0.25},
@@ -703,21 +704,21 @@ func (s *S) TestBlocksScale(c *check.C) {
 				rotate{angle: 2.6868546486056104},
 				translate{x: -100.15073491380008, y: -45.42704043534255},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 91.81073491380008, y: 43.27954043534255, str: "750000"},
+				fillString{font: "Helvetica", size: 5, x: 91.04573491380008, y: 43.27954043534255, str: "7.5e+05"},
 				pop{},
 				push{},
 				translate{x: 64.11601743090151, y: 72.54166178424356},
 				rotate{angle: 2.3061855603863917},
 				translate{x: -64.11601743090151, y: -72.54166178424356},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 55.776017430901504, y: 70.39416178424356, str: "780000"},
+				fillString{font: "Helvetica", size: 5, x: 55.011017430901504, y: 70.39416178424356, str: "7.8e+05"},
 				pop{},
 				push{},
 				translate{x: 40.735013912670425, y: 111.1037186464892},
 				rotate{angle: 1.9255164721671725},
 				translate{x: -40.735013912670425, y: -111.1037186464892},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 32.39501391267042, y: 108.9562186464892, str: "810000"},
+				fillString{font: "Helvetica", size: 5, x: 31.630013912670425, y: 108.9562186464892, str: "8.1e+05"},
 				pop{},
 				setColor{col: color.Gray{Y: 0x80}},
 				setWidth{w: 0.25},
@@ -833,28 +834,28 @@ func (s *S) TestBlocksScale(c *check.C) {
 				rotate{angle: 0.7516384402795491},
 				translate{x: -71.11611111931958, y: -239.57311212801034},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 62.77611111931958, y: 237.42561212801033, str: "360000"},
+				fillString{font: "Helvetica", size: 5, x: 62.01111111931958, y: 237.42561212801033, str: "3.6e+05"},
 				pop{},
 				push{},
 				translate{x: 153.65604492617322, y: 271.6793932906552},
 				rotate{angle: -0.009699736158889083},
 				translate{x: -153.65604492617322, y: -271.6793932906552},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 145.31604492617322, y: 269.5318932906552, str: "420000"},
+				fillString{font: "Helvetica", size: 5, x: 144.55104492617323, y: 269.5318932906552, str: "4.2e+05"},
 				pop{},
 				push{},
 				translate{x: 235.55764185380664, y: 237.97802264140643},
 				rotate{angle: -0.7710379125973268},
 				translate{x: -235.55764185380664, y: -237.97802264140643},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 227.21764185380664, y: 235.83052264140642, str: "480000"},
+				fillString{font: "Helvetica", size: 5, x: 226.45264185380665, y: 235.83052264140642, str: "4.8e+05"},
 				pop{},
 				push{},
 				translate{x: 271.5970454566076, y: 157.07798957040575},
 				rotate{angle: -1.5323760890357647},
 				translate{x: -271.5970454566076, y: -157.07798957040575},
 				setColor{col: color.Gray16{Y: 0x0}},
-				fillString{font: "Helvetica", size: 5, x: 263.2570454566076, y: 154.93048957040574, str: "540000"},
+				fillString{font: "Helvetica", size: 5, x: 262.49204545660757, y: 154.93048957040574, str: "5.4e+05"},
 				pop{},
 			},
 		},
@@ -867,7 +868,7 @@ func (s *S) TestBlocksScale(c *check.C) {
 		s.LineStyle = plotter.DefaultLineStyle
 		s.Tick.Length = 3
 		s.Tick.LineStyle = plotter.DefaultLineStyle
-		s.Tick.Label = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+		s.Tick.Label = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 		s.Grid.LineStyle = t.grid
 		s.Grid.Inner = t.inner
 		s.Grid.Outer = t.outer
@@ -876,13 +877,13 @@ func (s *S) TestBlocksScale(c *check.C) {
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("scale-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("scale-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -1021,20 +1022,20 @@ func (s *S) TestLabelsBlocks(c *check.C) {
 
 		l, err := rings.NewLabels(b, 110, rings.NameLabels(t.feats)...)
 		c.Assert(err, check.Equals, nil)
-		l.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+		l.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 		l.Placement = t.placement
 		p.Add(l)
 
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labels-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("labels-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -1128,20 +1129,20 @@ func (s *S) TestLabelsArcs(c *check.C) {
 
 		l, err := rings.NewLabels(t.arc, 110, t.label)
 		c.Assert(err, check.Equals, nil)
-		l.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+		l.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 		l.Placement = t.placement
 		p.Add(l)
 
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(h)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labels-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("labels-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -1170,14 +1171,14 @@ func (s *S) TestLabelSpokes(c *check.C) {
 
 	l, err := rings.NewLabels(ms, 125, rings.NameLabels([]feat.Feature{m[1], m[5], m[9]})...)
 	c.Assert(err, check.Equals, nil)
-	l.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+	l.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 	l.Placement = rings.Radial
 	p.Add(l)
 
 	p.HideAxes()
 
 	tc := &canvas{dpi: defaultDPI}
-	p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+	p.Draw(draw.NewCanvas(tc, 300, 300))
 
 	base.append(
 		push{},
@@ -1204,7 +1205,7 @@ func (s *S) TestLabelSpokes(c *check.C) {
 	c.Check(tc.actions, check.DeepEquals, base.actions)
 	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 		p.Add(b, ms)
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("labelspokes-%s.svg", failure(!ok))), check.Equals, nil)
+		c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("labelspokes-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -1231,7 +1232,7 @@ func (s *S) TestSpokes(c *check.C) {
 	p.HideAxes()
 
 	tc := &canvas{dpi: defaultDPI}
-	p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+	p.Draw(draw.NewCanvas(tc, 300, 300))
 
 	base.append(
 		setColor{col: color.Gray16{Y: 0x0}},
@@ -1308,7 +1309,7 @@ func (s *S) TestSpokes(c *check.C) {
 	c.Check(tc.actions, check.DeepEquals, base.actions)
 	if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 		p.Add(b)
-		c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("spokes-%s.svg", failure(!ok))), check.Equals, nil)
+		c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("spokes-%s.svg", failure(!ok))), check.Equals, nil)
 	}
 }
 
@@ -1547,7 +1548,7 @@ func (s *S) TestLinks(c *check.C) {
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
@@ -1555,7 +1556,7 @@ func (s *S) TestLinks(c *check.C) {
 			s, err := rings.NewSpokes(append(m[0], m[1]...), b, 72, 78)
 			c.Assert(err, check.Equals, nil)
 			p.Add(b, s)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("links-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("links-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -2173,13 +2174,13 @@ func (s *S) TestRibbons(c *check.C) {
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("ribbons-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("ribbons-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -2640,13 +2641,13 @@ func (s *S) TestSail(c *check.C) {
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("sail-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("sail-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -3399,7 +3400,7 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 1, func(v, _ int) float64 { return float64(v) }),
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3480,7 +3481,7 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 1, func(v, _ int) float64 { return float64(v) }),
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3595,7 +3596,7 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3654,7 +3655,7 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3712,7 +3713,7 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3770,7 +3771,7 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3829,7 +3830,7 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3886,7 +3887,7 @@ func (s *S) TestScores(c *check.C) {
 				},
 			},
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -3921,8 +3922,8 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 2, func(_, _ int) float64 { return rand.NormFloat64() }),
 			renderer: &rings.Trace{
-				LineStyles: func() []plot.LineStyle {
-					sty := []plot.LineStyle{plotter.DefaultLineStyle, plotter.DefaultLineStyle}
+				LineStyles: func() []draw.LineStyle {
+					sty := []draw.LineStyle{plotter.DefaultLineStyle, plotter.DefaultLineStyle}
 					sty[0].Color = color.NRGBA{R: 0xff, A: 0xff}
 					sty[1].Color = color.RGBA{G: 0xff, A: 0x80}
 					return sty
@@ -4074,8 +4075,8 @@ func (s *S) TestScores(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 2, func(_, _ int) float64 { return rand.NormFloat64() }),
 			renderer: &rings.Trace{
-				LineStyles: func() []plot.LineStyle {
-					sty := []plot.LineStyle{plotter.DefaultLineStyle, plotter.DefaultLineStyle}
+				LineStyles: func() []draw.LineStyle {
+					sty := []draw.LineStyle{plotter.DefaultLineStyle, plotter.DefaultLineStyle}
 					sty[0].Color = color.NRGBA{R: 0xff, A: 0xff}
 					sty[1].Color = color.RGBA{G: 0xff, A: 0x80}
 					return sty
@@ -4256,13 +4257,13 @@ func (s *S) TestScores(c *check.C) {
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("scores-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("scores-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }
@@ -4286,7 +4287,7 @@ func (s *S) TestScoresAxis(c *check.C) {
 		{
 			scores: makeScorers(b.Set[1].(*fs), 10, 1, func(v, _ int) float64 { return float64(v) }),
 			renderer: &rings.Trace{
-				LineStyles: []plot.LineStyle{func() plot.LineStyle {
+				LineStyles: []draw.LineStyle{func() draw.LineStyle {
 					sty := plotter.DefaultLineStyle
 					sty.Color = color.Gray{0}
 					return sty
@@ -4300,13 +4301,13 @@ func (s *S) TestScoresAxis(c *check.C) {
 						LineStyle: plotter.DefaultLineStyle,
 						Label: rings.AxisLabel{
 							Text:      "Test",
-							TextStyle: plot.TextStyle{Color: color.Gray16{0}, Font: font},
+							TextStyle: draw.TextStyle{Color: color.Gray16{0}, Font: font},
 						},
 						Tick: rings.TickConfig{
-							Marker:    plot.DefaultTicks,
+							Marker:    plot.DefaultTicks{},
 							LineStyle: plotter.DefaultLineStyle,
 							Length:    -2,
-							Label:     plot.TextStyle{Color: color.Gray16{0}, Font: font},
+							Label:     draw.TextStyle{Color: color.Gray16{0}, Font: font},
 						},
 					}
 				}(),
@@ -4525,13 +4526,13 @@ func (s *S) TestScoresAxis(c *check.C) {
 		p.HideAxes()
 
 		tc := &canvas{dpi: defaultDPI}
-		p.Draw(plot.MakeDrawAreaSize(tc, 300, 300))
+		p.Draw(draw.NewCanvas(tc, 300, 300))
 
 		base.append(t.actions...)
 		c.Check(tc.actions, check.DeepEquals, base.actions, check.Commentf("Test %d", i))
 		if ok := reflect.DeepEqual(tc.actions, base.actions); *pics && !ok || *allPics {
 			p.Add(b)
-			c.Assert(p.Save(vg.Length(300).Inches(), vg.Length(300).Inches(), fmt.Sprintf("axis-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
+			c.Assert(p.Save(vg.Length(300), vg.Length(300), fmt.Sprintf("axis-%d-%s.svg", i, failure(!ok))), check.Equals, nil)
 		}
 	}
 }

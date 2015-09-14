@@ -10,14 +10,15 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/biogo/biogo/feat"
-	"github.com/biogo/feat/genome"
-	mouse "github.com/biogo/feat/genome/mouse/mm10"
-	"github.com/biogo/graphics/rings"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/plotter"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/plotter"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
+	"github.com/biogo/biogo/feat/genome"
+	mouse "github.com/biogo/biogo/feat/genome/mouse/mm10"
+	"github.com/biogo/graphics/rings"
 )
 
 func main() {
@@ -69,12 +70,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	lb.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+	lb.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 	p.Add(lb)
 
 	p.HideAxes()
 
-	if err := p.Save(4, 4, "mouse.svg"); err != nil {
+	if err := p.Save(300, 300, "mouse.svg"); err != nil {
 		panic(err)
 	}
 }
@@ -106,12 +107,12 @@ func (b colorBand) FillColor() color.Color {
 	}
 }
 
-func (b colorBand) LineStyle() plot.LineStyle {
+func (b colorBand) LineStyle() draw.LineStyle {
 	switch b.Giemsa {
 	case "acen":
-		return plot.LineStyle{Color: color.RGBA{R: 0xff, A: 0xff}, Width: 1}
+		return draw.LineStyle{Color: color.RGBA{R: 0xff, A: 0xff}, Width: 1}
 	case "gneg", "gpos25", "gpos33", "gpos50", "gpos66", "gpos75", "gpos100":
-		return plot.LineStyle{}
+		return draw.LineStyle{}
 	default:
 		panic("unexpected giemsa value")
 	}

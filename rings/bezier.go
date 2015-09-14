@@ -8,9 +8,9 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/biogo/graphics/bezier"
+	"github.com/gonum/plot/vg"
 
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/graphics/bezier"
 )
 
 // LengthDist generates a random value in the range [Length*Min, Length*Max), depending on a

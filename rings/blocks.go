@@ -9,10 +9,11 @@ import (
 	"fmt"
 	"image/color"
 
-	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
 
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
+	"github.com/biogo/biogo/feat"
 )
 
 // Blocks implements rendering of feat.Features as radial blocks.
@@ -30,7 +31,7 @@ type Blocks struct {
 
 	// LineStyle determines the line style of each block. LineStyle behaviour
 	// is over-ridden if the feature describing a block is a LineStyler.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// Inner and Outer define the inner and outer radii of the blocks.
 	Inner, Outer vg.Length
@@ -91,7 +92,7 @@ func NewGappedBlocks(fs []feat.Feature, base Arcer, inner, outer vg.Length, gap 
 
 // DrawAt renders the feature of a Blocks at cen in the specified drawing area,
 // according to the Blocks configuration.
-func (r *Blocks) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Blocks) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -118,22 +119,22 @@ func (r *Blocks) DrawAt(da plot.DrawArea, cen plot.Point) {
 		pa.Close()
 
 		if c, ok := f.(FillColorer); ok {
-			da.SetColor(c.FillColor())
-			da.Fill(pa)
+			ca.SetColor(c.FillColor())
+			ca.Fill(pa)
 		} else if r.Color != nil {
-			da.SetColor(r.Color)
-			da.Fill(pa)
+			ca.SetColor(r.Color)
+			ca.Fill(pa)
 		}
 
-		var sty plot.LineStyle
+		var sty draw.LineStyle
 		if ls, ok := f.(LineStyler); ok {
 			sty = ls.LineStyle()
 		} else {
 			sty = r.LineStyle
 		}
 		if sty.Color != nil && sty.Width != 0 {
-			da.SetLineStyle(sty)
-			da.Stroke(pa)
+			ca.SetLineStyle(sty)
+			ca.Stroke(pa)
 		}
 	}
 }
@@ -162,9 +163,9 @@ func globalOrientation(f featureOrienter) feat.Orientation {
 }
 
 // Plot calls DrawAt using the Blocks' X and Y values as the drawing coordinates.
-func (r *Blocks) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Blocks) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the blocks rendering.
@@ -172,9 +173,9 @@ func (r *Blocks) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{-r.Outer, -r.Outer},
-			Size: plot.Point{2 * r.Outer, 2 * r.Outer},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{-r.Outer, -r.Outer},
+			Max: draw.Point{r.Outer, r.Outer},
 		},
 	}}
 }

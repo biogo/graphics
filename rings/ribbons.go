@@ -10,11 +10,12 @@ import (
 	"image/color"
 	"math"
 
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
+
 	"github.com/biogo/biogo/feat"
 	"github.com/biogo/graphics/bezier"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/vg"
 )
 
 // Ribbons implements rendering of feat.Feature associations as ribbons.
@@ -66,7 +67,7 @@ type Ribbons struct {
 	// LineStyle determines the line style of each ribbon. LineStyle behaviour is over-ridden
 	// for end point arcs if the feature describing an end point is a LineStyler and for
 	// Bézier curves if the Pair is a LineStyler.
-	LineStyle plot.LineStyle
+	LineStyle draw.LineStyle
 
 	// X and Y specify rendering location when Plot is called.
 	X, Y float64
@@ -159,7 +160,7 @@ func (r *Ribbons) twist(angles *[4]Angle, fp Pair) {
 // according to the Ribbons configuration.
 // DrawAt will panic if the feature pairs being linked both satisfy feat.Orienter and the
 // product of orientations is not in feat.{Forward,NotOriented,Reverse}.
-func (r *Ribbons) DrawAt(da plot.DrawArea, cen plot.Point) {
+func (r *Ribbons) DrawAt(ca draw.Canvas, cen draw.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -234,8 +235,8 @@ loop:
 			col = r.Color
 		}
 		if col != nil {
-			da.SetColor(col)
-			da.Fill(pa)
+			ca.SetColor(col)
+			ca.Fill(pa)
 		}
 
 		if ls, ok := fp.(LineStyler); ok || (r.LineStyle.Color != nil && r.LineStyle.Width != 0) {
@@ -253,15 +254,15 @@ loop:
 				}
 			}
 
-			var sty plot.LineStyle
+			var sty draw.LineStyle
 			if ok {
 				sty = ls.LineStyle()
 			} else {
 				sty = r.LineStyle
 			}
 			if sty.Color != nil && sty.Width != 0 {
-				da.SetLineStyle(sty)
-				da.Stroke(pa)
+				ca.SetLineStyle(sty)
+				ca.Stroke(pa)
 			}
 		}
 
@@ -275,17 +276,17 @@ loop:
 				e = Rectangular(start, float64(rad))
 				pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
 				pa.Arc(cen.X, cen.Y, rad, float64(start), float64(end-start))
-				da.SetLineStyle(f.LineStyle())
-				da.Stroke(pa)
+				ca.SetLineStyle(f.LineStyle())
+				ca.Stroke(pa)
 			}
 		}
 	}
 }
 
 // Plot calls DrawAt using the Ribbons' X and Y values as the drawing coordinates.
-func (r *Ribbons) Plot(da plot.DrawArea, plt *plot.Plot) {
-	trX, trY := plt.Transforms(&da)
-	r.DrawAt(da, plot.Point{trX(r.X), trY(r.Y)})
+func (r *Ribbons) Plot(ca draw.Canvas, plt *plot.Plot) {
+	trX, trY := plt.Transforms(&ca)
+	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the ribbons rendering.
@@ -351,9 +352,9 @@ func (r *Ribbons) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rect: plot.Rect{
-			Min:  plot.Point{vg.Length(-rad), vg.Length(-rad)},
-			Size: plot.Point{2 * vg.Length(rad), 2 * vg.Length(rad)},
+		Rectangle: draw.Rectangle{
+			Min: draw.Point{vg.Length(-rad), vg.Length(-rad)},
+			Max: draw.Point{vg.Length(rad), vg.Length(rad)},
 		},
 	}}
 }

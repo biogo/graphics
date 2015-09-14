@@ -7,7 +7,7 @@ package rings_test
 import (
 	"image/color"
 
-	"code.google.com/p/plotinum/vg"
+	"github.com/gonum/plot/vg"
 )
 
 const defaultDPI = 72

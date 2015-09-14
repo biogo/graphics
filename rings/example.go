@@ -13,12 +13,13 @@ import (
 	"math/rand"
 	"os"
 
+	"github.com/gonum/plot"
+	"github.com/gonum/plot/plotter"
+	"github.com/gonum/plot/vg"
+	"github.com/gonum/plot/vg/draw"
+
 	"github.com/biogo/biogo/feat"
 	"github.com/biogo/graphics/rings"
-
-	"code.google.com/p/plotinum/plot"
-	"code.google.com/p/plotinum/plotter"
-	"code.google.com/p/plotinum/vg"
 )
 
 const name = "example_rings"
@@ -56,7 +57,7 @@ func main() {
 
 	g := byte(0)
 	for i := vg.Length(0); i < 3; i++ {
-		bs, err := rings.NewBlocks(randomFeatures(rand.Intn(10), 1000, 1000000, false, sty), rings.Arc{0, rings.Complete * rings.Clockwise}, 50+i*8, 55+i*8, 0.005)
+		bs, err := rings.NewGappedBlocks(randomFeatures(rand.Intn(10), 1000, 1000000, false, sty), rings.Arc{0, rings.Complete * rings.Clockwise}, 50+i*8, 55+i*8, 0.005)
 		if err != nil {
 			panic(err)
 		}
@@ -65,7 +66,7 @@ func main() {
 		p.Add(bs)
 	}
 
-	bs, err := rings.NewBlocks(randomFeatures(3, 100000, 1000000, false, sty), rings.Arc{0, rings.Complete * rings.Clockwise}, 80, 100, 0.01)
+	bs, err := rings.NewGappedBlocks(randomFeatures(3, 100000, 1000000, false, sty), rings.Arc{0, rings.Complete * rings.Clockwise}, 80, 100, 0.01)
 	if err != nil {
 		panic(err)
 	}
@@ -85,7 +86,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	lb.TextStyle = plot.TextStyle{Color: color.Gray16{0}, Font: font}
+	lb.TextStyle = draw.TextStyle{Color: color.Gray16{0}, Font: font}
 	p.Add(lb)
 
 	m := randomFeatures(400, bs.Set[1].Start(), bs.Set[1].End(), true, sty)
@@ -179,7 +180,7 @@ func main() {
 
 	p.HideAxes()
 
-	if p.Save(4, 4, fmt.Sprintf("%s.%s", name, extension)); err != nil {
+	if p.Save(300, 300, fmt.Sprintf("%s.%s", name, extension)); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -190,7 +191,7 @@ type fs struct {
 	name       string
 	location   feat.Feature
 	orient     feat.Orientation
-	style      plot.LineStyle
+	style      draw.LineStyle
 }
 
 func (f *fs) Start() int                    { return f.start }
@@ -200,15 +201,15 @@ func (f *fs) Name() string                  { return f.name }
 func (f *fs) Description() string           { return "bogus" }
 func (f *fs) Location() feat.Feature        { return f.location }
 func (f *fs) Orientation() feat.Orientation { return f.orient }
-func (f *fs) LineStyle() plot.LineStyle     { return f.style }
+func (f *fs) LineStyle() draw.LineStyle     { return f.style }
 
 type fp struct {
 	feats [2]*fs
-	sty   plot.LineStyle
+	sty   draw.LineStyle
 }
 
 func (p fp) Features() [2]feat.Feature { return [2]feat.Feature{p.feats[0], p.feats[1]} }
-func (p fp) LineStyle() plot.LineStyle {
+func (p fp) LineStyle() draw.LineStyle {
 	var col color.RGBA
 	for _, f := range p.feats {
 		r, g, b, a := f.style.Color.RGBA()
@@ -221,7 +222,7 @@ func (p fp) LineStyle() plot.LineStyle {
 	return p.sty
 }
 
-func randomFeatures(n, min, max int, single bool, sty plot.LineStyle) []feat.Feature {
+func randomFeatures(n, min, max int, single bool, sty draw.LineStyle) []feat.Feature {
 	data := make([]feat.Feature, n)
 	for i := range data {
 		start := rand.Intn(max-min) + min
