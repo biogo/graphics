@@ -14,12 +14,12 @@ import (
 	"testing"
 
 	"github.com/gonum/plot"
+	"github.com/gonum/plot/palette"
 	"github.com/gonum/plot/plotter"
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/plot/vg/draw"
 
 	"github.com/biogo/biogo/feat"
-	"github.com/biogo/graphics/palette"
 	"github.com/biogo/graphics/rings"
 
 	"gopkg.in/check.v1"

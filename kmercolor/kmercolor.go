@@ -9,9 +9,10 @@ import (
 	"image"
 	"image/color"
 
+	"github.com/gonum/plot/palette"
+
 	"github.com/biogo/biogo/index/kmerindex"
 	"github.com/biogo/biogo/util"
-	"github.com/biogo/graphics/palette"
 )
 
 const (
