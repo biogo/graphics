@@ -1,6 +1,6 @@
 ![bíogo](https://raw.githubusercontent.com/biogo/biogo/master/biogo.png)
 
-#HTS
+#Graphics
 
 [![Build Status](https://travis-ci.org/biogo/graphics.svg?branch=master)](https://travis-ci.org/biogo/graphics)
 
