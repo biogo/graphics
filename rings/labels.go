@@ -125,7 +125,7 @@ func NewLabels(base Arcer, r vg.Length, ls ...Labeler) (*Labels, error) {
 
 // DrawAt renders the text of a Labels at cen in the specified drawing area,
 // according to the Labels configuration.
-func (r *Labels) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Labels) DrawAt(ca draw.Canvas, cen vg.Point) {
 	for _, l := range r.Labels {
 		var sty draw.TextStyle
 		if ts, ok := l.(TextStyler); ok {
@@ -154,8 +154,7 @@ func (r *Labels) DrawAt(ca draw.Canvas, cen draw.Point) {
 		}
 
 		angle := arc.Theta + arc.Phi/2
-		e := Rectangular(angle, float64(r.Radius))
-		x, y := vg.Length(e.X)+cen.X, vg.Length(e.Y)+cen.Y
+		pt := cen.Add(Rectangular(angle, r.Radius))
 		var (
 			rot            Angle
 			xalign, yalign float64
@@ -167,13 +166,13 @@ func (r *Labels) DrawAt(ca draw.Canvas, cen draw.Point) {
 		}
 		if rot != 0 {
 			ca.Push()
-			ca.Translate(x, y)
+			ca.Translate(pt)
 			ca.Rotate(float64(rot))
-			ca.Translate(-x, -y)
-			ca.FillText(sty, x, y, xalign, yalign, l.Label())
+			ca.Translate(vg.Point{-pt.X, -pt.Y})
+			ca.FillText(sty, pt.X, pt.Y, xalign, yalign, l.Label())
 			ca.Pop()
 		} else {
-			ca.FillText(sty, x, y, xalign, yalign, l.Label())
+			ca.FillText(sty, pt.X, pt.Y, xalign, yalign, l.Label())
 		}
 	}
 }
@@ -181,7 +180,7 @@ func (r *Labels) DrawAt(ca draw.Canvas, cen draw.Point) {
 // Plot calls DrawAt using the Labels' X and Y values as the drawing coordinates.
 func (r *Labels) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the label rendering.
@@ -189,9 +188,9 @@ func (r *Labels) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{-r.Radius, -r.Radius},
-			Max: draw.Point{r.Radius, r.Radius},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{-r.Radius, -r.Radius},
+			Max: vg.Point{r.Radius, r.Radius},
 		},
 	}}
 }

@@ -43,21 +43,19 @@ func NewHighlight(col color.Color, base Arc, inner, outer vg.Length) *Highlight 
 
 // DrawAt renders the feature of a Highlight at cen in the specified drawing area,
 // according to the Highlight configuration.
-func (r *Highlight) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Highlight) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if r.Color == nil && (r.LineStyle.Color == nil || r.LineStyle.Width == 0) {
 		return
 	}
 
 	var pa vg.Path
 
-	s := Rectangular(r.Base.Theta, float64(r.Inner))
-	pa.Move(cen.X+vg.Length(s.X), cen.Y+vg.Length(s.Y))
-	pa.Arc(cen.X, cen.Y, r.Inner, float64(r.Base.Theta), float64(r.Base.Phi))
+	pa.Move(cen.Add(Rectangular(r.Base.Theta, r.Inner)))
+	pa.Arc(cen, r.Inner, float64(r.Base.Theta), float64(r.Base.Phi))
 	if r.Base.Phi == Clockwise*Complete || r.Base.Phi == CounterClockwise*Complete {
-		s = Rectangular(r.Base.Theta+r.Base.Phi, float64(r.Outer))
-		pa.Move(cen.X+vg.Length(s.X), cen.Y+vg.Length(s.Y))
+		pa.Move(cen.Add(Rectangular(r.Base.Theta+r.Base.Phi, r.Outer)))
 	}
-	pa.Arc(cen.X, cen.Y, r.Outer, float64(r.Base.Theta+r.Base.Phi), float64(-r.Base.Phi))
+	pa.Arc(cen, r.Outer, float64(r.Base.Theta+r.Base.Phi), float64(-r.Base.Phi))
 	pa.Close()
 
 	if r.Color != nil {
@@ -79,7 +77,7 @@ func (r *Highlight) Arc() Arc { return r.Base }
 // Plot calls DrawAt using the Highlight's X and Y values as the drawing coordinates.
 func (r *Highlight) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the highlight rendering.
@@ -87,9 +85,9 @@ func (r *Highlight) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{-r.Outer, -r.Outer},
-			Max: draw.Point{r.Outer, r.Outer},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{-r.Outer, -r.Outer},
+			Max: vg.Point{r.Outer, r.Outer},
 		},
 	}}
 }

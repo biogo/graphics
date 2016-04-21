@@ -9,6 +9,7 @@ import (
 	"math"
 
 	"github.com/biogo/biogo/feat"
+	"github.com/gonum/plot/vg"
 )
 
 // Arcer is a type that describes an arc of circle.
@@ -36,19 +37,19 @@ func Normalize(theta Angle) Angle { return Angle(math.Mod(float64(theta)+2*math.
 
 // Rectangular returns the rectangular coordinates for the location defined by theta and r
 // in polar coordinates.
-func Rectangular(theta Angle, r float64) Point {
+func Rectangular(theta Angle, r vg.Length) vg.Point {
 	if r == 0 {
-		return Point{0, 0}
+		return vg.Point{0, 0}
 	}
-	return Point{X: math.Cos(float64(theta)) * r, Y: math.Sin(float64(theta)) * r}
+	return vg.Point{X: vg.Length(math.Cos(float64(theta)) * float64(r)), Y: vg.Length(math.Sin(float64(theta)) * float64(r))}
 }
 
 // Polar returns the polar coordinates of a point.
-func Polar(p Point) (theta Angle, r float64) {
-	if (p == Point{0, 0}) {
+func Polar(p vg.Point) (theta Angle, r vg.Length) {
+	if (p == vg.Point{0, 0}) {
 		return 0, 0
 	}
-	return Normalize(Angle(math.Atan2(p.Y, p.X))), math.Hypot(p.X, p.Y)
+	return Normalize(Angle(math.Atan2(float64(p.Y), float64(p.X)))), vg.Length(math.Hypot(float64(p.X), float64(p.Y)))
 }
 
 // Angle represents an angle in radians. Angles increase in the counter clockwise direction.

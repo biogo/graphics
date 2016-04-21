@@ -29,7 +29,7 @@ type Scorer interface {
 type ScoreRenderer interface {
 	// Configure sets up the ScoreRenderer for set-wide values.
 	// The min and max parameters may be ignored by an implementation.
-	Configure(ca draw.Canvas, cen draw.Point, base ArcOfer, inner, outer vg.Length, min, max float64)
+	Configure(ca draw.Canvas, cen vg.Point, base ArcOfer, inner, outer vg.Length, min, max float64)
 
 	// Render renders scores across the specified arc. Rendering may be
 	// performed lazily.
@@ -103,7 +103,7 @@ func NewScores(fs []Scorer, base ArcOfer, inner, outer vg.Length, renderer Score
 
 // DrawAt renders the feature of a Scores at cen in the specified drawing area,
 // according to the Scores configuration.
-func (r *Scores) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Scores) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -130,7 +130,7 @@ func (r *Scores) DrawAt(ca draw.Canvas, cen draw.Point) {
 // Plot calls DrawAt using the Scores' X and Y values as the drawing coordinates.
 func (r *Scores) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the score rendering.
@@ -138,9 +138,9 @@ func (r *Scores) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{-r.Outer, -r.Outer},
-			Max: draw.Point{r.Outer, r.Outer},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{-r.Outer, -r.Outer},
+			Max: vg.Point{r.Outer, r.Outer},
 		},
 	}}
 }
@@ -167,7 +167,7 @@ type Heat struct {
 
 	DrawArea draw.Canvas
 
-	Center       draw.Point
+	Center       vg.Point
 	Inner, Outer vg.Length
 
 	Min, Max float64
@@ -175,7 +175,7 @@ type Heat struct {
 
 // Configure is called by Scores' DrawAt method. The min and max parameters are ignored if
 // the Heat's Min and Max fields are both non-zero.
-func (h *Heat) Configure(ca draw.Canvas, cen draw.Point, _ ArcOfer, inner, outer vg.Length, min, max float64) {
+func (h *Heat) Configure(ca draw.Canvas, cen vg.Point, _ ArcOfer, inner, outer vg.Length, min, max float64) {
 	h.DrawArea = ca
 	h.Center = cen
 	h.Inner = inner
@@ -201,11 +201,10 @@ func (h *Heat) Render(arc Arc, scorer Scorer) {
 	for _, v := range scores {
 		pa = pa[:0]
 
-		s := Rectangular(arc.Theta, float64(rad))
-		pa.Move(h.Center.X+vg.Length(s.X), h.Center.Y+vg.Length(s.Y))
-		pa.Arc(h.Center.X, h.Center.Y, rad, float64(arc.Theta), float64(arc.Phi))
+		pa.Move(h.Center.Add(Rectangular(arc.Theta, rad)))
+		pa.Arc(h.Center, rad, float64(arc.Theta), float64(arc.Phi))
 		rad += d
-		pa.Arc(h.Center.X, h.Center.Y, rad, float64(arc.Theta+arc.Phi), float64(-arc.Phi))
+		pa.Arc(h.Center, rad, float64(arc.Theta+arc.Phi), float64(-arc.Phi))
 		pa.Close()
 
 		var c color.Color
@@ -241,7 +240,7 @@ type Trace struct {
 
 	DrawArea draw.Canvas
 
-	Center       draw.Point
+	Center       vg.Point
 	Inner, Outer vg.Length
 
 	Min, Max float64
@@ -254,7 +253,7 @@ type Trace struct {
 
 // Configure is called by Scores' DrawAt method. The min and max parameters are ignored if
 // the Trace's Min and Max fields are both non-zero.
-func (t *Trace) Configure(ca draw.Canvas, cen draw.Point, base ArcOfer, inner, outer vg.Length, min, max float64) {
+func (t *Trace) Configure(ca draw.Canvas, cen vg.Point, base ArcOfer, inner, outer vg.Length, min, max float64) {
 	t.values = t.values[:0]
 	t.DrawArea = ca
 	t.Center = cen
@@ -319,20 +318,17 @@ func (t *Trace) Close() {
 					prev = math.Min(math.Max(prev, t.Min), t.Max)
 					as := math.Min(math.Max(as, t.Min), t.Max)
 
-					s := Rectangular(arc.Theta, (prev-t.Min)*rs+float64(t.Inner))
-					e := Rectangular(arc.Theta, (as-t.Min)*rs+float64(t.Inner))
-					pa.Move(t.Center.X+vg.Length(s.X), t.Center.Y+vg.Length(s.Y))
-					pa.Line(t.Center.X+vg.Length(e.X), t.Center.Y+vg.Length(e.Y))
+					pa.Move(t.Center.Add(Rectangular(arc.Theta, vg.Length((prev-t.Min)*rs)+t.Inner)))
+					pa.Line(t.Center.Add(Rectangular(arc.Theta, vg.Length((as-t.Min)*rs)+t.Inner)))
 				}
 			}
 
 			if t.Min <= as && as <= t.Max {
 				rad := vg.Length((as-t.Min)*rs) + t.Inner
 				if !joined {
-					s := Rectangular(arc.Theta, float64(rad))
-					pa.Move(t.Center.X+vg.Length(s.X), t.Center.Y+vg.Length(s.Y))
+					pa.Move(t.Center.Add(Rectangular(arc.Theta, rad)))
 				}
-				pa.Arc(t.Center.X, t.Center.Y, rad, float64(arc.Theta), float64(arc.Phi))
+				pa.Arc(t.Center, rad, float64(arc.Theta), float64(arc.Phi))
 			}
 
 			sty := t.LineStyles[j]

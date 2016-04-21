@@ -92,7 +92,7 @@ func NewGappedBlocks(fs []feat.Feature, base Arcer, inner, outer vg.Length, gap 
 
 // DrawAt renders the feature of a Blocks at cen in the specified drawing area,
 // according to the Blocks configuration.
-func (r *Blocks) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Blocks) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -106,16 +106,14 @@ func (r *Blocks) DrawAt(ca draw.Canvas, cen draw.Point) {
 			panic(fmt.Sprintf("rings: no arc for feature location: %v", err))
 		}
 
-		s := Rectangular(arc.Theta, float64(r.Inner))
-		pa.Move(cen.X+vg.Length(s.X), cen.Y+vg.Length(s.Y))
-		pa.Arc(cen.X, cen.Y, r.Inner, float64(arc.Theta), float64(arc.Phi))
+		pa.Move(cen.Add(Rectangular(arc.Theta, r.Inner)))
+		pa.Arc(cen, r.Inner, float64(arc.Theta), float64(arc.Phi))
 		if arc.Phi == Clockwise*Complete || arc.Phi == CounterClockwise*Complete {
 			if c, ok := f.(feat.Conformationer); ok && c.Conformation() == feat.Circular {
-				s = Rectangular(arc.Theta+arc.Phi, float64(r.Outer))
-				pa.Move(cen.X+vg.Length(s.X), cen.Y+vg.Length(s.Y))
+				pa.Move(cen.Add(Rectangular(arc.Theta+arc.Phi, r.Outer)))
 			}
 		}
-		pa.Arc(cen.X, cen.Y, r.Outer, float64(arc.Theta+arc.Phi), float64(-arc.Phi))
+		pa.Arc(cen, r.Outer, float64(arc.Theta+arc.Phi), float64(-arc.Phi))
 		pa.Close()
 
 		if c, ok := f.(FillColorer); ok {
@@ -165,7 +163,7 @@ func globalOrientation(f featureOrienter) feat.Orientation {
 // Plot calls DrawAt using the Blocks' X and Y values as the drawing coordinates.
 func (r *Blocks) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the blocks rendering.
@@ -173,9 +171,9 @@ func (r *Blocks) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{-r.Outer, -r.Outer},
-			Max: draw.Point{r.Outer, r.Outer},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{-r.Outer, -r.Outer},
+			Max: vg.Point{r.Outer, r.Outer},
 		},
 	}}
 }

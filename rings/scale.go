@@ -75,7 +75,7 @@ func NewScale(fs []feat.Feature, base ArcOfer, r vg.Length) (*Scale, error) {
 
 // DrawAt renders the scales at cen in the specified drawing area, according to the
 // Scale configuration.
-func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Scale) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -100,7 +100,6 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 
 		// These loops are split to reduce the amount of style changing between elements.
 		marks := r.Tick.Marker.Ticks(float64(f.Start()), float64(f.End()))
-		var e Point
 
 		if r.Grid.Inner != r.Grid.Outer && r.Grid.LineStyle.Color != nil && r.Grid.LineStyle.Width != 0 {
 			ca.SetLineStyle(r.Grid.LineStyle)
@@ -113,10 +112,8 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 
 				angle := Angle(iv-min)*scale + arc.Theta
 
-				e = Rectangular(angle, float64(r.Grid.Inner))
-				pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-				e = Rectangular(angle, float64(r.Grid.Outer))
-				pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+				pa.Move(cen.Add(Rectangular(angle, r.Grid.Inner)))
+				pa.Line(cen.Add(Rectangular(angle, r.Grid.Outer)))
 
 				ca.Stroke(pa)
 			}
@@ -125,10 +122,9 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 		if r.LineStyle.Color != nil && r.LineStyle.Width != 0 {
 			start := arc.Theta
 			end := Angle(f.End()-min)*scale + arc.Theta
-			e = Rectangular(start, float64(r.Radius))
 			pa = pa[:0]
-			pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-			pa.Arc(cen.X, cen.Y, r.Radius, float64(start), float64(end-start))
+			pa.Move(cen.Add(Rectangular(start, r.Radius)))
+			pa.Arc(cen, r.Radius, float64(start), float64(end-start))
 
 			ca.SetLineStyle(r.LineStyle)
 			ca.Stroke(pa)
@@ -151,10 +147,8 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 				} else {
 					length = r.Tick.Length
 				}
-				e = Rectangular(angle, float64(r.Radius))
-				pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-				e = Rectangular(angle, float64(r.Radius+length))
-				pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+				pa.Move(cen.Add(Rectangular(angle, r.Radius)))
+				pa.Line(cen.Add(Rectangular(angle, r.Radius+length)))
 
 				ca.Stroke(pa)
 			}
@@ -168,8 +162,7 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 				}
 
 				angle := Angle(iv-min)*scale + arc.Theta
-				e = Rectangular(angle, float64(r.Radius+r.Tick.Length+r.Tick.Label.Font.Extents().Height))
-				x, y := vg.Length(e.X)+cen.X, vg.Length(e.Y)+cen.Y
+				pt := cen.Add(Rectangular(angle, r.Radius+r.Tick.Length+r.Tick.Label.Font.Extents().Height))
 				var (
 					rot            Angle
 					xalign, yalign float64
@@ -181,13 +174,13 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 				}
 				if rot != 0 {
 					ca.Push()
-					ca.Translate(x, y)
+					ca.Translate(pt)
 					ca.Rotate(float64(rot))
-					ca.Translate(-x, -y)
-					ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+					ca.Translate(vg.Point{-pt.X, -pt.Y})
+					ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
 					ca.Pop()
 				} else {
-					ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+					ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
 				}
 			}
 		}
@@ -197,7 +190,7 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen draw.Point) {
 // Plot calls DrawAt using the Scale's X and Y values as the drawing coordinates.
 func (r *Scale) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the label rendering.
@@ -208,9 +201,9 @@ func (r *Scale) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{-vg.Length(radius), -vg.Length(radius)},
-			Max: draw.Point{vg.Length(radius), vg.Length(radius)},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{-vg.Length(radius), -vg.Length(radius)},
+			Max: vg.Point{vg.Length(radius), vg.Length(radius)},
 		},
 	}}
 }

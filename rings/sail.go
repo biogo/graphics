@@ -168,7 +168,7 @@ func (r *Sail) twist(af []angleFeat) {
 // according to the Sail configuration.
 // DrawAt will panic if the feature pairs being linked both satisfy feat.Orienter and the
 // product of orientations is not in feat.{Forward,NotOriented,Reverse}.
-func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Sail) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -205,15 +205,14 @@ func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
 	r.twist(af)
 
 	var pa vg.Path
-	e := Rectangular(af[0].angles[0], float64(r.Radius))
-	pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+	pa.Move(cen.Add(Rectangular(af[0].angles[0], r.Radius)))
 	arcs := make([]int, len(af))
 	for i, f := range af {
 		// Arc from f.angles[0] to f.angles[1] with radius r.Radius around cen.
 		arcs[i] = len(pa) // Remember where the arcs are.
 		start := f.angles[0]
 		end := f.angles[1]
-		pa.Arc(cen.X, cen.Y, r.Radius, float64(start), float64(end-start))
+		pa.Arc(cen, r.Radius, float64(start), float64(end-start))
 
 		// Bézier from f.angles[1]@radius to (circular successor of f).angles[0]@radius
 		// through r.Bezier if it is not nil and we wanted more than 1 segment;
@@ -227,12 +226,10 @@ func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
 				)...,
 			)
 			for i := 1; i <= r.Bezier.Segments; i++ {
-				pnt := b.Point(float64(i) / float64(r.Bezier.Segments))
-				pa.Line(cen.X+vg.Length(pnt.X), cen.Y+vg.Length(pnt.Y))
+				pa.Line(cen.Add(b.Point(float64(i) / float64(r.Bezier.Segments))))
 			}
 		} else {
-			e = Rectangular(next, float64(r.Radius))
-			pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+			pa.Line(cen.Add(Rectangular(next, r.Radius)))
 		}
 	}
 
@@ -247,11 +244,9 @@ func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
 			if _, ok := f.Feature.(LineStyler); ok {
 				// The feature wants to define its own line style, so don't draw arc.
 				end := f.angles[1]
-				e = Rectangular(end, float64(r.Radius))
 				pa[arcs[i]] = vg.PathComp{
 					Type: vg.MoveComp,
-					X:    cen.X + vg.Length(e.X),
-					Y:    cen.Y + vg.Length(e.Y),
+					Pos:  cen.Add(Rectangular(end, r.Radius)),
 				}
 			}
 		}
@@ -269,9 +264,8 @@ func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
 			//Arc from f.angles[0] to f.angles[1] with radius r.Radius around cen.
 			start := f.angles[0]
 			end := f.angles[1]
-			e = Rectangular(start, float64(r.Radius))
-			pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-			pa.Arc(cen.X, cen.Y, r.Radius, float64(start), float64(end-start))
+			pa.Move(cen.Add(Rectangular(start, r.Radius)))
+			pa.Arc(cen, r.Radius, float64(start), float64(end-start))
 			ca.SetLineStyle(ls.LineStyle())
 			ca.Stroke(pa)
 		}
@@ -281,7 +275,7 @@ func (r *Sail) DrawAt(ca draw.Canvas, cen draw.Point) {
 // Plot calls DrawAt using the Sail's X and Y values as the drawing coordinates.
 func (r *Sail) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the ribbons rendering.
@@ -335,7 +329,7 @@ func (r *Sail) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 			)
 			for k := 0; k <= r.Bezier.Segments; k++ {
 				e := b.Point(float64(k) / float64(r.Bezier.Segments))
-				if d := math.Hypot(e.X, e.Y); d > rad {
+				if d := math.Hypot(float64(e.X), float64(e.Y)); d > rad {
 					rad = d
 				}
 			}
@@ -345,9 +339,9 @@ func (r *Sail) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{vg.Length(-rad), vg.Length(-rad)},
-			Max: draw.Point{vg.Length(rad), vg.Length(rad)},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{vg.Length(-rad), vg.Length(-rad)},
+			Max: vg.Point{vg.Length(rad), vg.Length(rad)},
 		},
 	}}
 }

@@ -9,8 +9,6 @@ import (
 	"math/rand"
 
 	"github.com/gonum/plot/vg"
-
-	"github.com/biogo/graphics/bezier"
 )
 
 // LengthDist generates a random value in the range [Length*Min, Length*Max), depending on a
@@ -77,15 +75,15 @@ type Bezier struct {
 
 // ControlPoints returns a set of Bézier curve control points defining the path between the points defined
 // by the parameters and the Bezier's Radius, Crest and Purity fields.
-func (b *Bezier) ControlPoints(a [2]Angle, rad [2]vg.Length) []bezier.Point {
-	var p [2]Point
+func (b *Bezier) ControlPoints(a [2]Angle, rad [2]vg.Length) []vg.Point {
+	var p [2]vg.Point
 	for i := range a {
-		p[i] = Rectangular(a[i], float64(rad[i]))
+		p[i] = Rectangular(a[i], rad[i])
 	}
 
 	var radius = b.Radius
 	if b.Purity != nil {
-		bisectRadius := vg.Length(math.Hypot((p[0].X+p[1].X)/2, (p[0].Y+p[1].Y)/2))
+		bisectRadius := vg.Length(math.Hypot(float64(p[0].X+p[1].X)/2, float64(p[0].Y+p[1].Y)/2))
 		radius.Length += vg.Length(b.Purity.Perturb(rand.Float64())-1) * (radius.Length - bisectRadius)
 	}
 
@@ -95,28 +93,17 @@ func (b *Bezier) ControlPoints(a [2]Angle, rad [2]vg.Length) []bezier.Point {
 	} else {
 		bisect = (a[1] + a[0]) / 2
 	}
-	mp := Rectangular(bisect, float64(radius.Perturb(rand.Float64())))
-	mid := bezier.Point{X: mp.X, Y: mp.Y}
+	mid := Rectangular(bisect, radius.Perturb(rand.Float64()))
 
 	if b.Crest != nil {
-		points := []bezier.Point{
-			0: {X: p[0].X, Y: p[0].Y},
-			2: mid,
-			4: {X: p[1].X, Y: p[1].Y},
-		}
+		points := []vg.Point{0: p[0], 2: mid, 4: p[1]}
 		c := b.Crest.Perturb(rand.Float64())
 
-		var cp Point
 		for i, r := range rad {
-			cp = Rectangular(a[i], float64(r)-float64(r-radius.Length)*c)
-			points[2*i+1] = bezier.Point{X: cp.X, Y: cp.Y}
+			points[2*i+1] = Rectangular(a[i], r-(r-radius.Length)*vg.Length(c))
 		}
 		return points
 	}
 
-	return []bezier.Point{
-		{X: p[0].X, Y: p[0].Y},
-		mid,
-		{X: p[1].X, Y: p[1].Y},
-	}
+	return []vg.Point{p[0], mid, p[1]}
 }

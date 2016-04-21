@@ -5,6 +5,7 @@
 package rings_test
 
 import (
+	"image"
 	"image/color"
 
 	"github.com/gonum/plot/vg"
@@ -70,8 +71,8 @@ func (c *canvas) Rotate(a float64) {
 
 type translate struct{ x, y vg.Length }
 
-func (c *canvas) Translate(x, y vg.Length) {
-	c.actions = append(c.actions, translate{x, y})
+func (c *canvas) Translate(pt vg.Point) {
+	c.actions = append(c.actions, translate{pt.X, pt.Y})
 }
 
 type scale struct {
@@ -117,13 +118,15 @@ type fillString struct {
 	str  string
 }
 
-func (c *canvas) FillString(font vg.Font, x, y vg.Length, str string) {
-	c.actions = append(c.actions, fillString{font.Name(), font.Size, x, y, str})
+func (c *canvas) FillString(font vg.Font, pt vg.Point, str string) {
+	c.actions = append(c.actions, fillString{font.Name(), font.Size, pt.X, pt.Y, str})
 }
 
-type dpi struct{}
+type drawImage struct {
+	rect vg.Rectangle
+	image.Rectangle
+}
 
-func (c *canvas) DPI() float64 {
-	c.actions = append(c.actions, dpi{})
-	return c.dpi
+func (c *canvas) DrawImage(rect vg.Rectangle, img image.Image) {
+	c.actions = append(c.actions, drawImage{rect, img.Bounds()})
 }

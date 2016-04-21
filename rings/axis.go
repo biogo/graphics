@@ -70,12 +70,11 @@ type TickConfig struct {
 
 // drawAt renders the axis at cen in the specified drawing area, according to the
 // Axis configuration.
-func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer, inner, outer vg.Length, min, max float64) {
+func (r *Axis) drawAt(ca draw.Canvas, cen vg.Point, fs []Scorer, base ArcOfer, inner, outer vg.Length, min, max float64) {
 	locMap := make(map[feat.Feature]struct{})
 
 	var (
 		pa vg.Path
-		e  Point
 
 		marks []plot.Tick
 
@@ -101,9 +100,8 @@ func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer,
 
 				radius := vg.Length(mark.Value-min)*scale + inner
 
-				e = Rectangular(arc.Theta, float64(radius))
-				pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-				pa.Arc(cen.X, cen.Y, radius, float64(arc.Theta), float64(arc.Phi))
+				pa.Move(cen.Add(Rectangular(arc.Theta, radius)))
+				pa.Arc(cen, radius, float64(arc.Theta), float64(arc.Phi))
 
 				ca.Stroke(pa)
 			}
@@ -113,10 +111,8 @@ func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer,
 	if r.LineStyle.Color != nil && r.LineStyle.Width != 0 {
 		pa = pa[:0]
 
-		e = Rectangular(r.Angle, float64(inner))
-		pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-		e = Rectangular(r.Angle, float64(outer))
-		pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+		pa.Move(cen.Add(Rectangular(r.Angle, inner)))
+		pa.Line(cen.Add(Rectangular(r.Angle, outer)))
 
 		ca.SetLineStyle(r.LineStyle)
 		ca.Stroke(pa)
@@ -141,10 +137,10 @@ func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer,
 			} else {
 				length = r.Tick.Length
 			}
-			off := Rectangular(r.Angle+Complete/4, float64(length))
-			e = Rectangular(r.Angle, float64(radius))
-			pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-			pa.Line(cen.X+vg.Length(e.X+off.X), cen.Y+vg.Length(e.Y+off.Y))
+			off := Rectangular(r.Angle+Complete/4, length)
+			e := Rectangular(r.Angle, radius)
+			pa.Move(cen.Add(e))
+			pa.Line(cen.Add(e.Add(off)))
 
 			ca.Stroke(pa)
 
@@ -152,9 +148,7 @@ func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer,
 				continue
 			}
 
-			e = Rectangular(r.Angle, float64(radius))
-			x, y := vg.Length(e.X+(off.X*2))+cen.X, vg.Length(e.Y+(off.Y*2))+cen.Y
-
+			pt := cen.Add(Rectangular(r.Angle, radius).Add(vg.Point{off.X * 2, off.Y * 2}))
 			var (
 				rot            Angle
 				xalign, yalign float64
@@ -166,21 +160,19 @@ func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer,
 			}
 			if rot != 0 {
 				ca.Push()
-				ca.Translate(x, y)
+				ca.Translate(pt)
 				ca.Rotate(float64(rot))
-				ca.Translate(-x, -y)
-				ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+				ca.Translate(vg.Point{-pt.X, -pt.Y})
+				ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
 				ca.Pop()
 			} else {
-				ca.FillText(r.Tick.Label, x, y, xalign, yalign, mark.Label)
+				ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
 			}
 		}
 	}
 
 	if r.Label.Text != "" && r.Label.Color != nil {
-		e = Rectangular(r.Angle, float64(inner+outer)/2)
-		x, y := vg.Length(e.X)+cen.X, vg.Length(e.Y)+cen.Y
-
+		pt := cen.Add(Rectangular(r.Angle, (inner+outer)/2))
 		var (
 			rot            Angle
 			xalign, yalign float64
@@ -192,13 +184,13 @@ func (r *Axis) drawAt(ca draw.Canvas, cen draw.Point, fs []Scorer, base ArcOfer,
 		}
 		if rot != 0 {
 			ca.Push()
-			ca.Translate(x, y)
+			ca.Translate(pt)
 			ca.Rotate(float64(rot))
-			ca.Translate(-x, -y)
-			ca.FillText(r.Label.TextStyle, x, y, xalign, yalign, r.Label.Text)
+			ca.Translate(vg.Point{-pt.X, -pt.Y})
+			ca.FillText(r.Label.TextStyle, pt.X, pt.Y, xalign, yalign, r.Label.Text)
 			ca.Pop()
 		} else {
-			ca.FillText(r.Label.TextStyle, x, y, xalign, yalign, r.Label.Text)
+			ca.FillText(r.Label.TextStyle, pt.X, pt.Y, xalign, yalign, r.Label.Text)
 		}
 	}
 }

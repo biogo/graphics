@@ -65,7 +65,7 @@ func NewSpokes(fs []feat.Feature, base ArcOfer, inner, outer vg.Length) (*Spokes
 
 // DrawAt renders the feature of a Spokes at cen in the specified drawing area,
 // according to the Spokes configuration.
-func (r *Spokes) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Spokes) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -87,11 +87,8 @@ func (r *Spokes) DrawAt(ca draw.Canvas, cen draw.Point) {
 			panic(fmt.Sprintf("rings: no arc for feature location: %v\n%v", err, f))
 		}
 
-		var e Point
-		e = Rectangular(arc.Theta, float64(r.Inner))
-		pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
-		e = Rectangular(arc.Theta, float64(r.Outer))
-		pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+		pa.Move(cen.Add(Rectangular(arc.Theta, r.Inner)))
+		pa.Line(cen.Add(Rectangular(arc.Theta, r.Outer)))
 
 		var sty draw.LineStyle
 		if ls, ok := f.(LineStyler); ok {
@@ -119,7 +116,7 @@ func (r *Spokes) ArcOf(loc, f feat.Feature) (Arc, error) { return r.Base.ArcOf(l
 // Plot calls DrawAt using the Spokes' X and Y values as the drawing coordinates.
 func (r *Spokes) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the blocks rendering.
@@ -127,9 +124,9 @@ func (r *Spokes) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{-r.Outer, -r.Outer},
-			Max: draw.Point{r.Outer, r.Outer},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{-r.Outer, -r.Outer},
+			Max: vg.Point{r.Outer, r.Outer},
 		},
 	}}
 }

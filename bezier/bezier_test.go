@@ -9,6 +9,8 @@ import (
 	"math"
 	"testing"
 
+	"github.com/gonum/plot/vg"
+
 	"gopkg.in/check.v1"
 )
 
@@ -30,9 +32,9 @@ func (checker *approxChecker) Check(params []interface{}, names []string) (resul
 		}
 	}()
 	epsilon := params[2].(float64)
-	p := [2]Point{params[0].(Point), params[1].(Point)}
-	return (math.Abs(p[0].X-p[1].X) <= epsilon || (math.IsNaN(p[0].X) && math.IsNaN(p[1].X))) &&
-		(math.Abs(p[0].Y-p[1].Y) <= epsilon || (math.IsNaN(p[0].Y) && math.IsNaN(p[1].Y))), ""
+	p := [2]vg.Point{params[0].(vg.Point), params[1].(vg.Point)}
+	return (math.Abs(float64(p[0].X-p[1].X)) <= epsilon || (math.IsNaN(float64(p[0].X)) && math.IsNaN(float64(p[1].X)))) &&
+		(math.Abs(float64(p[0].Y-p[1].Y)) <= epsilon || (math.IsNaN(float64(p[0].Y)) && math.IsNaN(float64(p[1].Y)))), ""
 }
 
 // Tests
@@ -44,7 +46,7 @@ var _ = check.Suite(&S{})
 
 func (s *S) TestNew(c *check.C) {
 	for i, t := range []struct {
-		ctrls []Point
+		ctrls []vg.Point
 		curve Curve
 	}{
 		{
@@ -52,30 +54,30 @@ func (s *S) TestNew(c *check.C) {
 			curve: nil,
 		},
 		{
-			ctrls: []Point{{1, 2}, {3, 4}, {5, 6}, {7, 8}},
+			ctrls: []vg.Point{{1, 2}, {3, 4}, {5, 6}, {7, 8}},
 			curve: Curve{
-				{Point: Point{X: 1, Y: 2}, Control: Point{X: 1, Y: 2}},
-				{Point: Point{X: 3, Y: 4}, Control: Point{X: 9, Y: 12}},
-				{Point: Point{X: 5, Y: 6}, Control: Point{X: 15, Y: 18}},
-				{Point: Point{X: 7, Y: 8}, Control: Point{X: 7, Y: 8}},
+				{Point: vg.Point{X: 1, Y: 2}, Control: vg.Point{X: 1, Y: 2}},
+				{Point: vg.Point{X: 3, Y: 4}, Control: vg.Point{X: 9, Y: 12}},
+				{Point: vg.Point{X: 5, Y: 6}, Control: vg.Point{X: 15, Y: 18}},
+				{Point: vg.Point{X: 7, Y: 8}, Control: vg.Point{X: 7, Y: 8}},
 			},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 1}, {1, 0}},
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 1}, {1, 0}},
 			curve: Curve{
-				{Point: Point{X: 0, Y: 0}, Control: Point{X: 0, Y: 0}},
-				{Point: Point{X: 0, Y: 1}, Control: Point{X: 0, Y: 3}},
-				{Point: Point{X: 1, Y: 1}, Control: Point{X: 3, Y: 3}},
-				{Point: Point{X: 1, Y: 0}, Control: Point{X: 1, Y: 0}},
+				{Point: vg.Point{X: 0, Y: 0}, Control: vg.Point{X: 0, Y: 0}},
+				{Point: vg.Point{X: 0, Y: 1}, Control: vg.Point{X: 0, Y: 3}},
+				{Point: vg.Point{X: 1, Y: 1}, Control: vg.Point{X: 3, Y: 3}},
+				{Point: vg.Point{X: 1, Y: 0}, Control: vg.Point{X: 1, Y: 0}},
 			},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
 			curve: Curve{
-				{Point: Point{X: 0, Y: 0}, Control: Point{X: 0, Y: 0}},
-				{Point: Point{X: 0, Y: 1}, Control: Point{X: 0, Y: 3}},
-				{Point: Point{X: 1, Y: 0}, Control: Point{X: 3, Y: 0}},
-				{Point: Point{X: 1, Y: 1}, Control: Point{X: 1, Y: 1}},
+				{Point: vg.Point{X: 0, Y: 0}, Control: vg.Point{X: 0, Y: 0}},
+				{Point: vg.Point{X: 0, Y: 1}, Control: vg.Point{X: 0, Y: 3}},
+				{Point: vg.Point{X: 1, Y: 0}, Control: vg.Point{X: 3, Y: 0}},
+				{Point: vg.Point{X: 1, Y: 1}, Control: vg.Point{X: 1, Y: 1}},
 			},
 		},
 	} {
@@ -87,58 +89,58 @@ func (s *S) TestNew(c *check.C) {
 func (s *S) TestPoint(c *check.C) {
 	type tPoints []struct {
 		t     float64
-		point Point
+		point vg.Point
 	}
 	for i, t := range []struct {
-		ctrls []Point
+		ctrls []vg.Point
 		tPoints
 	}{
 		{
-			ctrls: []Point{{1, 2}, {3, 4}, {5, 6}, {7, 8}},
+			ctrls: []vg.Point{{1, 2}, {3, 4}, {5, 6}, {7, 8}},
 			tPoints: tPoints{
-				{t: 0, point: Point{1, 2}},
-				{t: 0.1, point: Point{1.6, 2.6}},
-				{t: 0.2, point: Point{2.2, 3.2}},
-				{t: 0.3, point: Point{2.8, 3.8}},
-				{t: 0.4, point: Point{3.4, 4.4}},
-				{t: 0.5, point: Point{4, 5}},
-				{t: 0.6, point: Point{4.6, 5.6}},
-				{t: 0.7, point: Point{5.2, 6.2}},
-				{t: 0.8, point: Point{5.8, 6.8}},
-				{t: 0.9, point: Point{6.4, 7.4}},
-				{t: 1, point: Point{7, 8}},
+				{t: 0, point: vg.Point{1, 2}},
+				{t: 0.1, point: vg.Point{1.6, 2.6}},
+				{t: 0.2, point: vg.Point{2.2, 3.2}},
+				{t: 0.3, point: vg.Point{2.8, 3.8}},
+				{t: 0.4, point: vg.Point{3.4, 4.4}},
+				{t: 0.5, point: vg.Point{4, 5}},
+				{t: 0.6, point: vg.Point{4.6, 5.6}},
+				{t: 0.7, point: vg.Point{5.2, 6.2}},
+				{t: 0.8, point: vg.Point{5.8, 6.8}},
+				{t: 0.9, point: vg.Point{6.4, 7.4}},
+				{t: 1, point: vg.Point{7, 8}},
 			},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 1}, {1, 0}},
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 1}, {1, 0}},
 			tPoints: tPoints{
-				{t: 0, point: Point{0, 0}},
-				{t: 0.1, point: Point{0.028, 0.27}},
-				{t: 0.2, point: Point{0.104, 0.48}},
-				{t: 0.3, point: Point{0.216, 0.63}},
-				{t: 0.4, point: Point{0.352, 0.72}},
-				{t: 0.5, point: Point{0.5, 0.75}},
-				{t: 0.6, point: Point{0.648, 0.72}},
-				{t: 0.7, point: Point{0.784, 0.63}},
-				{t: 0.8, point: Point{0.896, 0.48}},
-				{t: 0.9, point: Point{0.972, 0.27}},
-				{t: 1, point: Point{1, 0}},
+				{t: 0, point: vg.Point{0, 0}},
+				{t: 0.1, point: vg.Point{0.028, 0.27}},
+				{t: 0.2, point: vg.Point{0.104, 0.48}},
+				{t: 0.3, point: vg.Point{0.216, 0.63}},
+				{t: 0.4, point: vg.Point{0.352, 0.72}},
+				{t: 0.5, point: vg.Point{0.5, 0.75}},
+				{t: 0.6, point: vg.Point{0.648, 0.72}},
+				{t: 0.7, point: vg.Point{0.784, 0.63}},
+				{t: 0.8, point: vg.Point{0.896, 0.48}},
+				{t: 0.9, point: vg.Point{0.972, 0.27}},
+				{t: 1, point: vg.Point{1, 0}},
 			},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
 			tPoints: tPoints{
-				{t: 0, point: Point{0, 0}},
-				{t: 0.1, point: Point{0.028, 0.244}},
-				{t: 0.2, point: Point{0.104, 0.392}},
-				{t: 0.3, point: Point{0.216, 0.468}},
-				{t: 0.4, point: Point{0.352, 0.496}},
-				{t: 0.5, point: Point{0.5, 0.5}},
-				{t: 0.6, point: Point{0.648, 0.504}},
-				{t: 0.7, point: Point{0.784, 0.532}},
-				{t: 0.8, point: Point{0.896, 0.608}},
-				{t: 0.9, point: Point{0.972, 0.756}},
-				{t: 1, point: Point{1, 1}},
+				{t: 0, point: vg.Point{0, 0}},
+				{t: 0.1, point: vg.Point{0.028, 0.244}},
+				{t: 0.2, point: vg.Point{0.104, 0.392}},
+				{t: 0.3, point: vg.Point{0.216, 0.468}},
+				{t: 0.4, point: vg.Point{0.352, 0.496}},
+				{t: 0.5, point: vg.Point{0.5, 0.5}},
+				{t: 0.6, point: vg.Point{0.648, 0.504}},
+				{t: 0.7, point: vg.Point{0.784, 0.532}},
+				{t: 0.8, point: vg.Point{0.896, 0.608}},
+				{t: 0.9, point: vg.Point{0.972, 0.756}},
+				{t: 1, point: vg.Point{1, 1}},
 			},
 		},
 	} {
@@ -151,12 +153,12 @@ func (s *S) TestPoint(c *check.C) {
 
 func (s *S) TestCurve(c *check.C) {
 	for i, t := range []struct {
-		ctrls  []Point
-		points []Point
+		ctrls  []vg.Point
+		points []vg.Point
 	}{
 		{
-			ctrls: []Point{{1, 2}, {3, 4}, {5, 6}, {7, 8}},
-			points: []Point{
+			ctrls: []vg.Point{{1, 2}, {3, 4}, {5, 6}, {7, 8}},
+			points: []vg.Point{
 				{1, 2},
 				{1.6, 2.6},
 				{2.2, 3.2},
@@ -171,8 +173,8 @@ func (s *S) TestCurve(c *check.C) {
 			},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 1}, {1, 0}},
-			points: []Point{
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 1}, {1, 0}},
+			points: []vg.Point{
 				{0, 0},
 				{0.028, 0.27},
 				{0.104, 0.48},
@@ -187,8 +189,8 @@ func (s *S) TestCurve(c *check.C) {
 			},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
-			points: []Point{
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+			points: []vg.Point{
 				{0, 0},
 				{0.028, 0.244},
 				{0.104, 0.392},
@@ -203,23 +205,23 @@ func (s *S) TestCurve(c *check.C) {
 			},
 		},
 		{
-			ctrls:  []Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
-			points: []Point{},
+			ctrls:  []vg.Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+			points: []vg.Point{},
 		},
 		{
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
-			points: []Point{
-				{math.NaN(), math.NaN()},
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+			points: []vg.Point{
+				{vg.Length(math.NaN()), vg.Length(math.NaN())},
 			},
 		}, {
-			ctrls: []Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
-			points: []Point{
+			ctrls: []vg.Point{{0, 0}, {0, 1}, {1, 0}, {1, 1}},
+			points: []vg.Point{
 				{0, 0},
 				{1, 1},
 			},
 		},
 	} {
-		bc := New(t.ctrls...).Curve(make([]Point, len(t.points)))
+		bc := New(t.ctrls...).Curve(make([]vg.Point, len(t.points)))
 		for j, p := range bc {
 			c.Check(p, approxEquals, t.points[j], epsilon, check.Commentf("Test %d part %d: %+v", i, j, t.ctrls))
 		}

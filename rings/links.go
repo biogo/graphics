@@ -61,7 +61,7 @@ func NewLinks(fp []Pair, ends [2]ArcOfer, r [2]vg.Length) (*Links, error) {
 
 // DrawAt renders the feature pairs of a Links at cen in the specified drawing area,
 // according to the Links configuration.
-func (r *Links) DrawAt(ca draw.Canvas, cen draw.Point) {
+func (r *Links) DrawAt(ca draw.Canvas, cen vg.Point) {
 	if len(r.Set) == 0 {
 		return
 	}
@@ -94,8 +94,7 @@ loop:
 		}
 
 		pa = pa[:0]
-		e := Rectangular(angles[0], float64(r.Radii[0]))
-		pa.Move(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+		pa.Move(cen.Add(Rectangular(angles[0], r.Radii[0])))
 		// Bézier from angles[0]@radius[0] to angles[1]@radius[1] through
 		// r.Bezier if it is not nil and we wanted more than 1 segment;
 		// otherwise straight lines.
@@ -104,12 +103,10 @@ loop:
 				r.Bezier.ControlPoints(angles, r.Radii)...,
 			)
 			for i := 1; i <= r.Bezier.Segments; i++ {
-				pnt := b.Point(float64(i) / float64(r.Bezier.Segments))
-				pa.Line(cen.X+vg.Length(pnt.X), cen.Y+vg.Length(pnt.Y))
+				pa.Line(cen.Add(b.Point(float64(i) / float64(r.Bezier.Segments))))
 			}
 		} else {
-			e = Rectangular(angles[1], float64(r.Radii[1]))
-			pa.Line(cen.X+vg.Length(e.X), cen.Y+vg.Length(e.Y))
+			pa.Line(cen.Add(Rectangular(angles[1], r.Radii[1])))
 		}
 
 		var sty draw.LineStyle
@@ -128,7 +125,7 @@ loop:
 // Plot calls DrawAt using the Links' X and Y values as the drawing coordinates.
 func (r *Links) Plot(ca draw.Canvas, plt *plot.Plot) {
 	trX, trY := plt.Transforms(&ca)
-	r.DrawAt(ca, draw.Point{trX(r.X), trY(r.Y)})
+	r.DrawAt(ca, vg.Point{trX(r.X), trY(r.Y)})
 }
 
 // GlyphBoxes returns a liberal glyphbox for the links rendering.
@@ -174,7 +171,7 @@ func (r *Links) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 			)
 			for k := 0; k <= r.Bezier.Segments; k++ {
 				e := b.Point(float64(k) / float64(r.Bezier.Segments))
-				if d := math.Hypot(e.X, e.Y); d > rad {
+				if d := math.Hypot(float64(e.X), float64(e.Y)); d > rad {
 					rad = d
 				}
 			}
@@ -184,9 +181,9 @@ func (r *Links) GlyphBoxes(plt *plot.Plot) []plot.GlyphBox {
 	return []plot.GlyphBox{{
 		X: plt.X.Norm(r.X),
 		Y: plt.Y.Norm(r.Y),
-		Rectangle: draw.Rectangle{
-			Min: draw.Point{vg.Length(-rad), vg.Length(-rad)},
-			Max: draw.Point{vg.Length(rad), vg.Length(rad)},
+		Rectangle: vg.Rectangle{
+			Min: vg.Point{vg.Length(-rad), vg.Length(-rad)},
+			Max: vg.Point{vg.Length(rad), vg.Length(rad)},
 		},
 	}}
 }

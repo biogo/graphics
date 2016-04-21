@@ -5,13 +5,10 @@
 // Package bezier implements 2D Bézier curve calculation.
 package bezier
 
-// Point represents a 2 dimensional value.
-type Point struct {
-	X, Y float64
-}
+import "github.com/gonum/plot/vg"
 
 type point struct {
-	Point, Control Point
+	Point, Control vg.Point
 }
 
 // Curve implements Bezier curve calculation according to the algorithm of Robert D. Miller.
@@ -20,7 +17,7 @@ type point struct {
 type Curve []point
 
 // NewCurve returns a Curve initialized with the control points in cp.
-func New(cp ...Point) Curve {
+func New(cp ...vg.Point) Curve {
 	if len(cp) == 0 {
 		return nil
 	}
@@ -29,14 +26,14 @@ func New(cp ...Point) Curve {
 		c[i].Point = p
 	}
 
-	var w float64
+	var w vg.Length
 	for i, p := range c {
 		if i == 0 {
 			w = 1
 		} else if i == 1 {
-			w = float64(len(c)) - 1
+			w = vg.Length(len(c)) - 1
 		} else {
-			w *= float64(len(c)-i) / float64(i)
+			w *= vg.Length(len(c)-i) / vg.Length(i)
 		}
 		c[i].Control.X = p.Point.X * w
 		c[i].Control.Y = p.Point.Y * w
@@ -46,11 +43,11 @@ func New(cp ...Point) Curve {
 }
 
 // Point returns the point at t along the curve, where 0 ≤ t ≤ 1.
-func (c Curve) Point(t float64) Point {
+func (c Curve) Point(t float64) vg.Point {
 	c[0].Point = c[0].Control
 	u := t
 	for i, p := range c[1:] {
-		c[i+1].Point = Point{p.Control.X * u, p.Control.Y * u}
+		c[i+1].Point = vg.Point{p.Control.X * vg.Length(u), p.Control.Y * vg.Length(u)}
 		u *= t
 	}
 
@@ -60,18 +57,18 @@ func (c Curve) Point(t float64) Point {
 	)
 	p := c[len(c)-1].Point
 	for i := len(c) - 2; i >= 0; i-- {
-		p.X += c[i].Point.X * tt
-		p.Y += c[i].Point.Y * tt
+		p.X += c[i].Point.X * vg.Length(tt)
+		p.Y += c[i].Point.Y * vg.Length(tt)
 		tt *= t1
 	}
 
 	return p
 }
 
-// Curve returns a slice of Point, p, filled with points along the Bézier curve described by c.
+// Curve returns a slice of vg.Point, p, filled with points along the Bézier curve described by c.
 // If the length of p is less than 2, the curve points are undefined. The length of p is not
 // altered by the call.
-func (c Curve) Curve(p []Point) []Point {
+func (c Curve) Curve(p []vg.Point) []vg.Point {
 	for i, nf := 0, float64(len(p)-1); i < len(p); i++ {
 		p[i] = c.Point(float64(i) / nf)
 	}
