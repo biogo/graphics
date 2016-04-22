@@ -177,10 +177,10 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen vg.Point) {
 					ca.Translate(pt)
 					ca.Rotate(float64(rot))
 					ca.Translate(vg.Point{-pt.X, -pt.Y})
-					ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
+					ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
 					ca.Pop()
 				} else {
-					ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
+					ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
 				}
 			}
 		}

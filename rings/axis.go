@@ -163,10 +163,10 @@ func (r *Axis) drawAt(ca draw.Canvas, cen vg.Point, fs []Scorer, base ArcOfer, i
 				ca.Translate(pt)
 				ca.Rotate(float64(rot))
 				ca.Translate(vg.Point{-pt.X, -pt.Y})
-				ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
+				ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
 				ca.Pop()
 			} else {
-				ca.FillText(r.Tick.Label, pt.X, pt.Y, xalign, yalign, mark.Label)
+				ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
 			}
 		}
 	}
@@ -187,10 +187,10 @@ func (r *Axis) drawAt(ca draw.Canvas, cen vg.Point, fs []Scorer, base ArcOfer, i
 			ca.Translate(pt)
 			ca.Rotate(float64(rot))
 			ca.Translate(vg.Point{-pt.X, -pt.Y})
-			ca.FillText(r.Label.TextStyle, pt.X, pt.Y, xalign, yalign, r.Label.Text)
+			ca.FillText(r.Label.TextStyle, pt, xalign, yalign, r.Label.Text)
 			ca.Pop()
 		} else {
-			ca.FillText(r.Label.TextStyle, pt.X, pt.Y, xalign, yalign, r.Label.Text)
+			ca.FillText(r.Label.TextStyle, pt, xalign, yalign, r.Label.Text)
 		}
 	}
 }
