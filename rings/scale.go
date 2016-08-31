@@ -172,16 +172,11 @@ func (r *Scale) DrawAt(ca draw.Canvas, cen vg.Point) {
 				} else {
 					rot, xalign, yalign = r.Tick.Placement(angle)
 				}
-				if rot != 0 {
-					ca.Push()
-					ca.Translate(pt)
-					ca.Rotate(float64(rot))
-					ca.Translate(vg.Point{-pt.X, -pt.Y})
-					ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
-					ca.Pop()
-				} else {
-					ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
-				}
+				r.Tick.Label.XAlign = draw.XAlignment(xalign)
+				r.Tick.Label.YAlign = draw.YAlignment(yalign)
+				r.Tick.Label.Rotation = float64(rot)
+
+				ca.FillText(r.Tick.Label, pt, mark.Label)
 			}
 		}
 	}

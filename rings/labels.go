@@ -164,16 +164,10 @@ func (r *Labels) DrawAt(ca draw.Canvas, cen vg.Point) {
 		} else {
 			rot, xalign, yalign = r.Placement(angle)
 		}
-		if rot != 0 {
-			ca.Push()
-			ca.Translate(pt)
-			ca.Rotate(float64(rot))
-			ca.Translate(vg.Point{-pt.X, -pt.Y})
-			ca.FillText(sty, pt, xalign, yalign, l.Label())
-			ca.Pop()
-		} else {
-			ca.FillText(sty, pt, xalign, yalign, l.Label())
-		}
+		sty.XAlign = draw.XAlignment(xalign)
+		sty.YAlign = draw.YAlignment(yalign)
+		sty.Rotation = float64(rot)
+		ca.FillText(sty, pt, l.Label())
 	}
 }
 
