@@ -176,9 +176,9 @@ func (r *Axis) drawAt(ca draw.Canvas, cen vg.Point, fs []Scorer, base ArcOfer, i
 		} else {
 			rot, xalign, yalign = r.Label.Placement(r.Angle)
 		}
-		r.Tick.Label.XAlign = draw.XAlignment(xalign)
-		r.Tick.Label.YAlign = draw.YAlignment(yalign)
-		r.Tick.Label.Rotation = float64(rot)
+		r.Label.TextStyle.XAlign = draw.XAlignment(xalign)
+		r.Label.TextStyle.YAlign = draw.YAlignment(yalign)
+		r.Label.TextStyle.Rotation = float64(rot)
 		ca.FillText(r.Label.TextStyle, pt, r.Label.Text)
 	}
 }
