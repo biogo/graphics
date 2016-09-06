@@ -158,16 +158,10 @@ func (r *Axis) drawAt(ca draw.Canvas, cen vg.Point, fs []Scorer, base ArcOfer, i
 			} else {
 				rot, xalign, yalign = r.Tick.Placement(r.Angle)
 			}
-			if rot != 0 {
-				ca.Push()
-				ca.Translate(pt)
-				ca.Rotate(float64(rot))
-				ca.Translate(vg.Point{-pt.X, -pt.Y})
-				ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
-				ca.Pop()
-			} else {
-				ca.FillText(r.Tick.Label, pt, xalign, yalign, mark.Label)
-			}
+			r.Tick.Label.XAlign = draw.XAlignment(xalign)
+			r.Tick.Label.YAlign = draw.YAlignment(yalign)
+			r.Tick.Label.Rotation = float64(rot)
+			ca.FillText(r.Tick.Label, pt, mark.Label)
 		}
 	}
 
@@ -182,15 +176,9 @@ func (r *Axis) drawAt(ca draw.Canvas, cen vg.Point, fs []Scorer, base ArcOfer, i
 		} else {
 			rot, xalign, yalign = r.Label.Placement(r.Angle)
 		}
-		if rot != 0 {
-			ca.Push()
-			ca.Translate(pt)
-			ca.Rotate(float64(rot))
-			ca.Translate(vg.Point{-pt.X, -pt.Y})
-			ca.FillText(r.Label.TextStyle, pt, xalign, yalign, r.Label.Text)
-			ca.Pop()
-		} else {
-			ca.FillText(r.Label.TextStyle, pt, xalign, yalign, r.Label.Text)
-		}
+		r.Label.TextStyle.XAlign = draw.XAlignment(xalign)
+		r.Label.TextStyle.YAlign = draw.YAlignment(yalign)
+		r.Label.TextStyle.Rotation = float64(rot)
+		ca.FillText(r.Label.TextStyle, pt, r.Label.Text)
 	}
 }
