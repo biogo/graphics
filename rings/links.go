@@ -10,11 +10,11 @@ import (
 	"math"
 
 	"github.com/gonum/plot"
+	"github.com/gonum/plot/tools/bezier"
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/plot/vg/draw"
 
 	"github.com/biogo/biogo/feat"
-	"github.com/biogo/graphics/bezier"
 )
 
 // Links implements rendering of feat.Feature associations as Bézier curves.

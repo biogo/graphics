@@ -12,11 +12,11 @@ import (
 	"sort"
 
 	"github.com/gonum/plot"
+	"github.com/gonum/plot/tools/bezier"
 	"github.com/gonum/plot/vg"
 	"github.com/gonum/plot/vg/draw"
 
 	"github.com/biogo/biogo/feat"
-	"github.com/biogo/graphics/bezier"
 )
 
 // Sail implements rendering of feat.Feature associations as sails. A sail is conceptually
