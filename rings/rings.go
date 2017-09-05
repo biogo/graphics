@@ -12,7 +12,7 @@ package rings
 import (
 	"image/color"
 
-	"github.com/gonum/plot/vg/draw"
+	"gonum.org/v1/plot/vg/draw"
 
 	"github.com/biogo/biogo/feat"
 )

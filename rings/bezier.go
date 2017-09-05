@@ -8,7 +8,7 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/gonum/plot/vg"
+	"gonum.org/v1/plot/vg"
 )
 
 // LengthDist generates a random value in the range [Length*Min, Length*Max), depending on a

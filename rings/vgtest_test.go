@@ -8,7 +8,7 @@ import (
 	"image"
 	"image/color"
 
-	"github.com/gonum/plot/vg"
+	"gonum.org/v1/plot/vg"
 )
 
 const defaultDPI = 72

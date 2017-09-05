@@ -8,8 +8,9 @@ import (
 	"errors"
 	"math"
 
+	"gonum.org/v1/plot/vg"
+
 	"github.com/biogo/biogo/feat"
-	"github.com/gonum/plot/vg"
 )
 
 // Arcer is a type that describes an arc of circle.
