@@ -196,21 +196,3 @@ func (a Arcs) containingArcOf(f feat.Feature) (Arc, bool) {
 	}
 	return arcNaN, false
 }
-
-// Lens is an ArcOfer that can arbitrarily scale the arc of a feature.
-type Lens struct {
-	ArcOfer
-
-	// Optics is a contextual arc scaling function.
-	Optics func(loc, f feat.Feature, base, arc Arc) (Arc, error)
-}
-
-// ArcOf returns a scaled arc determined by a call to the Optics function using the
-// arc returned by the embedded ArcOfer's ArcOf method.
-func (l Lens) ArcOf(loc, f feat.Feature) (Arc, error) {
-	arc, err := l.ArcOfer.ArcOf(loc, f)
-	if err != nil {
-		return arc, err
-	}
-	return l.Optics(loc, f, l.ArcOfer.Arc(), arc)
-}
